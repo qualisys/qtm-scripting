@@ -13,7 +13,11 @@ This repository contains example scripts and useful script based tools for QTM.
 ## Adding your own script menus
 1. Follow the example of the scripts in the tools folder:
     - Have an exported function to create a menu
-    - Edit the "startup_tools.py" script to reference your new script. 
+    - Edit the "startup_tools.py" script to reference your new script.
+    
+## Documentation (WIP)
+Will be available here: https://qualisys.github.io/qtm-scripting/
+
 ## External Links
 1. [This Repository](https://github.com/qualisys/qtm-scripting.git)
 2. [www.python.org](https://www.python.org/)
