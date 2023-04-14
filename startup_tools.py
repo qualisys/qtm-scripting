@@ -19,9 +19,13 @@ importlib.reload(tools.gap_fill)
 import tools.filter
 importlib.reload(tools.filter)
 
+import tools.markerset
+importlib.reload(tools.markerset)
+
 def add_menu():
     tools.gap_fill.add_menu()
     tools.filter.add_menu()
+    tools.markerset.add_menu()
 
 if __name__ == '__main__':
     add_menu()

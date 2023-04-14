@@ -3,13 +3,18 @@ Scripting examples and tools for QTM.  Lua and Python are supported in the commo
 ## Installation
 1. Download the repo to your machine.
 2. In QTM Project Options->Miscellaneous->Scripting:
-    - Set Language to Python
+    - Set Language to Python (this only affects which terminal is shown)
     - Add the Python file "startup_demo_scripts.py"
     - Add the Python file "startup_tools.py"
     - Select the checkbox next to the scripts you wish to have add menus, you can have either one or both at the same time.
 
 ## What is in this repository
 This repository contains example scripts and useful script based tools for QTM.
+1. Demo Scripts contains example scripts demonstrating various capabilities of the scripting engine.
+2. Tools contains various helpful tools for use in QTM
+    - Gap_Fill has a selection of gap trimming and filling tools using stored relational information based on marker names from the standard Animation markerset
+    - Filter has spike reporting and removal/smoothing tools
+    - Markerset has miscellaneous tools for reporting, modifying and selecting markersets.
 ## Adding your own script menus
 1. Follow the example of the scripts in the tools folder:
     - Have an exported function to create a menu
