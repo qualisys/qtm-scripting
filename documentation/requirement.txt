@@ -1,0 +1,4 @@
+mkdocs~=1.4.0
+mkdocs-material~=9.1.0
+mkdocs-exclude-search~=0.6.0
+mike~=1.1.0
