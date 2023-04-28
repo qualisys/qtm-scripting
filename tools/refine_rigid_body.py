@@ -29,16 +29,22 @@ Script variables (global):
 new refined rigid body
 * my_menu_name: Name of the QTM menu added by the script
 * refine_menu_name: Name of the rigid body refinement submenu
+
+Requirements:
+* numpy
 """
 
-#import CUSTOM_SCRIPT_NAME
-#import CUSTOM_LIBRARY_NAME
-#import importlib
+import importlib
 
 import qtm
-in_qtm = True
-if not in_qtm:
-    import qtm_stub as qtm
+
+import tools.helpers.tools
+import tools.helpers.traj
+
+importlib.reload(tools.helpers.tools)
+importlib.reload(tools.helpers.traj)
+
+from tools.helpers.tools import add_menu_item, add_command
 
 import qtm.data.object.trajectory as traj
 import qtm.data.series._3d as data_3d
