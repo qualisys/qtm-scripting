@@ -61,7 +61,7 @@ import numpy as np
 
 # Script variables (global)
 write_mode = "replace" # "replace"/"add": replace points in current rigid body definition, or add new refined rigid body
-my_menu_name = "My menu"
+my_menu_name = "Rigid bodies"
 refine_menu_name = "Refine rigid body"
 
 
@@ -270,8 +270,11 @@ def setup_my_menu():
     _update_rb_refine_submenu()
 
 
-# Initial script actions (local 'main')
-# - Add commands and set up menu
-add_my_commands()
-setup_my_menu()
+def add_menu():
+    # Initial script actions (local 'main')
+    # - Add commands and set up menu
+    add_my_commands()
+    setup_my_menu()
 
+if __name__ == "__main__":
+    add_menu()
