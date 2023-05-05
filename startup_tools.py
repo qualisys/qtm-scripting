@@ -25,11 +25,15 @@ importlib.reload(tools.markerset)
 import tools.refine_rigid_body
 importlib.reload(tools.refine_rigid_body)
 
+import tools.gap_fill_presets
+importlib.reload(tools.gap_fill_presets)
+
 def add_menu():
     tools.gap_fill.add_menu()
     tools.filter.add_menu()
     tools.markerset.add_menu()
     tools.refine_rigid_body.add_menu()
+    tools.gap_fill_presets.add_menu()
 
 if __name__ == '__main__':
     add_menu()
