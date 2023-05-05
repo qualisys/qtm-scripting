@@ -15,6 +15,8 @@ This repository contains example scripts and useful script based tools for QTM.
     - Gap_Fill has a selection of gap trimming and filling tools using stored relational information based on marker names from the standard Animation markerset
     - Filter has spike reporting and removal/smoothing tools
     - Markerset has miscellaneous tools for reporting, modifying and selecting markersets.
+    - Refine rigid bodies can be used to adapt rigid body definitions to measured markers.
+    - Gap fill presets can be used to define and use custom gap fill actions, including relational gap fill.
 ## Adding your own script menus
 1. Follow the example of the scripts in the tools folder:
     - Have an exported function to create a menu
