@@ -141,10 +141,9 @@ def add_menu_item(menu_id, button_text, command_name, index=None):
 def add_menu_item_toggleable(menu_id, button_text_state_one, button_text_state_two, command_name, index=None):
     # Generate command-name that toggles the button (also calls the ACTUAL command)
     toggle_command_name = str(command_name + "_internal")
-    if toggle_command_name not in globals()["_toggle_button_menu_ids"]:
-        # This is the first time creating this toggle, so we add the command
+    try:
         add_command(toggle_command_name, lambda: (_toggle_menu_button(globals()["_toggle_button_menu_ids"][toggle_command_name], button_text_state_one, button_text_state_two, toggle_command_name, command_name)))
-    # Update (or add, if first time) 'toggle_command_name' & menu ID key-value pair
-    globals()["_toggle_button_menu_ids"][toggle_command_name] = menu_id
-    add_menu_item(globals()["_toggle_button_menu_ids"][toggle_command_name], button_text_state_one, toggle_command_name, index)
+    except:
+        print(f"Failed to add command, already exists?")
+    add_menu_item(menu_id, button_text_state_one, toggle_command_name, index)
 # endregion

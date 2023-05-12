@@ -1,11 +1,18 @@
+import tools.helpers.tools
+import tools.helpers.selection
+import tools.helpers.printing
 from tools.helpers.tools import add_command, add_menu_item, add_menu_item_toggleable, set_toggleable_command_hotkey
 from tools.helpers.selection import select_all_trajectories, select_labeled_trajectories, select_unlabeled_trajectories
 from tools.helpers.printing import force_print
 import subprocess
 import os
 import sys
+import importlib
 import qtm
 
+importlib.reload(tools.helpers.tools)
+importlib.reload(tools.helpers.selection)
+importlib.reload(tools.helpers.printing)
 
 # - - - - - - - - - - - - - - - - - - -  - - - - - -
 # ////////   E X P O R T E D   C L A S S   ////////
