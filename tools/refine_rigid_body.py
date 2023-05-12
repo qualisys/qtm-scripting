@@ -47,8 +47,11 @@ import qtm.settings.processing._6d as rb
 import qtm.gui.timeline as tline
 import qtm.gui.terminal as trm
 import qtm.utilities.color as clr
-
-import numpy as np
+have_numpy = True
+try:
+    import numpy as np
+except:
+    have_numpy = False
 
 
 # Script variables (global)
@@ -267,9 +270,12 @@ def setup_my_menu():
 
 
 def add_menu():
-    # - Add commands and set up menu
-    add_my_commands()
-    setup_my_menu()
+    if have_numpy:
+        # - Add commanads and set up menu
+        add_my_commands()
+        setup_my_menu()
+    else:
+        print(f"You need Numpy installed in Python to use the Rigid Body menu.")
 
 if __name__ == "__main__":
     add_menu()
