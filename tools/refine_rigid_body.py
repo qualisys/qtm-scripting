@@ -38,14 +38,6 @@ import importlib
 
 import qtm
 
-import tools.helpers.tools
-import tools.helpers.traj
-
-importlib.reload(tools.helpers.tools)
-importlib.reload(tools.helpers.traj)
-
-from tools.helpers.tools import add_menu_item, add_command
-
 import qtm.data.object.trajectory as traj
 import qtm.data.series._3d as data_3d
 
@@ -61,8 +53,9 @@ import numpy as np
 
 # Script variables (global)
 write_mode = "replace" # "replace"/"add": replace points in current rigid body definition, or add new refined rigid body
-my_menu_name = "Rigid bodies"
-refine_menu_name = "Refine rigid body"
+my_menu_name = "Refine rigid body"
+# my_menu_name = "Rigid bodies"
+# refine_menu_name = "Refine rigid body"
 
 
 def _refine_rigid_body(rb_id):
@@ -76,7 +69,7 @@ def _refine_rigid_body(rb_id):
         #raise Exception("Index to non-existing rigid body: " + str(rb_id+1))
         trm.write("Index to non-existing rigid body: " + str(rb_id+1))
         #sys.exit()
-        exit()
+        return
     
     # - Check coordinate system
     if not(rb.get_body_coordinate_system("project", rb_id)["type"] == "global"):
@@ -84,8 +77,7 @@ def _refine_rigid_body(rb_id):
         #    .format(name = rb.get_body_name("project", rb_id)))
         trm.write("Rigid body '{name}' coordinate system should be global for this operation."
             .format(name = rb.get_body_name("project", rb_id)))
-        #sys.exit()
-        exit()
+        return
     
     # Add a check that a file is open including the rigid body referenced in the project.
     # The rigid bodies in the project and the file should be the same.
@@ -97,20 +89,16 @@ def _refine_rigid_body(rb_id):
     except:
         # logging.error("A file should be open with the same rigid bodies as in the project.")
         trm.write("A file should be open with the same rigid bodies as in the project.")
-        #sys.exit()
-        exit()
+        return
     if nrb_file < rb_id:
         trm.write("A file should be open with the same rigid bodies as in the project.")
-        #sys.exit()
-        exit()
+        return
     if not(rb_file_name == rb.get_body_name("project",rb_id)):
         trm.write("A file should be open with the same rigid bodies as in the project.")
-        #sys.exit()
-        exit()
+        return
     if not(rb_file_type == "global"):
         trm.write("A file should be open with the same rigid bodies as in the project.")
-        #sys.exit()
-        exit()
+        return
     
     
     # Make a list of points (names and positions)
@@ -123,7 +111,7 @@ def _refine_rigid_body(rb_id):
             pt_names.append(rb.get_point_name("project", rb_id, i))
             pt_idx.append(i)
             #pt_pos.append(rb.get_point_position("project", rb_id, i))
-    trm.write(str(pt_names))
+    #trm.write(str(pt_names))
     #trm.write("Rigid body points:\n" + str(pt_pos))
     
     # Find corresponding trajectories (current file, current sample)
@@ -174,19 +162,25 @@ def _update_rb_refine_submenu():
         if curr_menu_dict["text"] == my_menu_name: # "My menu":
             my_menu_id = curr_menu_dict["submenu"]
             break
-    list_of_dicts_my_menu = qtm.gui.get_menu_items(my_menu_id)
-    for curr_menu_dict in list_of_dicts_my_menu:
-        if curr_menu_dict["text"] == refine_menu_name: # "Refine rigid body":
-            rfrb_id = curr_menu_dict["submenu"]
-            break
+    # list_of_dicts_my_menu = qtm.gui.get_menu_items(my_menu_id)
+    # for curr_menu_dict in list_of_dicts_my_menu:
+    #     if curr_menu_dict["text"] == refine_menu_name: # "Refine rigid body":
+    #         rfrb_id = curr_menu_dict["submenu"]
+    #         break
     
     # Clear current rigid body items (associated with refine command)
-    list_of_dicts_items = qtm.gui.get_menu_items(rfrb_id)
+    # list_of_dicts_items = qtm.gui.get_menu_items(rfrb_id)
+    list_of_dicts_items = qtm.gui.get_menu_items(my_menu_id)
     for i in reversed(range(len(list_of_dicts_items))):
         if list_of_dicts_items[i]["command"][:6] == "refine":
-            qtm.gui.delete_menu_item(rfrb_id,i)
+            # qtm.gui.delete_menu_item(rfrb_id,i)
+            qtm.gui.delete_menu_item(my_menu_id,i)
     
     n_rb = rb.get_body_count("project")
+    if n_rb == 0:
+        trm.write(f"No rigid body definitions found in the current project.")
+        return
+    
     for i in range(n_rb):
         rb_name = rb.get_body_name("project",i)
         #trm.write(rb_name)
@@ -204,7 +198,8 @@ def _update_rb_refine_submenu():
             break
             
         # Add button to Refine rigid body submenu with the rigid body name and associated command
-        qtm.gui.insert_menu_button(rfrb_id, rb_name, command_name)
+        # qtm.gui.insert_menu_button(rfrb_id, rb_name, command_name)
+        qtm.gui.insert_menu_button(my_menu_id, rb_name, command_name)
         #trm.write(f"Added button {rb_name} with command {command_name}")
 
 
@@ -259,19 +254,19 @@ def add_my_commands():
 
 def setup_my_menu():
     """Function for setting up the menu."""
-    # my_menu_id = qtm.gui.insert_menu_submenu(None, "My menu")
-    my_menu_id = qtm.gui.insert_menu_submenu(None, my_menu_name) # "My menu"
-    rfrb_id = qtm.gui.insert_menu_submenu(my_menu_id, refine_menu_name) # "Refine rigid body"
+    my_menu_id = qtm.gui.insert_menu_submenu(None, my_menu_name)
+    #rfrb_id = qtm.gui.insert_menu_submenu(my_menu_id, refine_menu_name) # "Refine rigid body"
     
     # Add button for updating Refine rigid body submenu.
     # Alt. use set_draw_function callback for automatic update
-    qtm.gui.insert_menu_button(rfrb_id, "Update rigid body list...", "update_rb_refine_submenu")
-    qtm.gui.insert_menu_separator(rfrb_id)
+    #qtm.gui.insert_menu_button(rfrb_id, "Update rigid body list...", "update_rb_refine_submenu")
+    #qtm.gui.insert_menu_separator(rfrb_id)
+    qtm.gui.insert_menu_button(my_menu_id, "Update rigid body list...", "update_rb_refine_submenu")
+    qtm.gui.insert_menu_separator(my_menu_id)
     _update_rb_refine_submenu()
 
 
 def add_menu():
-    # Initial script actions (local 'main')
     # - Add commands and set up menu
     add_my_commands()
     setup_my_menu()
