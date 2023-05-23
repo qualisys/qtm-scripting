@@ -211,7 +211,6 @@ def printSpikeRangesSelected():
         return 0
     selections = qtm.gui.selection.get_selections()
     for s in selections:
-        s = selections[0]
         id = s["id"]
         name = qtm.data.object.trajectory.get_label(id)
 
