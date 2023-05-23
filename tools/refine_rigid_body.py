@@ -180,6 +180,10 @@ def _update_rb_refine_submenu():
             qtm.gui.delete_menu_item(my_menu_id,i)
     
     n_rb = rb.get_body_count("project")
+    if n_rb == 0:
+        trm.write(f"No rigid body definitions found in the current project.")
+        return
+    
     for i in range(n_rb):
         rb_name = rb.get_body_name("project",i)
         #trm.write(rb_name)
