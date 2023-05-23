@@ -39,6 +39,10 @@ def _fixName(oldName) ->str:
 		else:
 			newName = newName + c
 	return newName
+
+def _fix_C3D_name(oldName : str) ->str:
+	return oldName.split(":")[-1]
+
 # - - - - - - - - - - - - - - - - - -
 # ////////   P U B L I C   ////////
 # - - - - - - - - - - - - - - -
@@ -126,16 +130,36 @@ def fixInvalidMarkerNames():
 		print(f"Fixed {fixedCnt} marker names")
 	else:
 		print(f"No markers needed fixing.")		
+
+def fix_C3D_names():
+	seriesIDs = qtm.data.series._3d.get_series_ids()
+	fixedCnt = 0
+	for id in seriesIDs:
+		fullname = qtm.data.object.trajectory.get_label(id)
+		if fullname is not None:
+			if ":" in fullname:
+				fixedName = _fix_C3D_name(fullname)
+				qtm.data.object.trajectory.set_label(id,fixedName)
+				fixedCnt = fixedCnt + 1
+	if fixedCnt > 0:
+		print(f"Fixed {fixedCnt} marker names")
+	else:
+		print(f"No markers needed fixing.")		
+
+
 def add_menu():
     add_command("markerset_summary", summary)
     add_command("markerset_select_whole_markerset", selectWholeMarkerset)
     add_command("markerset_fix_invalid_marker_names", fixInvalidMarkerNames)
+    add_command("markerset_fix_C3D_names", fix_C3D_names)
+    
 
     menu_id = qtm.gui.insert_menu_submenu(None,"Markerset")
     add_menu_item(menu_id, "Markerset Summary", "markerset_summary")
     add_menu_item(menu_id, "Select Whole Markerset", "markerset_select_whole_markerset")
     qtm.gui.insert_menu_separator(menu_id)
     add_menu_item(menu_id, "Fix Invalid Names", "markerset_fix_invalid_marker_names")
+    add_menu_item(menu_id, "Fix C3D Names", "markerset_fix_C3D_names")
 
 
 # endregion
