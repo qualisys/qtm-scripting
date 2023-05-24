@@ -1,4 +1,3 @@
-import menu_tools as tools
 import sys
 import inspect
 import os
@@ -8,6 +7,9 @@ import traceback
 this_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 if this_dir not in sys.path:
     sys.path.append(this_dir)
+
+import menu_tools as tools
+
 
 # constants
 _error_print_periodicity = 2.0  # As seconds
