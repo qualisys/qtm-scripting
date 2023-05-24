@@ -1,19 +1,26 @@
 """
 Filter tools menu
 """
+import sys
+import os
+import inspect
 import importlib
 import math
 
+this_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+if this_dir not in sys.path:
+    sys.path.append(this_dir)
+    
 import qtm
 
-import tools.helpers.tools
-import tools.helpers.traj
+import helpers.menu_tools
+import helpers.traj
 
-importlib.reload(tools.helpers.tools)
-importlib.reload(tools.helpers.traj)
+importlib.reload(helpers.menu_tools)
+importlib.reload(helpers.traj)
 
-from tools.helpers.tools import add_menu_item, add_command
-from tools.helpers.traj import get_default_markerset_marker, get_selected_markerset_marker
+from helpers.menu_tools import add_menu_item, add_command
+from helpers.traj import get_default_markerset_marker, get_selected_markerset_marker
 
 def _markerAcceleration(id : int, frame :int, deltat: float):
     try:

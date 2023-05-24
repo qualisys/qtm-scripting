@@ -1,5 +1,12 @@
-from tools.helpers.vector import Vec3
-import tools.helpers.printing as printing
+import sys
+import os
+import inspect
+this_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+if this_dir not in sys.path:
+    sys.path.append(this_dir)
+    
+from vector import Vec3
+import printing as printing
 import qtm
 
 # variables

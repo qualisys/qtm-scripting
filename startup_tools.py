@@ -13,27 +13,27 @@ if this_dir not in sys.path:
     sys.path.append(this_dir)
 
 # if you create a new tools menu, add the import here then add the menu below
-import tools.gap_fill
-importlib.reload(tools.gap_fill)
+import demo_scripts.tools.gap_fill
+importlib.reload(demo_scripts.tools.gap_fill)
 
-import tools.filter
-importlib.reload(tools.filter)
+import demo_scripts.tools.filter
+importlib.reload(demo_scripts.tools.filter)
 
-import tools.markerset
-importlib.reload(tools.markerset)
+import demo_scripts.tools.markerset
+importlib.reload(demo_scripts.tools.markerset)
 
-import tools.refine_rigid_body
-importlib.reload(tools.refine_rigid_body)
+import demo_scripts.tools.refine_rigid_body
+importlib.reload(demo_scripts.tools.refine_rigid_body)
 
-import tools.gap_fill_presets
-importlib.reload(tools.gap_fill_presets)
+import demo_scripts.tools.gap_fill_presets
+importlib.reload(demo_scripts.tools.gap_fill_presets)
 
 def add_menu():
-    tools.gap_fill.add_menu()
-    tools.filter.add_menu()
-    tools.markerset.add_menu()
-    tools.refine_rigid_body.add_menu()
-    tools.gap_fill_presets.add_menu()
+    demo_scripts.tools.gap_fill.add_menu()
+    demo_scripts.tools.filter.add_menu()
+    demo_scripts.tools.markerset.add_menu()
+    demo_scripts.tools.refine_rigid_body.add_menu()
+    demo_scripts.tools.gap_fill_presets.add_menu()
 
 if __name__ == '__main__':
     add_menu()

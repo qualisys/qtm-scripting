@@ -1,4 +1,4 @@
-from tools.helpers.tools import clamp
+from tools.helpers.menu_tools import clamp
 from tools.helpers.traj import get_marker_positions, get_unlabeled_marker_ids
 from tools.helpers.matrix import Mat4x4
 import sys

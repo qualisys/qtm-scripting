@@ -10,7 +10,7 @@ if this_dir not in sys.path:
 import qtm
 
 from tools.helpers.printing import try_print_except
-from tools.helpers.tools import add_command 
+from tools.helpers.menu_tools import add_command 
 
 try:
     import draw_overlay_advanced

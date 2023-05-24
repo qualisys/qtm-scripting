@@ -9,14 +9,14 @@ import importlib
 
 import qtm
 
-import tools.helpers.tools
-import tools.helpers.traj
+import helpers.menu_tools
+import helpers.traj
 
-importlib.reload(tools.helpers.tools)
-importlib.reload(tools.helpers.traj)
+importlib.reload(helpers.menu_tools)
+importlib.reload(helpers.traj)
 
-from tools.helpers.tools import add_menu_item, add_command
-from tools.helpers.traj import get_default_markerset_marker, get_selected_markerset_marker
+from helpers.menu_tools import add_menu_item, add_command
+from helpers.traj import get_default_markerset_marker, get_selected_markerset_marker
 
 def _selectWholeMarkerset(markersetname) -> int:
 	seriesIDs = qtm.data.series._3d.get_series_ids()

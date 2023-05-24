@@ -3,18 +3,33 @@ Gap filling tools
 Relational fills for the animation markerset.
 Filling in the beginning or ending of a trajectory.
 """
+import sys
+import os
+import inspect
 import importlib
 
 import qtm
 
-import tools.helpers.tools
-import tools.helpers.traj
+this_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+if this_dir not in sys.path:
+    sys.path.append(this_dir)
 
-importlib.reload(tools.helpers.tools)
-importlib.reload(tools.helpers.traj)
+# import tools.helpers.tools
+# import tools.helpers.traj
 
-from tools.helpers.tools import add_menu_item, add_command
-from tools.helpers.traj import get_default_markerset_marker, get_selected_markerset_marker
+# importlib.reload(tools.helpers.tools)
+# importlib.reload(tools.helpers.traj)
+
+# from tools.helpers.tools import add_menu_item, add_command
+# from tools.helpers.traj import get_default_markerset_marker, get_selected_markerset_marker
+import helpers.menu_tools
+import helpers.traj
+
+importlib.reload(helpers.menu_tools)
+importlib.reload(helpers.traj)
+
+from helpers.menu_tools import add_menu_item, add_command
+from helpers.traj import get_default_markerset_marker, get_selected_markerset_marker
 
 # Hardcoded relationships for all animation markers
 # Two of them is usually enough, the first is a 
