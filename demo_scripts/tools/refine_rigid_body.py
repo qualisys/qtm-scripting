@@ -122,10 +122,14 @@ def _refine_rigid_body(rb_id):
         trm.write("Refine rigid body not supported in Preview mode.\nMake a capture and try again.")
         return
     
-    for pt_name in pt_names:
-        traj_id = traj.find_trajectory(pt_name)
-        traj_points.append(data_3d.get_sample(traj_id, cf)["position"])
-    tpts = np.array(traj_points)
+    try:
+        for pt_name in pt_names:
+            traj_id = traj.find_trajectory(pt_name)
+            traj_points.append(data_3d.get_sample(traj_id, cf)["position"])
+        tpts = np.array(traj_points)
+    except:
+        trm.write(f"All trajectories of the rigid body '{rb_file_name}' must be present and filled at the current frame.")
+        return
     
     # Transform trajectories to local coordinates of the rigid body
     series_id = data_6d.get_series_id(rb_id)

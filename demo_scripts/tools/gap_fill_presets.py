@@ -10,9 +10,9 @@ This script is especially helpful for applying relational or virtual gap filling
 of relations.
 
 The gap fill actions are compiled from a list of gap fill definitions specified by the global variable
-`list_of_presets` in this script. The list can easily be customized by editing this variable.
+`list_of_gap_fill_presets` in this script. The list can easily be customized by editing this script variable.
 
-The list items in list_of_presets are formatted as a dictionary with the following key-value combinations:
+The list items in list_of_gap_fill_presets are formatted as a dictionary with the following key-value combinations:
   * display_name: Name of the definition appearing in the submenu
   * target: Name of the trajectory to be filled
   * method: gap fill method, corresponding to the `algorithm` variable in the QTM Common API `fill_trajectory` method
@@ -25,6 +25,10 @@ The list items in list_of_presets are formatted as a dictionary with the followi
     - is_relative_offset (bool, directly passed to the `fill_trajectory` method)
   
   For more information about settings, see the QTM Common API documentation for the `fill_trajectory` method.
+
+Script valiables:
+  * list_of_gap_fill_presets: predefined gap-fill actions. Initial example based on the Qualisys sports marker set for
+    the skeleton solver.
 
 Current limitations of the script:
   * The number of gap fill relations is limited to a maximum of 10 items. This can be expanded by adding new commands in
@@ -45,15 +49,8 @@ import qtm.utilities.color as clr
 
 import copy
 
-# list_of_presets = [\
-    # {"display_name": "WaistBack (polynomial)", "target": "WaistBack", "method": "polynomial"},\
-    # {"display_name": "WaistBack (kinematic)", "target": "WaistBack", "method": "kinematic"},\
-    # {"display_name": "WaistLFront (rel): WaistBack-WaistRFront-WaistL", "target": "WaistLFront", "method": "relational", "settings": {"origin": "WaistBack", "line": "WaistRFront", "plane": "WaistL"}},\
-    # {"display_name": "WaistRFront (rel): WaistBack-WaistLFront-WaistR", "target": "WaistRFront", "method": "relational", "settings": {"origin": "WaistBack", "line": "WaistLFront", "plane": "WaistR"}}\
-    # ]
-
-# Edit the list of presets defining the gap fill actions
-list_of_presets = [\
+# Edit the list of presets defining the gap fill actions (example based on Qualisys Sports markerset for the skeleton solver)
+list_of_gap_fill_presets = [\
     {"display_name": "Q_WaistBack (polynomial)", "target": "Q_WaistBack", "method": "polynomial"},\
     {"display_name": "Q_WaistBack (kinematic)", "target": "Q_WaistBack", "method": "kinematic"},\
     {"display_name": "Q_WaistLFront (rel): WaistBack-WaistRFront-WaistL", "target": "Q_WaistLFront", "method": "relational", "settings": {"origin": "Q_WaistBack", "line": "Q_WaistRFront", "plane": "Q_WaistL"}},\
@@ -64,7 +61,7 @@ list_of_presets = [\
 def _gap_fill_def(def_id):
     """Function for parsing and applying gap fill definitions"""
     #find trajectory ID of target
-    gf_def = list_of_presets[def_id]
+    gf_def = list_of_gap_fill_presets[def_id]
     marker_name = gf_def["target"]
     try:
         id_target = traj.find_trajectory(marker_name)
@@ -76,10 +73,8 @@ def _gap_fill_def(def_id):
         trm.write(f"Target trajectory {marker_name} not found in measurement.")
         return
     
-    #find gap ranges:
+    #find gap ranges
     gap_ranges = data_3d.get_gap_ranges(id_target)
-    #n_gaps = len(gap_ranges)
-    #print('Number of gaps: ' + str(n_gaps))
     
     gf_method = gf_def["method"]
     if gf_method in ["relational", "virtual"]:
@@ -190,8 +185,8 @@ def setup_my_menu():
     # Add buttons for respective relations
     # Alt. use set_draw_function callback for automatic update
     #qtm.gui.insert_menu_button(rfrb_id, "Update rigid body list...", "update_rb_refine_submenu")
-    for i in range(len(list_of_presets)):
-        disp_name = list_of_presets[i]["display_name"]
+    for i in range(len(list_of_gap_fill_presets)):
+        disp_name = list_of_gap_fill_presets[i]["display_name"]
         command_name = "gap_fill_def_" + str(i)
         if not(any(uc == command_name for uc in qtm.gui.get_commands("user"))):
             trm.write(f"Number of gap fill definitions exceeds maximum:\n" + \
