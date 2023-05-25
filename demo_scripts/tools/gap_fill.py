@@ -1,7 +1,12 @@
 """
 Gap filling tools
-Relational fills for the animation markerset.
-Filling in the beginning or ending of a trajectory.
+ * Relational fills for the animation markerset.
+ * Trim gaps
+ * Filling in the beginning or ending of a trajectory.
+
+ There are two relational fill definitions for the markers.  Various combinations of using the
+ first, second or both in multiple passes can be invoked.  It works on the currently selected
+ trajectories.
 """
 import sys
 import os
@@ -397,8 +402,11 @@ def add_menu():
     add_command("gap_fill_end_gap_constant_value", FillEndGapConstantValue)
     add_command("gap_fill_end_gap_constant_velocity", FillEndGapConstantVelocity)
     add_command("gap_fill_print_all_gaps", PrintGaps)
+    add_command("gap_fill_help", lambda:(print(__doc__)))
 
     menu_id = qtm.gui.insert_menu_submenu(None,"GapFill")
+    add_menu_item(menu_id, "Help", "gap_fill_help")
+    qtm.gui.insert_menu_separator(menu_id)    
     add_menu_item(menu_id, "Relational Gap Fill - Multi Pass", "gap_fill_relational_selected")
     add_menu_item(menu_id, "Relational Gap Fill - One Pass Definition 1", "gap_fill_relational_definition1")
     add_menu_item(menu_id, "Relational Gap Fill - One Pass Definition 2", "gap_fill_relational_definition2")

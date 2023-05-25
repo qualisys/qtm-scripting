@@ -1,9 +1,9 @@
 """
 Markerset tools
-Display markerset summary
-Fix illegal characters for animation
-Select Whole Markerset
-
+ * Display markerset summary
+ * Select Whole Markerset
+ * Fix illegal characters for animation
+ * Remove namespace characters up to the ':' for imported C3D files.
 """
 import importlib
 
@@ -148,18 +148,20 @@ def fix_C3D_names():
 
 
 def add_menu():
-    add_command("markerset_summary", summary)
-    add_command("markerset_select_whole_markerset", selectWholeMarkerset)
-    add_command("markerset_fix_invalid_marker_names", fixInvalidMarkerNames)
-    add_command("markerset_fix_C3D_names", fix_C3D_names)
-    
+	add_command("markerset_summary", summary)
+	add_command("markerset_select_whole_markerset", selectWholeMarkerset)
+	add_command("markerset_fix_invalid_marker_names", fixInvalidMarkerNames)
+	add_command("markerset_fix_C3D_names", fix_C3D_names)
+	add_command("markerset_help", lambda:(print(__doc__)))
 
-    menu_id = qtm.gui.insert_menu_submenu(None,"Markerset")
-    add_menu_item(menu_id, "Markerset Summary", "markerset_summary")
-    add_menu_item(menu_id, "Select Whole Markerset", "markerset_select_whole_markerset")
-    qtm.gui.insert_menu_separator(menu_id)
-    add_menu_item(menu_id, "Fix Invalid Names", "markerset_fix_invalid_marker_names")
-    add_menu_item(menu_id, "Fix C3D Names", "markerset_fix_C3D_names")
+	menu_id = qtm.gui.insert_menu_submenu(None,"Markerset")
+	add_menu_item(menu_id, "Help", "markerset_help")
+	qtm.gui.insert_menu_separator(menu_id)
+	add_menu_item(menu_id, "Markerset Summary", "markerset_summary")
+	add_menu_item(menu_id, "Select Whole Markerset", "markerset_select_whole_markerset")
+	qtm.gui.insert_menu_separator(menu_id)
+	add_menu_item(menu_id, "Fix Invalid Names", "markerset_fix_invalid_marker_names")
+	add_menu_item(menu_id, "Fix C3D Names", "markerset_fix_C3D_names")
 
 
 # endregion
