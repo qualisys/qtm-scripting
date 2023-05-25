@@ -116,7 +116,12 @@ def _refine_rigid_body(rb_id):
     
     # Find corresponding trajectories (current file, current sample)
     traj_points = []
-    cf = tline.get_current_frame()
+    try:
+        cf = tline.get_current_frame()
+    except: 
+        trm.write("Refine rigid body not supported in Preview mode.\nMake a capture and try again.")
+        return
+    
     for pt_name in pt_names:
         traj_id = traj.find_trajectory(pt_name)
         traj_points.append(data_3d.get_sample(traj_id, cf)["position"])
