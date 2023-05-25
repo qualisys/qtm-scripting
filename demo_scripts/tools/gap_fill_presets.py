@@ -1,6 +1,6 @@
-"""Script for applying gap filling according to specific definitions
+"""gap_fill_presets.py: Script for applying gap filling according to specific definitions
 
-When loading the script, a menu "My menu" is added to QTM with a submenu "Gap fill..." containing a list of
+When loading the script, a menu "Gap fill presets" is added to QTM with a submenu "Gap fill..." containing a list of
 gap fill action buttons.
 
 When pressing a gap fill action button, the action is applied to all the gaps of the target trajectory in the
@@ -13,25 +13,25 @@ The gap fill actions are compiled from a list of gap fill definitions specified 
 `list_of_presets` in this script. The list can easily be customized by editing this variable.
 
 The list items in list_of_presets are formatted as a dictionary with the following key-value combinations:
-  display_name: Name of the definition appearing in the submenu
-  target: Name of the trajectory to be filled
-  method: gap fill method, corresponding to the `algorithm` variable in the QTM Common API `fill_trajectory` method
-  settings: settings definition for relational and virtual gap fill, which is a dictionary with key-value combinations:
-    origin: Name of trajectory to be used as origin in the gap fill relation (automatically converted to trajectory ID)
-    line: Name of trajectory defining the line in the gap fill relation (automatically converted to trajectory ID)
-    plane: Name of the trajectory defining the plane in the gap fill relation (automatically converted to trajectory ID)
-    offset: XYZ offset (vec3f, directly passed to the `fill_trajectory` method)
-    is_rigid_body (bool, directly passed to the `fill_trajectory` method)
-    is_relative_offset (bool, directly passed to the `fill_trajectory` method)
+  * display_name: Name of the definition appearing in the submenu
+  * target: Name of the trajectory to be filled
+  * method: gap fill method, corresponding to the `algorithm` variable in the QTM Common API `fill_trajectory` method
+  * settings: settings definition for relational and virtual gap fill, which is a dictionary with key-value combinations:
+    - origin: Name of trajectory to be used as origin in the gap fill relation (automatically converted to trajectory ID)
+    - line: Name of trajectory defining the line in the gap fill relation (automatically converted to trajectory ID)
+    - plane: Name of the trajectory defining the plane in the gap fill relation (automatically converted to trajectory ID)
+    - offset: XYZ offset (vec3f, directly passed to the `fill_trajectory` method)
+    - is_rigid_body (bool, directly passed to the `fill_trajectory` method)
+    - is_relative_offset (bool, directly passed to the `fill_trajectory` method)
   
   For more information about settings, see the QTM Common API documentation for the `fill_trajectory` method.
 
 Current limitations of the script:
-  There is no check if trajectories with the specified names exist. Applying actions containing
-    non existing trajectories will produce a run time error.
-  Relational and virtual gap fill methods produce a run time error when the other trajectories used
-    in the relation contain gaps overlapping with parts to be filled.
+  * The number of gap fill relations is limited to a maximum of 10 items. This can be expanded by adding new commands in
+      this script under add_my_commands.
+
 """
+
 import importlib
 
 import qtm
@@ -129,6 +129,11 @@ def _gap_fill_def(def_id):
 
 def add_my_commands():
     """Function for adding new commands used in this script to QTM"""
+
+    command_name = "disp_gap_fill_presets_doc"
+    qtm.gui.add_command(command_name)
+    qtm.gui.set_command_execute_function(command_name, lambda:(print(__doc__)))
+
     # Add commands for 10 relations (maximum number of relations, you can add more here if you want)
     # Work around for adding commands in for-loop since Python uses call by assignment
     command_name = "gap_fill_def_0"
@@ -177,6 +182,10 @@ def setup_my_menu():
     """Function for setting up the menu."""
     my_menu_id = qtm.gui.insert_menu_submenu(None, "Gap fill presets")
     #gf_sub_id = qtm.gui.insert_menu_submenu(my_menu_id, "Gap fill...")
+
+    # Add Help button for display of the script doc string
+    qtm.gui.insert_menu_button(my_menu_id, "Help", "disp_gap_fill_presets_doc")
+    qtm.gui.insert_menu_separator(my_menu_id)
 
     # Add buttons for respective relations
     # Alt. use set_draw_function callback for automatic update
