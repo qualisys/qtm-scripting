@@ -1,5 +1,16 @@
 """
 Filter tools menu
+
+Functions for printing and eliminating spikes in the currently selected trajectories.
+
+Printing is done to the terminal window.  Spikes are found using a hardcoded acceleration value that
+is similar to the default value in the Trajectory Window (150m/s^2).  It is not currently possible to
+query the value in the Trajectory editor.
+
+The median cut filter is a special filter that finds the median value of the curve around the location
+of the spike then replaces the 'spike' with that median value.  One characteristic of this filter is
+that applying it twice (or more) has no effect on the data.  This filter in conjunction with a smoothing
+filter makes for a great way of eliminating spikes in trajectories.
 """
 import sys
 import os
@@ -292,9 +303,12 @@ def add_menu():
     add_command("filter_median_cut_then_smooth_spikes_selected", medianCutThenSmoothSelected)
     add_command("filter_smooth_spikes_selected", smoothSpikesSelected)
     add_command("filter_print_spike_ranges_selected", printSpikeRangesSelected)
+    add_command("filter_help", lambda:(print(__doc__)))
 
 
     menu_id = qtm.gui.insert_menu_submenu(None,"Filter")
+    add_menu_item(menu_id, "Help", "filter_help")
+    qtm.gui.insert_menu_separator(menu_id)
     add_menu_item(menu_id, "Median Cut Filter Selected", "filter_median_cut_selected")
     add_menu_item(menu_id, "Median Cut Filter Selected Frame", "filter_median_cut_selected_frame")
     add_menu_item(menu_id, "Median Cut Filter Then Smooth Spikes", "filter_median_cut_then_smooth_spikes_selected")
