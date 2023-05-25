@@ -10,7 +10,7 @@ import math
 this_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 if this_dir not in sys.path:
     sys.path.append(this_dir)
-    
+
 import qtm
 
 import helpers.menu_tools
@@ -266,7 +266,7 @@ def smoothSpikesSelected():
         print(f"No spikes found")
     else:
         for r in spikeRanges:
-            qtm.data.object.trajectory.smooth(id,None,r, None)
+            qtm.data.object.trajectory.smooth_trajectory(id,None,r, None)
 
 def medianCutThenSmoothSelected():
     
