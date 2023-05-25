@@ -1,4 +1,4 @@
-"""Script for refining rigid body definition based on a measurement
+"""refine_rigid_body.py: Script for refining rigid body definition based on a measurement
 
 Use this script to refine the points in a rigid body definition in
 the QTM project, based on a measurement with the same rigid body.
@@ -6,32 +6,32 @@ the QTM project, based on a measurement with the same rigid body.
 This can be useful for adapting a default rigid body defintion to an actually
 measured one, for example for tracking of Tobii glasses.
 
-When loading the script, a menu "My menu" is added to QTM with a submenu
-"Refine rigid body" containing a list of rigid bodies in the project.
+When loading the script, a menu "Refine rigid body" is added to QTM containing
+a list of rigid bodies in the project.
 
-The submenu contains the following buttons:
+The menu contains the following buttons:
 * Update rigid body list... Use this to update the rigid bodies listed in the submenu
 * Buttons for the rigid bodies in the project. The number of rigid bodies is limited
 to 10, but this can be changed by editing the script.
 
 Use of the script:
 * Make sure that a file is opened that is processed with the same rigid bodies as
-in the project.
+  in the project.
 * Set the current frame to a frame where all markers of the rigid body are present and
-without artifact.
+  without artifact.
 * Press the button for a rigid body to update it or add a new, refined version of the
-rigid body to the project, dependent on the write_mode (global variable in the script).
+  rigid body to the project, dependent on the rb_refine_write_mode (script variable).
 * Make sure to press the Update button when rigid body definitions are added or removed
-from the project.
+  from the project.
 
 Script variables (global):
-* write_mode: ("replace" or "add") replace points in current rigid body definition, or add
-new refined rigid body
-* my_menu_name: Name of the QTM menu added by the script
-* refine_menu_name: Name of the rigid body refinement submenu
+* rb_refine_write_mode: ("replace" or "add") replace points in current rigid body definition, or add
+  new refined rigid body
+* rb_refine_menu_name: Name of the QTM menu added by the script
 
 Requirements:
 * numpy
+
 """
 
 import importlib
@@ -55,11 +55,8 @@ except:
 
 
 # Script variables (global)
-write_mode = "replace" # "replace"/"add": replace points in current rigid body definition, or add new refined rigid body
-my_menu_name = "Refine rigid body"
-# my_menu_name = "Rigid bodies"
-# refine_menu_name = "Refine rigid body"
-
+rb_refine_write_mode = "replace" # "replace"/"add": replace points in current rigid body definition, or add new refined rigid body
+rb_refine_menu_name = "Refine rigid body"
 
 def _refine_rigid_body(rb_id):
     """Function for creating the refined definition of the selected rigid body."""
@@ -134,7 +131,7 @@ def _refine_rigid_body(rb_id):
     tpts_trf = np.matmul(tpts_trl,RT[0:3,0:3])
     #trm.write("Transformed points:\n" + str(tpts_trf))
     
-    if (write_mode == "replace"):
+    if (rb_refine_write_mode == "replace"):
         # Overwrite point coordinates (virtual points are ignored)
         for i in range(len(pt_idx)):
             rb.set_point_position("project", rb_id, pt_idx[i], tpts_trf[i].tolist())
@@ -157,26 +154,20 @@ def _refine_rigid_body(rb_id):
             .format(name = rb.get_body_name("project", new_id)))
 
 
-def _update_rb_refine_submenu():
+def _update_rb_refine_items():
     """Function for updating the rigid body refine submenu."""
     # Retrieve menu handles
     list_of_dicts_all_menus = qtm.gui.get_menu_items()
     for curr_menu_dict in list_of_dicts_all_menus:
-        if curr_menu_dict["text"] == my_menu_name: # "My menu":
+        if curr_menu_dict["text"] == rb_refine_menu_name:
             my_menu_id = curr_menu_dict["submenu"]
             break
-    # list_of_dicts_my_menu = qtm.gui.get_menu_items(my_menu_id)
-    # for curr_menu_dict in list_of_dicts_my_menu:
-    #     if curr_menu_dict["text"] == refine_menu_name: # "Refine rigid body":
-    #         rfrb_id = curr_menu_dict["submenu"]
-    #         break
     
     # Clear current rigid body items (associated with refine command)
     # list_of_dicts_items = qtm.gui.get_menu_items(rfrb_id)
     list_of_dicts_items = qtm.gui.get_menu_items(my_menu_id)
     for i in reversed(range(len(list_of_dicts_items))):
         if list_of_dicts_items[i]["command"][:6] == "refine":
-            # qtm.gui.delete_menu_item(rfrb_id,i)
             qtm.gui.delete_menu_item(my_menu_id,i)
     
     n_rb = rb.get_body_count("project")
@@ -186,30 +177,30 @@ def _update_rb_refine_submenu():
     
     for i in range(n_rb):
         rb_name = rb.get_body_name("project",i)
-        #trm.write(rb_name)
         # Check if command exists (write warning to terminal if not)
         # If not, add command and define execute function
         command_name = "refine_rigid_body_" + str(i)
         if not(any(uc == command_name for uc in qtm.gui.get_commands("user"))):
-            # # Note: adding commands in a for-loop does not work because Python uses reference by assignment
-            # qtm.gui.add_command(command_name)
-            # #trm.write(f"This is i: {i}")
-            # qtm.gui.set_command_execute_function(command_name, lambda:(_refine_rigid_body(i)))
-            # trm.write(f"Added cxf _refine_rigid_body({i}) for command {command_name}")
             trm.write(f"Number of rigid bodies in the project exceeds index:\n" + \
                 f"- Rigid bodies no. {i+1} and higher are ignored.")
             break
             
         # Add button to Refine rigid body submenu with the rigid body name and associated command
-        # qtm.gui.insert_menu_button(rfrb_id, rb_name, command_name)
         qtm.gui.insert_menu_button(my_menu_id, rb_name, command_name)
         #trm.write(f"Added button {rb_name} with command {command_name}")
 
 
 def add_my_commands():
     """Function for adding new commands used in this script to QTM"""
-    qtm.gui.add_command("update_rb_refine_submenu")
-    qtm.gui.set_command_execute_function("update_rb_refine_submenu", _update_rb_refine_submenu)
+
+    # Add command for display of script doc string
+    command_name = "disp_refine_rigid_body_doc"
+    qtm.gui.add_command(command_name)
+    qtm.gui.set_command_execute_function(command_name, lambda:(print(__doc__)))
+
+    # Add command for updating the rigid body list for the 
+    qtm.gui.add_command("update_rb_refine_items")
+    qtm.gui.set_command_execute_function("update_rb_refine_items", _update_rb_refine_items)
     
     # Add commands for 10 rigid bodies (maximum number that can be refined this way, you can add more here if you want)
     # Work around for adding commands in for-loop since Python uses call by assignment
@@ -257,16 +248,18 @@ def add_my_commands():
 
 def setup_my_menu():
     """Function for setting up the menu."""
-    my_menu_id = qtm.gui.insert_menu_submenu(None, my_menu_name)
-    #rfrb_id = qtm.gui.insert_menu_submenu(my_menu_id, refine_menu_name) # "Refine rigid body"
+    my_menu_id = qtm.gui.insert_menu_submenu(None, rb_refine_menu_name)
     
-    # Add button for updating Refine rigid body submenu.
-    # Alt. use set_draw_function callback for automatic update
-    #qtm.gui.insert_menu_button(rfrb_id, "Update rigid body list...", "update_rb_refine_submenu")
-    #qtm.gui.insert_menu_separator(rfrb_id)
-    qtm.gui.insert_menu_button(my_menu_id, "Update rigid body list...", "update_rb_refine_submenu")
+    # Add Help button for display of the script doc string
+    qtm.gui.insert_menu_button(my_menu_id, "Help", "disp_refine_rigid_body_doc")
     qtm.gui.insert_menu_separator(my_menu_id)
-    _update_rb_refine_submenu()
+
+    # Add button for updating Refine rigid body menu items.
+    qtm.gui.insert_menu_button(my_menu_id, "Update rigid body list...", "update_rb_refine_items")
+    qtm.gui.insert_menu_separator(my_menu_id)
+
+    # Add rigid body items
+    _update_rb_refine_items()
 
 
 def add_menu():
@@ -275,7 +268,7 @@ def add_menu():
         add_my_commands()
         setup_my_menu()
     else:
-        print(f"You need Numpy installed in Python to use the Rigid Body menu.")
+        print(f"You need Numpy installed in Python to use the Refine Rigid Body menu.")
 
 if __name__ == "__main__":
     add_menu()
