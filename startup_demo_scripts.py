@@ -12,6 +12,8 @@ import importlib
 this_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 if this_dir not in sys.path:
     sys.path.append(this_dir)
+    sys.path.append(os.path.join(this_dir,"demo_scripts"))
+
 
 import demo_scripts.startup
 importlib.reload(demo_scripts.startup)

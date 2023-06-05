@@ -1,5 +1,5 @@
 import Classes.custom_overlay_class
-from tools.helpers.printing import try_print_except
+from helpers.printing import try_print_except
 import importlib
 import qtm
 

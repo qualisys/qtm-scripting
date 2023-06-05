@@ -9,8 +9,8 @@ if this_dir not in sys.path:
     sys.path.append(this_dir)
 import qtm
 
-from tools.helpers.printing import try_print_except
-from tools.helpers.menu_tools import add_command 
+from helpers.printing import try_print_except
+from helpers.menu_tools import add_command 
 
 try:
     import draw_overlay_advanced

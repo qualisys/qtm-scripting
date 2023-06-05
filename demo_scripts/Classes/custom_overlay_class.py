@@ -1,4 +1,4 @@
-from tools.helpers import traj, selection
+from helpers import traj, selection
 import qtm
 
 
