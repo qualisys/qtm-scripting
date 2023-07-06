@@ -1,0 +1,52 @@
+site_name: QTM Scripting Interface
+use_directory_urls: false
+
+nav:
+  - Home: index.md
+  - Modules: modules.md
+  - Types: types.md
+  - Changelog: changelog.md
+
+plugins:
+    - search
+    - exclude-search:
+        exclude: 
+          - modules.md
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+theme:
+ logo: assets/images/Q.png
+ name: material
+ features:
+ - content.tabs.link
+ - content.code.annotation
+ - content.code.copy
+ language: "en"
+ font: false
+ palette:
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/weather-night
+      name: Switch to dark mode
+
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to light mode
+
+markdown_extensions:
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.superfences
+
+copyright: |
+   Copyright 2023 Qualisys AB
+
+extra:
+ generator: false
+ version:
+  provider: mike
