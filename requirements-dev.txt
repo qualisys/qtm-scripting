@@ -1,0 +1,6 @@
+mkdocs==1.4.2
+mkdocs-material==9.1.5
+mkdocs-exclude-search==0.6.5
+Pygments==2.14.0
+pymdown-extensions==9.10
+mike==1.1.2
