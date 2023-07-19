@@ -1,5 +1,5 @@
 # QTM Scripting
-Scripting examples and tools for QTM.  Lua and Python are supported in the common API for QTM.  But for now these examples are all in Python.
+Scripting examples and tools for QTM.  Lua and Python are supported in the QTM Scripting Interface.  But for now these examples are all in Python.
 ## Installation
 1. Download the repo to your machine.
 2. In QTM Project Options->Miscellaneous->Scripting:
@@ -22,8 +22,8 @@ This repository contains example scripts and useful script based tools for QTM.
     - Have an exported function to create a menu
     - Edit the "startup_tools.py" script to reference your new script.
     
-## Documentation (WIP)
-Will be available here: https://qualisys.github.io/qtm-scripting/
+## Documentation
+https://qualisys.github.io/qtm-scripting/
 
 ## External Links
 1. [This Repository](https://github.com/qualisys/qtm-scripting.git)

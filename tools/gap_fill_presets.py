@@ -15,7 +15,7 @@ The gap fill actions are compiled from a list of gap fill definitions specified 
 The list items in list_of_gap_fill_presets are formatted as a dictionary with the following key-value combinations:
   * display_name: Name of the definition appearing in the submenu
   * target: Name of the trajectory to be filled
-  * method: gap fill method, corresponding to the `algorithm` variable in the QTM Common API `fill_trajectory` method
+  * method: gap fill method, corresponding to the `algorithm` variable in the QTM Scripting Interface `fill_trajectory` method
   * settings: settings definition for relational and virtual gap fill, which is a dictionary with key-value combinations:
     - origin: Name of trajectory to be used as origin in the gap fill relation (automatically converted to trajectory ID)
     - line: Name of trajectory defining the line in the gap fill relation (automatically converted to trajectory ID)
@@ -24,7 +24,7 @@ The list items in list_of_gap_fill_presets are formatted as a dictionary with th
     - is_rigid_body (bool, directly passed to the `fill_trajectory` method)
     - is_relative_offset (bool, directly passed to the `fill_trajectory` method)
   
-  For more information about settings, see the QTM Common API documentation for the `fill_trajectory` method.
+  For more information about settings, see the QTM Scripting Interface documentation for the `fill_trajectory` method.
 
 Script valiables:
   * list_of_gap_fill_presets: predefined gap-fill actions. Initial example based on the Qualisys sports marker set for
