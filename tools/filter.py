@@ -296,6 +296,7 @@ def medianCutThenSmoothSelected():
             _medianCutRange(id,start, end)
             qtm.data.object.trajectory.smooth_trajectory(id,None,r, None)
 
+menu_priority = 10
 def add_menu():
 
     add_command("filter_median_cut_selected", medianCutFilterSelected)

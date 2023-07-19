@@ -389,6 +389,7 @@ def PrintGaps():
     markerset, marker = get_default_markerset_marker()
     if markerset:
         _print_gaps(markerset)
+menu_priority = 1
 
 def add_menu():
 

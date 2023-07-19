@@ -197,6 +197,7 @@ def setup_my_menu():
         # qtm.gui.insert_menu_button(gf_sub_id, disp_name, command_name)
         qtm.gui.insert_menu_button(my_menu_id, disp_name, command_name)
 
+menu_priority = 1
 
 def add_menu():
     # - Add commands and set up menu

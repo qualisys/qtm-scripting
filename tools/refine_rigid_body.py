@@ -270,6 +270,7 @@ def setup_my_menu():
     # Add rigid body items
     _update_rb_refine_items()
 
+menu_priority = 1
 
 def add_menu():
     if have_numpy:

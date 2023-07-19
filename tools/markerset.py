@@ -146,6 +146,7 @@ def fix_C3D_names():
 	else:
 		print(f"No markers needed fixing.")		
 
+menu_priority = 1
 
 def add_menu():
 	add_command("markerset_summary", summary)
