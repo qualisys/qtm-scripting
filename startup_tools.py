@@ -12,6 +12,8 @@ this_file = inspect.getfile(inspect.currentframe())
 this_dir = os.path.dirname(os.path.abspath(this_file))
 if this_dir not in sys.path:
     sys.path.append(this_dir)
+    sys.path.append(os.path.join(this_dir,"tools"))
+    sys.path.append(os.path.join(this_dir,"user"))
 
 # NOTE ON ADDING NEW MENU FILES
 #
