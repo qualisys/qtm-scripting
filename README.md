@@ -18,9 +18,14 @@ This repository contains example scripts and useful script based tools for QTM.
     - Refine rigid bodies can be used to adapt rigid body definitions to measured markers.
     - Gap fill presets can be used to define and use custom gap fill actions, including relational gap fill.
 ## Adding your own script menus
-1. Follow the example of the scripts in the tools folder:
-    - Have an exported function to create a menu
-    - Edit the "startup_tools.py" script to reference your new script.
+1. Follow the example of the scripts, such as "gap_fill.py" in the tools folder:
+    - Have an exported function to create a menu, call it "add_menu()"
+    - Have a module variable, an integer, called "menu_priority" and give it a value greater than 0 
+    - The startup_tools.py script will find your file and function and invoke it upon startup.  You can create a "user" sub-folder and use it instead of the tools folder if you wish to keep your files separated.
+## Installing modules such as numpy
+1. Open a command prompt window
+    - Go to the QTM installation folder, usually "C:\Program Files (x86)\Qualisys\Qualisys Track Manager"
+    - Invoke the pip installer with a command like this, "python -m pip install numpy"
     
 ## Documentation
 https://qualisys.github.io/qtm-scripting/
