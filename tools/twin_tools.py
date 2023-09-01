@@ -178,7 +178,7 @@ def add_menu():
         add_my_commands()
         setup_my_menu()
     else:
-        print(f"You need Numpy installed in Python to use the Refine Rigid Body menu.")
+        print(f"You need Numpy installed in Python to use the Twin menu.")
 
 if __name__ == "__main__":
     add_menu()
