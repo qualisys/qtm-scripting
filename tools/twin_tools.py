@@ -12,13 +12,13 @@ This scripts adds a menu "Twin" to QTM the QTM menu bar.
 * Twin calibration (6DOF): 
 
 Twin calibration (6DOF)
-* Make sure that the Euler Angles definition setting in the QTM project is set to
+* Make sure that the Euler Angles definition setting in the QTM Project Options is set to
     "Qualisys standard".
 * Create a single rigid body with two sets of markers that are visible to the respective
-    systems.
+    systems (master and slave systems).
 * Create a single rigid body definition including both sets of markers.
 * Split the rigid body definition into two separate ones, for example by exporting and
-    editing the XML and loading it to QTM again. This way, two rigid body definitions are
+    editing the XML and loading it into QTM again. This way, two rigid body definitions are
     created with a common origin and orientation.
     Note: Both rigid bodies should use global coordinates.
 * Do a twin measurement with the rigid body in a central location in both volumes. Merge
@@ -28,7 +28,7 @@ Twin calibration (6DOF)
 * In QTM Project Options, fill in the twin calibration parameters as a manual calibration in
     the twin calibration dialog and reprocess the file with the updated twin calibration.
 * Make sure that the rigid body data is the same in the frame that was used for the
-    calibration and not too different in the rest of the measurement. If so, use the twin
+    calibration and not too different in the rest of the measurement. If ok, use the twin
     calibration for subsequent measurements.
 
 Requirements:
@@ -140,8 +140,10 @@ def _twin_calib_6dof():
     tp = [D[0], D[1], D[2], \
             RPYs[0], RPYs[1], RPYs[2]]
 
-    trm.write("Twin calibration parameters (X, Y, Z, Roll, Pitch, Yaw): ")
-    print(f'{tp[0]:.3f}, {tp[1]:.3f}, {tp[2]:.3f}, {tp[3]:.3f}, {tp[4]:.3f}, {tp[5]:.3f}')
+    trm.write(f"\n--- Twin calibration (6DOF) ---")
+    trm.write(f"Twin System calibration parameters (X, Y, Z, Roll, Pitch, Yaw): ")
+    trm.write(f"{tp[0]:.3f}, {tp[1]:.3f}, {tp[2]:.3f}, {tp[3]:.3f}, {tp[4]:.3f}, {tp[5]:.3f}\n\n")
+    trm.write(f"Fill in as 'Manual Calibration' in the twin calibration dialog.")
 
 
 def add_my_commands():
@@ -168,7 +170,7 @@ def setup_my_menu():
     # Add button for updating Refine rigid body menu items.
     qtm.gui.insert_menu_button(my_menu_id, "Twin calibration (6DOF)", "twin_calib_6dof")
 
-# menu_priority = 1
+menu_priority = 1
 
 def add_menu():
     if have_numpy:
