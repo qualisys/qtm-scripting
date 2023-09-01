@@ -1,15 +1,35 @@
 """twin_tools.py: Tools for twin system
 
 General info
-Twin calibration based on rigid bodies with aligned LCS.
+Tools for twin system. Currently, one method is included for twin calibration
+based on 6DOF rigid bodies with a fixed relationship that can be used as an alternative
+to the twin wand calibration, for example for application in which it is difficult to
+access the volume with a wand.
 
 Description of menu
+This scripts adds a menu "Twin" to QTM the QTM menu bar.
+* Help: display help text for twin_tools.py
+* Twin calibration (6DOF): 
 
-Use of the script:
-* Bla
-
-Script variables (global):
-* 
+Twin calibration (6DOF)
+* Make sure that the Euler Angles definition setting in the QTM project is set to
+    "Qualisys standard".
+* Create a single rigid body with two sets of markers that are visible to the respective
+    systems.
+* Create a single rigid body definition including both sets of markers.
+* Split the rigid body definition into two separate ones, for example by exporting and
+    editing the XML and loading it to QTM again. This way, two rigid body definitions are
+    created with a common origin and orientation.
+    Note: Both rigid bodies should use global coordinates.
+* Do a twin measurement with the rigid body in a central location in both volumes. Merge
+    with zero twin calibration and Calculate 6DOF with the two rigid body definitions.
+* Select a representative frame and press the "Twin calibration (6DOF)" button. This will
+    display the calculated twin calibration parameters in the terminal window.
+* In QTM Project Options, fill in the twin calibration parameters as a manual calibration in
+    the twin calibration dialog and reprocess the file with the updated twin calibration.
+* Make sure that the rigid body data is the same in the frame that was used for the
+    calibration and not too different in the rest of the measurement. If so, use the twin
+    calibration for subsequent measurements.
 
 Requirements:
 * numpy
@@ -20,15 +40,11 @@ import importlib
 
 import qtm
 
-# import qtm.data.object.trajectory as traj
-# import qtm.data.series._3d as data_3d
-
 import qtm.data.series._6d as data_6d
 import qtm.settings.processing._6d as rb
 
 import qtm.gui.timeline as tline
 import qtm.gui.terminal as trm
-# import qtm.utilities.color as clr
 
 import math
 
@@ -108,27 +124,24 @@ def _twin_calib_6dof():
     T_1 = RT_1.transpose()[3,0:3]
     # print(f"T_1: {T_1}")
     
-    R_align = np.matmul(RT_1[0:3,0:3].transpose(), RT_0[0:3,0:3])
+    R_align = np.matmul(RT_1[0:3,0:3], RT_0[0:3,0:3].transpose())
 
     # Rotate rigid body 2 position (align rigid body 2 to rigid body 1)
-    T_aligned = np.matmul(T_1, R_align)
-    # print(f"T_aligned: {T_aligned}")
+    T1_aligned = np.matmul(T_1, R_align)
+    # print(f"T1_aligned: {T1_aligned}")
 
     # Calculate translation of rigid body 2 (slave after rotation) relative to rigid body 1 (master)
-    D = T_0 - T_aligned
+    D = T_0 - T1_aligned
 
     # Convert rotation to Euler (RPY)
-    RPYs = rotationMatrixToEulerAngles(R_align)
+    RPYs = -rotationMatrixToEulerAngles(R_align)
 
-    # Put twin calibration parameters in list
-    twin_params = [D[0], D[1], D[2], \
+    # Put twin calibration parameters in list (negative Euler angles for QTM coordinate rotation)
+    tp = [D[0], D[1], D[2], \
             RPYs[0], RPYs[1], RPYs[2]]
 
     trm.write("Twin calibration parameters (X, Y, Z, Roll, Pitch, Yaw): ")
-    print(twin_params)
-
-    # Applying twin calibration with these parameters does not perfectly align the rigid bodies in selected frame in QTM.
-    # This needs to be investigated
+    print(f'{tp[0]:.3f}, {tp[1]:.3f}, {tp[2]:.3f}, {tp[3]:.3f}, {tp[4]:.3f}, {tp[5]:.3f}')
 
 
 def add_my_commands():
