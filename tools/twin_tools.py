@@ -7,7 +7,7 @@ to the twin wand calibration, for example for application in which it is difficu
 access the volume with a wand.
 
 Description of menu
-This scripts adds a menu "Twin" to QTM the QTM menu bar.
+This scripts adds a menu "Twin" to the QTM menu bar.
 * Help: display help text for twin_tools.py
 * Twin calibration (6DOF): 
 
@@ -154,7 +154,7 @@ def add_my_commands():
     qtm.gui.add_command(command_name)
     qtm.gui.set_command_execute_function(command_name, lambda:(print(__doc__)))
 
-    # Add command for updating the rigid body list for the 
+    # Add command for 6dof twin calibration 
     qtm.gui.add_command("twin_calib_6dof")
     qtm.gui.set_command_execute_function("twin_calib_6dof", _twin_calib_6dof)
 
