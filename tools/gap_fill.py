@@ -99,10 +99,10 @@ Arel.append({"HeadL":("HeadR","HeadFront","HeadTop"),
         "RForeArm":("RWristOut","RElbowOut","RArm")
         })
 
-Arel.append({"HeadL":("TopSpine","LShoulderTop","RShoulderTop"),
-        "HeadTop":("TopSpine","LShoulderTop","RShoulderTop"),
-        "HeadR":("TopSpine","LShoulderTop","RShoulderTop"),
-        "HeadFront":("TopSpine","LShoulderTop","RShoulderTop"),
+Arel.append({"HeadL":("SpineTop","LShoulderTop","RShoulderTop"),
+        "HeadTop":("SpineTop","LShoulderTop","RShoulderTop"),
+        "HeadR":("SpineTop","LShoulderTop","RShoulderTop"),
+        "HeadFront":("SpineTop","LShoulderTop","RShoulderTop"),
         "LShoulderTop":("LShoulderBack","SpineTop","Chest"),
         "LShoulderBack":("RShoulderBack","RArm","Chest"),
         "LArm":("Chest","BackL","LWristOut"),
