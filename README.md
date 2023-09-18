@@ -12,11 +12,12 @@ Scripting examples and tools for QTM.  Lua and Python are supported in the QTM S
 This repository contains example scripts and useful script based tools for QTM.
 1. Demo Scripts contains example scripts demonstrating various capabilities of the scripting engine.
 2. Tools contains various helpful tools for use in QTM
-    - Gap_Fill has a selection of gap trimming and filling tools using stored relational information based on marker names from the standard Animation markerset
-    - Filter has spike reporting and removal/smoothing tools
-    - Markerset has miscellaneous tools for reporting, modifying and selecting markersets.
-    - Refine rigid bodies can be used to adapt rigid body definitions to measured markers.
-    - Gap fill presets can be used to define and use custom gap fill actions, including relational gap fill.
+    - *GapFill* has a selection of gap trimming and filling tools using stored relational information based on marker names from the standard Animation markerset
+    - *Filter* has spike reporting and removal/smoothing tools
+    - *Markerset* has miscellaneous tools for reporting, modifying and selecting markersets.
+    - *Refine rigid body* can be used to adapt rigid body definitions to measured markers.
+    - *Gap fill presets* can be used to define and use custom gap fill actions, including relational gap fill.
+    - *Twin* contains an alternative twin calibration method using a rigid body (6DOF).
 ## Adding your own script menus
 1. Follow the example of the scripts, such as "gap_fill.py" in the tools folder:
     - Have an exported function to create a menu, call it "add_menu()"
