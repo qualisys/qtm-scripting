@@ -1,6 +1,7 @@
 """
 Startup for tool menus. Invoke the add_menu function for scripts found at the top level of the tools folder.
 """
+from json import tool
 import sys
 import os
 import inspect
@@ -12,8 +13,12 @@ this_file = inspect.getfile(inspect.currentframe())
 this_dir = os.path.dirname(os.path.abspath(this_file))
 if this_dir not in sys.path:
     sys.path.append(this_dir)
-    sys.path.append(os.path.join(this_dir,"tools"))
-    sys.path.append(os.path.join(this_dir,"user"))
+tools_dir = os.path.join(this_dir, "tools")
+if tools_dir not in sys.path:
+    sys.path.append(tools_dir)
+user_dir = os.path.join(this_dir, "user")
+if user_dir not in sys.path:
+    sys.path.append(user_dir)
 
 # NOTE ON ADDING NEW MENU FILES
 #
