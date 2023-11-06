@@ -10,12 +10,12 @@ Access force data series.
     print(series_ids)
     # [162, 163, 164]
     
-    sample_ranges = qtm.data.series.force.get_sample_ranges(series_ids[1])
+    sample_ranges = qtm.data.series.force.get_sample_ranges(series_ids[0])
     print(sample_ranges)
     # [{'start': 0, 'end': 3999}]
     
     sample_index = 1000
-    print(qtm.data.series.force.get_sample(series_ids[1], sample_index))
+    print(qtm.data.series.force.get_sample(series_ids[0], sample_index))
     # {'force': [-43.66947368659142, -1.024620490494561, 339.9732299043336], 'moment': [35.271949647601424, 13.23768784042157, 7.189612166113668], 'center_of_pressure': [-27.376964978234895, 104.02044155564013, 0.0]}
     ```
 === "Lua"
@@ -24,12 +24,12 @@ Access force data series.
     print(series_ids)
     -- {162, 163, 164}
     
-    sample_ranges = qtm.data.series.force.get_sample_ranges(series_ids[2])
+    sample_ranges = qtm.data.series.force.get_sample_ranges(series_ids[1])
     print(sample_ranges)
     -- {{end = 3999, start = 0}}
     
     sample_index = 1000
-    print(qtm.data.series.force.get_sample(series_ids[2], sample_index))
+    print(qtm.data.series.force.get_sample(series_ids[1], sample_index))
     -- {moment = {35.271949647601, 13.237687840422, 7.1896121661137}, force = {-43.669473686591, -1.0246204904946, 339.97322990433}, center_of_pressure = {-27.376964978235, 104.02044155564, 0.0}}
     ```
 === "REST"

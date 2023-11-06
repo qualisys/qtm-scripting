@@ -116,10 +116,9 @@ Access and modify trajectories.
 === "REST"
     ``` bat
     :: - Create an empty labeled trajectory
-    curl --json "[\"trajectory\"]" http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/
-    :: 11190
-    
-    set trajectory_id=11190
+    for /f "usebackq delims=" %%i in (`curl -s --json "[\"trajectory\"]" http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/`) do (
+      set "trajectory_id=%%i"
+    )
     
     :: - Get measurement range
     curl --json "" http://localhost:7979/api/scripting/qtm/gui/timeline/get_measured_range/

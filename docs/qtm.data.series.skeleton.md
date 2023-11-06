@@ -10,12 +10,12 @@ Access and modify skeleton data series.
     print(series_ids)
     # [9474, 9485, 9493, 9500, 9506, 9512, 9518, 9525, 9532, 9538, ... ...
     
-    sample_ranges = qtm.data.series.skeleton.get_sample_ranges(series_ids[42])
+    sample_ranges = qtm.data.series.skeleton.get_sample_ranges(series_ids[0])
     print(sample_ranges)
     # [{'start': 0, 'end': 3918}]
     
     sample_index = 100
-    print(qtm.data.series.skeleton.get_sample(series_ids[42], sample_index))
+    print(qtm.data.series.skeleton.get_sample(series_ids[0], sample_index))
     # [[0.9405906306958157, 0.3371781617403682, -0.04000190861238576, -1.4210854715202004e-14], [-0.3378169776885003, 0.9174301488204885, -0.21024179323013725, -22.087045432760192], [-0.03418998439097159, 0.21126478476216182, 0.9768307098401148, -421.44593293055993], [0.0, 0.0, 0.0, 1.0]]
     ```
 === "Lua"
@@ -24,12 +24,12 @@ Access and modify skeleton data series.
     print(series_ids)
     -- {9474, 9485, 9493, 9500, 9506, 9512, 9518, 9525, 9532, 9538, ... ...
     
-    sample_ranges = qtm.data.series.skeleton.get_sample_ranges(series_ids[43])
+    sample_ranges = qtm.data.series.skeleton.get_sample_ranges(series_ids[1])
     print(sample_ranges)
     -- {{start = 0, end = 3918}}
     
     sample_index = 100
-    print(qtm.data.series.skeleton.get_sample(series_ids[43], sample_index))
+    print(qtm.data.series.skeleton.get_sample(series_ids[1], sample_index))
     -- {{0.94059063069582, 0.33717816174037, -0.040001908612386, -1.4210854715202e-14}, {-0.3378169776885, 0.91743014882049, -0.21024179323014, -22.08704543276}, {-0.034189984390972, 0.21126478476216, 0.97683070984011, -421.44593293056}, {0.0, 0.0, 0.0, 1.0}}
     ```
 === "REST"

@@ -46,7 +46,7 @@ Access and modify c3d export settings.
     curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_exclude_partially_labeled/
     :: false
     
-    set zero_baseline_range={"start": 0, "end": 9}
+    set zero_baseline_range={\"start\": 0, \"end\": 9}
     curl --json "[true]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_use_zero_force_baseline/
     curl --json "[%zero_baseline_range%]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_zero_force_baseline_range/
     curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_zero_force_baseline_range/
