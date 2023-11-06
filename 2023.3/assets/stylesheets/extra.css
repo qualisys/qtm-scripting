@@ -1,0 +1,30 @@
+:root {
+  --md-primary-fg-color:        #DA291C;
+  --md-accent-fg-color:         #F6BE00;
+}
+
+body[data-md-color-scheme="default"] {
+  --md-accent-fg-color:         #004c97;
+  --md-typeset-a-color:         #DA291C;
+  --md-code-bg-color:           #e1e1e1;
+}
+
+[data-md-color-scheme="slate"] {
+  @import;
+  --md-default-bg-color:        #1E1E1E;
+  --md-typeset-a-color:         #DA291C;
+  --md-code-bg-color:           #323232;
+}
+
+.md-typeset h1 {
+  color:                        #DA291C;
+  font-weight:                  bold;
+}
+
+.md-typeset h2 {
+  color:                        #DA291C;
+}
+
+.md-typeset pre > code {
+  max-height: 25rem;
+}
