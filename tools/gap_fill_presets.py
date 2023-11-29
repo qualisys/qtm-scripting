@@ -36,16 +36,13 @@ Current limitations of the script:
 
 """
 
-import importlib
+#import importlib
 
 import qtm
 
 import qtm.data.object.trajectory as traj
 import qtm.data.series._3d as data_3d
-
-import qtm.gui.timeline as tline
-import qtm.gui.terminal as trm
-import qtm.utilities.color as clr
+import qtm.gui.message as msg
 
 import copy
 
@@ -66,11 +63,13 @@ def _gap_fill_def(def_id):
     try:
         id_target = traj.find_trajectory(marker_name)
     except:
-        trm.write(f"No measurement.")
+        msg_str = "Open a file"
+        msg.add_message("gap_fill_presets: No file", msg_str, "error")
         return
     
     if id_target == None:
-        trm.write(f"Target trajectory {marker_name} not found in measurement.")
+        msg_str = f"Target trajectory {marker_name} not found in measurement."
+        msg.add_message("gap_fill_presets: Missing trajectory", msg_str, "warning")
         return
     
     #find gap ranges
@@ -84,7 +83,8 @@ def _gap_fill_def(def_id):
             marker_name = settings["origin"]
             id_orig =  traj.find_trajectory(marker_name)
             if id_orig == None:
-                trm.write(f"Origin trajectory {marker_name} not found in measurement.")
+                msg_str = f"Origin trajectory {marker_name} not found in measurement."
+                msg.add_message("gap_fill_presets: Missing trajectory", msg_str, "warning")
                 return
             else:
                 settings["origin"] = id_orig
@@ -92,7 +92,8 @@ def _gap_fill_def(def_id):
             marker_name = settings["line"]
             id_line =  traj.find_trajectory(marker_name)
             if id_line == None:
-                trm.write(f"Line trajectory {marker_name} not found in measurement.")
+                msg_str = f"Line trajectory {marker_name} not found in measurement."
+                msg.add_message("gap_fill_presets: Missing trajectory", msg_str, "warning")
                 return
             else:
                 settings["line"] = id_line
@@ -100,7 +101,8 @@ def _gap_fill_def(def_id):
             marker_name = settings["plane"]
             id_plane =  traj.find_trajectory(marker_name)
             if id_plane == None:
-                trm.write(f"Plane trajectory {marker_name} not found in measurement.")
+                msg_str = f"Plane trajectory {marker_name} not found in measurement."
+                msg.add_message("gap_fill_presets: Missing trajectory", msg_str, "warning")
                 return
             else:
                 settings["plane"] = id_plane
@@ -108,18 +110,20 @@ def _gap_fill_def(def_id):
         settings = None
     
     gf_action = gf_def["display_name"]
-    trm.write(f"Applying gap filling action {gf_action}")
     not_all_gaps_filled_flag = False
     for gap in gap_ranges:
-        #print(gap)
         try:
-            traj.fill_trajectory(id_target, gf_method, gap, settings) # May result in run time error when there are gaps in surrounding trajectories
+            traj.fill_trajectory(id_target, gf_method, gap, settings)
         except:
             not_all_gaps_filled_flag = True
             continue
     
     if not_all_gaps_filled_flag:
-        trm.write("- Not all gaps could be filled")
+        msg_str = f"Gap fill action {gf_action}:\nNot all gaps could be filled."
+        msg.add_message("gap_fill_presets: Done (not all gaps)", msg_str, "warning")
+    else:
+        msg_str = f"Gap fill action {gf_action} successfully applied."
+        msg.add_message("gap_fill_presets: Done", msg_str, "info")
 
 
 def add_my_commands():
@@ -176,25 +180,22 @@ def add_my_commands():
 def setup_my_menu():
     """Function for setting up the menu."""
     my_menu_id = qtm.gui.insert_menu_submenu(None, "Gap fill presets")
-    #gf_sub_id = qtm.gui.insert_menu_submenu(my_menu_id, "Gap fill...")
 
     # Add Help button for display of the script doc string
     qtm.gui.insert_menu_button(my_menu_id, "Help", "disp_gap_fill_presets_doc")
     qtm.gui.insert_menu_separator(my_menu_id)
 
     # Add buttons for respective relations
-    # Alt. use set_draw_function callback for automatic update
-    #qtm.gui.insert_menu_button(rfrb_id, "Update rigid body list...", "update_rb_refine_submenu")
     for i in range(len(list_of_gap_fill_presets)):
         disp_name = list_of_gap_fill_presets[i]["display_name"]
         command_name = "gap_fill_def_" + str(i)
         if not(any(uc == command_name for uc in qtm.gui.get_commands("user"))):
-            trm.write(f"Number of gap fill definitions exceeds maximum:\n" + \
-                f"- Definitions {i+1} and higher are ignored.")
+            msg_str = f"Number of gap fill definitions exceeds maximum:\n" + \
+                f"Definitions {i+1} and higher are ignored."
+            msg.add_message("gap_fill_presets: too many gap fill definitions", msg_str, "warning")
             break
             
         # Add button to Refine rigid body submenu with the rigid body name and associated command
-        # qtm.gui.insert_menu_button(gf_sub_id, disp_name, command_name)
         qtm.gui.insert_menu_button(my_menu_id, disp_name, command_name)
 
 menu_priority = 1
