@@ -36,7 +36,7 @@ Requirements:
 
 """
 
-import importlib
+#import importlib
 
 import qtm
 
@@ -44,7 +44,7 @@ import qtm.data.series._6d as data_6d
 import qtm.settings.processing._6d as rb
 
 import qtm.gui.timeline as tline
-import qtm.gui.terminal as trm
+import qtm.gui.message as msg
 
 import math
 
@@ -88,30 +88,34 @@ def _twin_calib_6dof():
     try:
         nrb_file = rb.get_body_count("measurement")
     except:
-        # logging.error("A file should be open with the same rigid bodies as in the project.")
-        trm.write("A file should be open including two rigid bodies.")
+        msg_str = "A file should be open including two rigid bodies."
+        msg.add_message("twin_tools: Parsing error (double click for info)", msg_str, "error")
         return
     
     if nrb_file != 2:
-        trm.write("The file must contain two rigid bodies.")
+        msg_str = "The file must contain two rigid bodies."
+        msg.add_message("twin_tools: Requirements not fulfilled (double click for info)", msg_str, "error")
         return
     
     # - Check coordinate system
     if not(rb.get_body_coordinate_system("measurement", 0)["type"] == "global") or \
             not(rb.get_body_coordinate_system("measurement", 1)["type"] == "global"):
-        trm.write("Rigid bodies' coordinate systems must be global for this operation.")
+        msg_str = "Rigid bodies' coordinate systems must be global for this operation."
+        msg.add_message("twin_tools: Requirements not fulfilled (double click for info)", msg_str, "error")
         return
     
     # Check Euler convention
     if not(qtm.settings.euler.get_convention() == "qualisys"):
-        trm.write("Euler convention must be Qualisys standard for this operation.")
+        msg_str = "Euler convention must be Qualisys standard for this operation."
+        msg.add_message("twin_tools: Requirements not fulfilled (double click for info)", msg_str, "error")
         return
 
     # Get current frame
     try:
         cf = tline.get_current_frame()
     except: 
-        trm.write("6DOF twin calibration not supported in Preview mode.\nMake a capture and try again.")
+        msg_str = "6DOF twin calibration not supported in Preview mode.\nMake a capture and try again."
+        msg.add_message("twin_tools: Parsing error (double click for info)", msg_str, "error")
         return
         
     # Calculate rotation of rigid body 2 (slave) relative to rigid body 1 (master) at current frame
@@ -122,13 +126,11 @@ def _twin_calib_6dof():
     series_id_1 = data_6d.get_series_id(1)
     RT_1 = np.array(data_6d.get_sample(series_id_1, cf)["transform"])
     T_1 = RT_1.transpose()[3,0:3]
-    # print(f"T_1: {T_1}")
     
     R_align = np.matmul(RT_1[0:3,0:3], RT_0[0:3,0:3].transpose())
 
     # Rotate rigid body 2 position (align rigid body 2 to rigid body 1)
     T1_aligned = np.matmul(T_1, R_align)
-    # print(f"T1_aligned: {T1_aligned}")
 
     # Calculate translation of rigid body 2 (slave after rotation) relative to rigid body 1 (master)
     D = T_0 - T1_aligned
@@ -140,10 +142,13 @@ def _twin_calib_6dof():
     tp = [D[0], D[1], D[2], \
             RPYs[0], RPYs[1], RPYs[2]]
 
-    trm.write(f"\n--- Twin calibration (6DOF) ---")
-    trm.write(f"Twin System calibration parameters (X, Y, Z, Roll, Pitch, Yaw): ")
-    trm.write(f"{tp[0]:.3f}, {tp[1]:.3f}, {tp[2]:.3f}, {tp[3]:.3f}, {tp[4]:.3f}, {tp[5]:.3f}\n\n")
-    trm.write(f"Fill in as 'Manual Calibration' in the twin calibration dialog.")
+    print(f"\n--- Twin calibration (6DOF) ---")
+    print(f"Twin System calibration parameters (X, Y, Z, Roll, Pitch, Yaw): ")
+    print(f"{tp[0]:.3f}, {tp[1]:.3f}, {tp[2]:.3f}, {tp[3]:.3f}, {tp[4]:.3f}, {tp[5]:.3f}\n\n")
+    print(f"Fill in as 'Manual Calibration' in the twin calibration dialog.")
+
+    msg_str = f"Twin parameters (XYZRPY): {tp[0]:.3f}, {tp[1]:.3f}, {tp[2]:.3f}, {tp[3]:.3f}, {tp[4]:.3f}, {tp[5]:.3f}"
+    msg.add_message("twin_tools: Done (see terminal for result)", msg_str, "info")
 
 
 def add_my_commands():
