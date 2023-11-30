@@ -166,3 +166,5 @@ def add_menu():
 
 
 # endregion
+if __name__ == "__main__":
+    add_menu()
