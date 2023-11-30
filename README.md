@@ -29,7 +29,7 @@ This repository contains example scripts and useful script based tools for QTM.
     - Invoke the pip installer with a command like this, "python -m pip install numpy"
     
 ## Documentation
-https://qualisys.github.io/qtm-scripting/
+https://qualisys.github.io/qtm-scripting/2023.2/index.html
 
 ## External Links
 1. [This Repository](https://github.com/qualisys/qtm-scripting.git)
