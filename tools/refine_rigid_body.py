@@ -45,7 +45,7 @@ import qtm.data.series._6d as data_6d
 import qtm.settings.processing._6d as rb
 
 import qtm.gui.timeline as tline
-import qtm.gui.terminal as trm
+import qtm.gui.message as msg
 import qtm.utilities.color as clr
 have_numpy = True
 try:
@@ -60,23 +60,18 @@ rb_refine_menu_name = "Refine rigid body"
 
 def _refine_rigid_body(rb_id):
     """Function for creating the refined definition of the selected rigid body."""
-    # Refine points of rigid body with id rb_id
-    #trm.write(f"Refining rb_id {rb_id}")
-    
     # Checks
     # - Check index
     if rb.get_body_count("project") < rb_id+1:
-        #raise Exception("Index to non-existing rigid body: " + str(rb_id+1))
-        trm.write("Index to non-existing rigid body: " + str(rb_id+1))
-        #sys.exit()
+        msg_str = "Index to non-existing rigid body: " + str(rb_id+1)
+        msg.add_message("refine_rigid_body error: Invalid rigid body index", msg_str, "error")
         return
     
     # - Check coordinate system
     if not(rb.get_body_coordinate_system("project", rb_id)["type"] == "global"):
-        #raise Exception("Rigid body '{name}' coordinate system should be global for this operation."
-        #    .format(name = rb.get_body_name("project", rb_id)))
-        trm.write("Rigid body '{name}' coordinate system should be global for this operation."
-            .format(name = rb.get_body_name("project", rb_id)))
+        msg_str = "Rigid body '{name}' coordinate system should be global for this operation."\
+            .format(name = rb.get_body_name("project", rb_id))
+        msg.add_message("refine_rigid_body error: Invalid rigid body coordinate system in project", msg_str, "error")
         return
     
     # Add a check that a file is open including the rigid body referenced in the project.
@@ -84,42 +79,44 @@ def _refine_rigid_body(rb_id):
     # Check for current rigid body if this is the case (no check for points, it is assumed that the axes definitions are the same; if not the refined points can be very different from the original definition).
     try:
         nrb_file = rb.get_body_count("measurement")
-        rb_file_name = rb.get_body_name("measurement",rb_id)
-        rb_file_type = rb.get_body_coordinate_system("measurement", rb_id)["type"]
     except:
-        # logging.error("A file should be open with the same rigid bodies as in the project.")
-        trm.write("A file should be open with the same rigid bodies as in the project.")
-        return
-    if nrb_file < rb_id:
-        trm.write("A file should be open with the same rigid bodies as in the project.")
-        return
-    if not(rb_file_name == rb.get_body_name("project",rb_id)):
-        trm.write("A file should be open with the same rigid bodies as in the project.")
-        return
-    if not(rb_file_type == "global"):
-        trm.write("A file should be open with the same rigid bodies as in the project.")
+        msg_str = "A file should be open with the same rigid bodies as in the project."
+        msg.add_message("refine_rigid_body error: No file", msg_str, "error")
         return
     
+    if nrb_file < rb_id+1:
+        msg_str = "Rigid body index exceeded.\nThe file should contain the same rigid bodies as the project."
+        msg.add_message("refine_rigid_body error: Invalid file", msg_str, "error")
+        return
+    
+    rb_file_name = rb.get_body_name("measurement",rb_id)
+    if not(rb_file_name == rb.get_body_name("project",rb_id)):
+        msg_str = "Wrong rigid body name in file.\nThe file should contain the same rigid bodies as the project."
+        msg.add_message("refine_rigid_body error: Invalid file", msg_str, "error")
+        return
+    
+    rb_file_type = rb.get_body_coordinate_system("measurement", rb_id)["type"]
+    if not(rb_file_type == "global"):
+        msg_str = "Rigid body coordinate system in file should be global.\nThe file should contain the same rigid bodies as the project."
+        msg.add_message("refine_rigid_body error: Invalid file", msg_str, "error")
+        return
     
     # Make a list of points (names and positions)
     n_pts = rb.get_point_count("project", rb_id)
     pt_names = []
     pt_idx = []
-    #pt_pos = []
     for i in range(n_pts):
         if not(rb.get_point_is_virtual("project",rb_id, i)):
             pt_names.append(rb.get_point_name("project", rb_id, i))
             pt_idx.append(i)
-            #pt_pos.append(rb.get_point_position("project", rb_id, i))
-    #trm.write(str(pt_names))
-    #trm.write("Rigid body points:\n" + str(pt_pos))
     
     # Find corresponding trajectories (current file, current sample)
     traj_points = []
     try:
         cf = tline.get_current_frame()
-    except: 
-        trm.write("Refine rigid body not supported in Preview mode.\nMake a capture and try again.")
+    except:
+        msg_str = "Refine rigid body not supported in Preview mode.\nMake a capture and try again."
+        msg.add_message("refine_rigid_body error: No file", msg_str, "error")
         return
     
     try:
@@ -128,25 +125,25 @@ def _refine_rigid_body(rb_id):
             traj_points.append(data_3d.get_sample(traj_id, cf)["position"])
         tpts = np.array(traj_points)
     except:
-        trm.write(f"All trajectories of the rigid body '{rb_file_name}' must be present and filled at the current frame.")
+        msg_str = f"All trajectories of the rigid body '{rb_file_name}' must be present and filled at the current frame."
+        msg.add_message("refine_rigid_body error: Missing trajectories", msg_str, "error")
         return
     
     # Transform trajectories to local coordinates of the rigid body
     series_id = data_6d.get_series_id(rb_id)
     RT = np.array(data_6d.get_sample(series_id, cf)["transform"])
-    #trm.write("Current rigid body pose:\n" + str(RT))
     T = RT.transpose()[3,0:3]
     tpts_trl = tpts-T
     tpts_trf = np.matmul(tpts_trl,RT[0:3,0:3])
-    #trm.write("Transformed points:\n" + str(tpts_trf))
     
     if (rb_refine_write_mode == "replace"):
         # Overwrite point coordinates (virtual points are ignored)
         for i in range(len(pt_idx)):
             rb.set_point_position("project", rb_id, pt_idx[i], tpts_trf[i].tolist())
             
-        trm.write("The rigid body '{name}' has been successfully refined."
-            .format(name = rb.get_body_name("project", rb_id)))
+        msg_str = "The rigid body '{name}' has been successfully refined."\
+            .format(name = rb.get_body_name("project", rb_id))
+        msg.add_message("refine_rigid_body: Done", msg_str, "info")
     else:
         # Add new rigid body with refined points (virtual points are not included)
         new_id = rb.add_body("project")
@@ -159,9 +156,9 @@ def _refine_rigid_body(rb_id):
             rb.set_point_name("project", new_id, i, pt_names[i])
             rb.set_point_position("project", new_id, i, tpts_trf[i].tolist())
             
-        trm.write("The refined rigid body '{name}' has been successfully added to the project."
-            .format(name = rb.get_body_name("project", new_id)))
-
+        msg_str = "The refined rigid body '{name}' has been successfully added to the project."\
+            .format(name = rb.get_body_name("project", new_id))
+        msg.add_message("refine_rigid_body: Done", msg_str, "info")
 
 def _update_rb_refine_items():
     """Function for updating the rigid body refine submenu."""
@@ -181,7 +178,8 @@ def _update_rb_refine_items():
     
     n_rb = rb.get_body_count("project")
     if n_rb == 0:
-        trm.write(f"No rigid body definitions found in the current project.")
+        msg_str = "No rigid body definitions found in the current project."
+        msg.add_message("refine_rigid_body warning: No rigid bodies in project", msg_str, "warning")
         return
     
     for i in range(n_rb):
@@ -190,13 +188,13 @@ def _update_rb_refine_items():
         # If not, add command and define execute function
         command_name = "refine_rigid_body_" + str(i)
         if not(any(uc == command_name for uc in qtm.gui.get_commands("user"))):
-            trm.write(f"Number of rigid bodies in the project exceeds index:\n" + \
-                f"- Rigid bodies no. {i+1} and higher are ignored.")
+            msg_str = f"Number of rigid bodies in the project exceeds index:\n" + \
+                f"- Rigid bodies no. {i+1} and higher are ignored."
+            msg.add_message("refine_rigid_body warning: Too many rigid bodies in project", msg_str, "warning")
             break
             
         # Add button to Refine rigid body submenu with the rigid body name and associated command
         qtm.gui.insert_menu_button(my_menu_id, rb_name, command_name)
-        #trm.write(f"Added button {rb_name} with command {command_name}")
 
 
 def add_my_commands():
