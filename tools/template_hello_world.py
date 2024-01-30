@@ -4,14 +4,16 @@ Hello world script as a basic template for a tool script, consisting of:
 * An execution function (print hello world)
 * A QTM command associated with the execution function
 * A menu button to call the command
-* Add the menu_priority variable for automatic loading of multiple scripts
+* Use the menu_priority variable for automatic loading of multiple scripts
 through startup_tools.py in order of priority
 '''
 
 # Make sure to import the QTM Scripting interface
 import qtm
 
-menu_priority = 10
+# Set menu_priority to a positive integer if you want to use the startup_tools.py script
+# to add the menu in this script to QTM
+menu_priority = 0 
 
 # Execution function: print "Hello world!" to the terminal
 def _echo_hello():
