@@ -13,6 +13,7 @@ import importlib
 importlib.reload(helpers.menu_tools)
 importlib.reload(helpers.printing)
 
+
 # - - - - - - - - - - - - - - - - - - -  - - - - - -
 # ////////   E X P O R T E D   C L A S S   ////////
 # - - - - - - - - - - - - - - - - - - - - - - - -
@@ -165,14 +166,26 @@ class custom_menu_bar:
 
     @staticmethod
     def _add_commands_and_buttons_open_files_folders(open_folders_menu_id, open_scripts_menu_id):
-        for folder_path, directories, files in os.walk(sys.path[next((i for i in enumerate(sys.path) if "Scripts" in i[1]), [-1, -1])[0]], topdown=True):
-            if folder_path.rsplit("\\", 1)[1] != "__pycache__" and folder_path.rsplit("\\", 1)[1] != "Tests":
-                add_command("open_folder_" + folder_path.rsplit("\\", 1)[1], lambda local_var=folder_path: (subprocess.Popen("explorer \"" + local_var + "\"")))
-                add_menu_item(open_folders_menu_id, folder_path.rsplit("\\", 1)[1], "open_folder_" + folder_path.rsplit("\\", 1)[1])
+        target_dir = "qtm-scripting"
+        project_dir = next((path for path in sys.path if target_dir in path), None)
+
+        if project_dir:
+            for folder_path, directories, files in os.walk(project_dir, topdown=True):
+                # Skip unwanted folders
+                directories[:] = [d for d in directories if d not in ["__pycache__", "Tests", ".git"]]
+                base_folder_name = os.path.basename(folder_path)
+
+                add_command("open_folder_" + base_folder_name, lambda local_var=folder_path: subprocess.Popen("explorer \"" + local_var + "\""))
+                add_menu_item(open_folders_menu_id, base_folder_name, "open_folder_" + base_folder_name)
+
                 for curr_file in files:
-                    if curr_file.rsplit(".", 1)[1] == "py" and curr_file != "__init__.py":
-                        add_command("open_script_" + curr_file, lambda local_var=folder_path + "\\" + curr_file: (subprocess.Popen(["notepad.exe", local_var], shell=True)))
+                    file_name, file_extension = os.path.splitext(curr_file)
+                    # Skip unwanted files
+                    if file_extension == ".py" and curr_file != "__init__.py":
+                        file_path = os.path.join(folder_path, curr_file)
+                        add_command("open_script_" + curr_file, lambda local_var=file_path: subprocess.Popen(["notepad.exe", local_var], shell=True))
                         add_menu_item(open_scripts_menu_id, curr_file, "open_script_" + curr_file)
+
     # endregion
 
     # - - - - - - - - - - - - - - - - - -
