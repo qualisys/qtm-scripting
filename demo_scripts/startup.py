@@ -1,4 +1,3 @@
-from io import StringIO
 import sys
 import os
 import inspect
@@ -11,7 +10,7 @@ if this_dir not in sys.path:
 import qtm
 
 from helpers.printing import try_print_except
-from helpers.menu_tools import add_command 
+from helpers.menu_tools import add_command
 
 try:
     import draw_overlay_advanced
@@ -121,15 +120,6 @@ def _toggle_overlay_advanced():
     globals()["_is_drawing_overlay_advanced"] = not globals()["_is_drawing_overlay_advanced"]
 
 
-def _capture_help_output():
-    old_stdout = sys.stdout # Store original stdout
-    new_stdout = StringIO() # Capture output into string buffer
-    sys.stdout = new_stdout
-    help()
-    sys.stdout = old_stdout  # Restore original stdout
-    return new_stdout.getvalue()
-
-
 def _parse_help_output(output):
     topics = []
     for line in output.splitlines():
@@ -141,14 +131,14 @@ def _parse_help_output(output):
 
 
 def _get_help_root_topics():
-    help_output = _capture_help_output()
+    help_output = qtm.utilities.documentation.get_help_text()
     return _parse_help_output(help_output)
 
 
 def _add_help_root_commands():
     help_root_topics = _get_help_root_topics()
     for curr_root_topic in help_root_topics:
-        add_command(("help_root_" + curr_root_topic), lambda topic=curr_root_topic: (print("\n\n\n"), help(topic)))
+        add_command(("help_root_" + curr_root_topic), lambda topic=curr_root_topic: (print("\n\n\n" + qtm.utilities.documentation.get_help_text(topic))))
 
 
 def _setup_menu_commands():

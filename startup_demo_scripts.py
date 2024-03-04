@@ -6,6 +6,12 @@ import sys
 import os
 import inspect
 import importlib
+# Set scripts 'path' to your repo location
+# NOTE: This needs to be done before importing custom libraries
+this_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+if this_dir not in sys.path:
+    sys.path.append(this_dir)
+import qtm
 
 # Set scripts 'path' to your repo location
 # NOTE: This needs to be done before importing custom libraries
@@ -24,5 +30,3 @@ def add_menu():
 
 if __name__ == '__main__':
     add_menu()
-
-

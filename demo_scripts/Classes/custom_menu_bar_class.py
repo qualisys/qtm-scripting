@@ -9,7 +9,6 @@ import os
 import sys
 import qtm
 import importlib
-from pydoc import help
 
 importlib.reload(helpers.menu_tools)
 importlib.reload(helpers.selection)
