@@ -220,10 +220,9 @@ class custom_menu_bar:
                     print(f"Error inserting button for '{curr_func_name}' in '{curr_module_name}': {e}")
 
     @staticmethod
-    def _load_help_all_modules(menu_id):
+    def _add_help_items_all_modules(menu_id):
         module_names = []
         module_functions = {}  # Dictionary uses module names as keys
-        errors_encountered = False
 
         try:
             module_count = qtm.utilities.documentation.get_module_count()
@@ -235,30 +234,18 @@ class custom_menu_bar:
                 for curr_function_index in range(curr_module_method_count):
                     method_name = qtm.utilities.documentation.get_method_name(curr_module_index, curr_function_index)
                     module_functions[curr_module_name].append(method_name)
-
         except Exception as e:
-            errors_encountered = True
             print(f"Error loading module documentation: {e}")
             return  # Exit the function if there's an error in loading documentation
-
         try:
-            index = get_menu_item_index(menu_id, "Help (Modules) [ CLICK TO LOAD ]")
-            qtm.gui.delete_menu_item(menu_id, index)
-            index = qtm.gui.insert_menu_submenu(menu_id, "Help (Modules)", index)
+            index = qtm.gui.insert_menu_submenu(menu_id, "Help (Modules)")
             custom_menu_bar._insert_help_modules_sub_menu_items(index, module_names, module_functions)
         except Exception as e:
-            errors_encountered = True
             print(f"Error setting up help menu: {e}")
-        if errors_encountered == False:
-            print("\n\nSUCCESS: Module help items loaded!")
-        else:
-            print("\n\nERROR: Attempted to load module help items, but some error(s) encountered!")
 
     def _initialize_help_menu_items(self):
         self._add_help_root_menu_items(qtm.gui.insert_menu_submenu(self._menu_id, "Help (Main Topics)"))
-        add_command("load_help_all_modules", lambda: (self._load_help_all_modules(self._menu_id)))
-        add_menu_item(self._menu_id, "Help (Modules) [ CLICK TO LOAD ]", "load_help_all_modules")
-
+        self._add_help_items_all_modules(self._menu_id)
     # endregion
 
     # - - - - - - - - - - - - - - - - - -
