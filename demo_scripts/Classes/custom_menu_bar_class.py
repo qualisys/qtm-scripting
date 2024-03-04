@@ -79,7 +79,10 @@ class custom_menu_bar:
         list_of_all_menus_as_dicts = qtm.gui.get_menu_items()
         for curr_menu in list_of_all_menus_as_dicts:
             if curr_menu["submenu"] == self._menu_id:
-                print("\n" + "The '" + qtm.gui.get_menu_item(curr_menu["submenu"], 0)["text"] + "' button was successfully removed.")
+                if qtm.gui.get_menu_item(curr_menu["submenu"], 0)["text"] == "" and qtm.gui.get_menu_item(curr_menu["submenu"], 0)["command"] == "":
+                    print("\n" + "A menu divider / separator line was successfully removed.")
+                else:
+                    print("\n" + "The '" + qtm.gui.get_menu_item(curr_menu["submenu"], 0)["text"] + "' button was successfully removed.")
                 qtm.gui.delete_menu_item(self._menu_id, 0)
                 break
 
