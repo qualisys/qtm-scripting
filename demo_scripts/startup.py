@@ -28,7 +28,6 @@ _is_drawing_arrows_unlabeled_traj = False
 _is_drawing_decaying_arrows_unlabeled_traj = False
 _is_drawing_overlay_basic = False
 _is_drawing_overlay_advanced = False
-_help_root_topics = []
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -120,27 +119,6 @@ def _toggle_overlay_advanced():
     globals()["_is_drawing_overlay_advanced"] = not globals()["_is_drawing_overlay_advanced"]
 
 
-def _parse_help_output(output):
-    topics = []
-    for line in output.splitlines():
-        if '|' in line and 'Topic' not in line:
-            topic = line.split('|')[1].strip()
-            topic = topic.strip('"')  # Remove quotation marks from found 'topics' 
-            topics.append(topic)
-    return topics
-
-
-def _get_help_root_topics():
-    help_output = qtm.utilities.documentation.get_help_text()
-    return _parse_help_output(help_output)
-
-
-def _add_help_root_commands():
-    help_root_topics = _get_help_root_topics()
-    for curr_root_topic in help_root_topics:
-        add_command(("help_root_" + curr_root_topic), lambda topic=curr_root_topic: (print("\n\n\n" + qtm.utilities.documentation.get_help_text(topic))))
-
-
 def _setup_menu_commands():
     add_command("toggle_menu_script_example", lambda: (_toggle_menu_script_example()))
     add_command("toggle_3d_scene_basic", lambda: (_toggle_3d_scene_basic()))
@@ -149,7 +127,6 @@ def _setup_menu_commands():
     add_command("toggle_drawing_decaying_arrows_unlabeled_traj", lambda: (_toggle_drawing_decaying_arrows_unlabeled_traj()))
     add_command("toggle_overlay_basic", lambda: (_toggle_overlay_basic()))
     add_command("toggle_overlay_advanced", lambda: (_toggle_overlay_advanced()))
-    _add_help_root_commands()
 # endregion
 
 
