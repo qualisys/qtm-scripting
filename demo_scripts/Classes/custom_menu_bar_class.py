@@ -1,7 +1,7 @@
 import helpers.menu_tools
 import helpers.printing
 
-from helpers.menu_tools import add_command, add_menu_item, add_menu_item_toggleable, set_toggleable_command_hotkey, get_menu_item_index
+from helpers.menu_tools import add_command, add_menu_item, add_menu_item_toggleable, set_toggleable_command_hotkey
 from helpers.selection import select_all_trajectories, select_labeled_trajectories, select_unlabeled_trajectories
 from helpers.printing import force_print
 import subprocess

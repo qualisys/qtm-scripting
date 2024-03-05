@@ -145,24 +145,6 @@ def add_menu_item(menu_id, button_text, command_name, index=None):
     return True
 
 
-def get_menu_item_index(menu_id, name):
-    index = 0
-    for curr_menu_item in qtm.gui.get_menu_items(menu_id):
-        if curr_menu_item["text"] == name:
-            return index
-        else:
-            index += 1
-    return -1
-
-
-def remove_menu_item_by_name(menu_id, name):
-    menu_items = qtm.gui.get_menu_items(menu_id)
-    for curr_menu_item_index in range(len(menu_items)):
-        if menu_items[curr_menu_item_index]["text"] == name:
-            qtm.gui.delete_menu_item(menu_id, curr_menu_item_index)
-            return
-
-
 def add_menu_item_toggleable(menu_id, button_text_state_one, button_text_state_two, command_name, index=None):
     # Generate command-name that toggles the button (also calls the ACTUAL command)
     toggle_command_name = str(command_name + "_internal")
