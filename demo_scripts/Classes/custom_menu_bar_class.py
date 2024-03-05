@@ -350,8 +350,8 @@ class custom_menu_bar:
         self._add_commands_menus()
         self._add_commands_miscellaneous()
         self._add_command_clear_terminal()
+        self._add_commands_root_help()
         
-
         add_menu_item(self._menu_id, "Switch to Script Examples (Basic)", "toggle_menu_script_example")
 
         qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
@@ -389,7 +389,8 @@ class custom_menu_bar:
         qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
 
         # Add help-related GUI buttons
-        self._initialize_help_menu_items()
+        self._add_root_help_menu_items()
+        self._add_all_modules_help_menu_items()
 
         # Add hotkeys last to ensure all commands have been created
         self.set_hotkeys_advanced()
