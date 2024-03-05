@@ -211,7 +211,7 @@ class custom_menu_bar:
                 add_menu_item(sub_menu_index, button_text, saved_command)
 
     @staticmethod
-    def _insert_help_modules_sub_menu_items(sub_menu_id, module_names_arr, module_funcs_arr):
+    def _all_modules_help_create_commands_and_sub_menu_menu_items(sub_menu_id, module_names_arr, module_funcs_arr):
         for curr_module_name in module_names_arr:
             # Dynamically access the module using getattr, navigating through nested modules
             module_parts = curr_module_name.split('.')
@@ -263,7 +263,7 @@ class custom_menu_bar:
             return  # Exit the function if there's an error in loading documentation
         try:
             index = qtm.gui.insert_menu_submenu(self._menu_id, "Help (Modules)")
-            custom_menu_bar._insert_help_modules_sub_menu_items(index, module_names, module_functions)
+            custom_menu_bar._all_modules_help_create_commands_and_sub_menu_menu_items(index, module_names, module_functions)
         except Exception as e:
             print(f"Error setting up help menu: {e}")
     # endregion
@@ -335,16 +335,14 @@ class custom_menu_bar:
 
         # Add help-related GUI buttons
         self._add_root_help_menu_items()
-        self._add_all_modules_help_menu_items()
+        self._add_all_modules_help_menu_items() # NOTE: Also creates commands
 
         # Add hotkeys last to ensure all commands have been created
         self.set_hotkeys_basic()
 
     def setup_menu_advanced(self):
         self._menu_id = qtm.gui.insert_menu_submenu(None, "Script Examples (Advanced)")
-        # Create the commands
-        # NOTE: Trying to create a command with the same name more than once will generate an error. The
-        #       reason it works here is because we are calling 'add_command()' from 'HelpFuncsInternal.tools'.
+
         self._add_commands_printing()
         self._add_commands_commands()
         self._add_commands_menus()
@@ -388,11 +386,9 @@ class custom_menu_bar:
 
         qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
 
-        # Add help-related GUI buttons
         self._add_root_help_menu_items()
         self._add_all_modules_help_menu_items()
 
-        # Add hotkeys last to ensure all commands have been created
         self.set_hotkeys_advanced()
 
     def delete_menu(self):
