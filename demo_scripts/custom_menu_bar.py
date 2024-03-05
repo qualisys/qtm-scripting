@@ -1,4 +1,4 @@
-import Classes.custom_menu_bar_class
+from demo_scripts.Classes import custom_menu_bar_class
 import importlib
 import qtm
 
@@ -12,7 +12,7 @@ def _reload_script_modules():
     # means that changes you make to these scripts will not show up in
     # QTM despite pressing the "Reload scripts" button. However, running
     # "importlib.reload()" on these scripts will force Python to reload them.
-    importlib.reload(Classes.custom_menu_bar_class)
+    importlib.reload(custom_menu_bar_class)
 # endregion
 
 
@@ -37,4 +37,4 @@ def delete():
 # ////////   E N T R Y   P O I N T (local 'main')   ////////
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 _reload_script_modules()
-custom_menu_bar_instance = Classes.custom_menu_bar_class.custom_menu_bar()
+custom_menu_bar_instance = custom_menu_bar_class.custom_menu_bar()

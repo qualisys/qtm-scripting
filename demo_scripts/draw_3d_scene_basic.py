@@ -1,4 +1,4 @@
-import Classes.custom_3d_scene_class
+from demo_scripts.Classes import custom_3d_scene_class
 from helpers.printing import try_print_except
 import importlib
 import qtm
@@ -13,7 +13,7 @@ def _reload_script_modules():
     # means that changes you make to these scripts will not show up in
     # QTM despite pressing the "Reload scripts" button. However, running
     # "importlib.reload()" on these scripts will force Python to reload them.
-    importlib.reload(Classes.custom_3d_scene_class)
+    importlib.reload(custom_3d_scene_class)
 # endregion
 
 
@@ -33,4 +33,4 @@ def update_and_draw_scene():
 # ////////   E N T R Y   P O I N T (local 'main')   ////////
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 _reload_script_modules()
-custom_3d_scene_instance = Classes.custom_3d_scene_class.custom_3d_scene()
+custom_3d_scene_instance = custom_3d_scene_class.custom_3d_scene()
