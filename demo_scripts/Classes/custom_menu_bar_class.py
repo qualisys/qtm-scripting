@@ -224,7 +224,7 @@ class custom_menu_bar:
         self._add_commands_menus()
         self._add_command_clear_terminal()
 
-        # Add 'Switch to Advanced Menu Button
+        # Add Switch to Advanced Menu Button
         add_menu_item(self._menu_id, "Switch to " + menu_name_advanced, "toggle_menu_script_example")
 
         qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
