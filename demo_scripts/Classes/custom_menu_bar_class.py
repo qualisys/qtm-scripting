@@ -13,6 +13,10 @@ import importlib
 importlib.reload(helpers.menu_tools)
 importlib.reload(helpers.printing)
 
+# constants
+menu_name_basic = "Script Examples (Basic)"
+menu_name_advanced = "Script Examples (Advanced)"
+
 
 # - - - - - - - - - - - - - - - - - - -  - - - - - -
 # ////////   E X P O R T E D   C L A S S   ////////
@@ -25,11 +29,23 @@ class custom_menu_bar:
     def __init__(self):
         self._buttons_enabled = True
         self._menu_id = 0
+        self._menu_index = None
+
+    def _update_menu_index(self):
+        if (self._menu_index is None):
+            self._menu_index = qtm.gui.get_menu_item_count(0)
+        else:
+            self._menu_index = qtm.gui.get_menu_item_count(0)
+            menu_items = qtm.gui.get_menu_items(0)
+            for curr_menu_item_index in range(len(menu_items)):
+                if menu_items[curr_menu_item_index]["submenu"] == self._menu_id:
+                    self._menu_index = curr_menu_item_index
+        return self._menu_index
 
     def _toggle_buttons(self):
         self._buttons_enabled = not self._buttons_enabled
         state_str = "ENABLED" if self._buttons_enabled else "DISABLED"
-        print("\n" + f"Buttons in 'Script Examples (Basic)' have now been {state_str}.")
+        print("\n" + f"Buttons in '{menu_name_basic}' have now been {state_str}.")
 
     @staticmethod
     def _print_string():
@@ -109,7 +125,7 @@ class custom_menu_bar:
                             f"- Add a clickable button by running 'add_menu_item(<MENU_ID>, \"<BUTTON_TEXT>\", \"<COMMAND_NAME>\")'" + "\n\n"
                             f"To see a list of all available commands you can either:" + "\n"
                             f"{'-' * 55}" + "\n"
-                            f"- In the 'Script Examples (Basic)' menu, click the 'Get All Commands' button" + "\n"
+                            f"- In the '{menu_name_basic}' menu, click the 'Get All Commands' button" + "\n"
                             f"- In a script or in the terminal, run 'qtm.gui.get_commands()'"
                             )
         add_command("commands_information", lambda: (print(lambda_print_msg)), lambda: (self._buttons_enabled is True))
@@ -126,11 +142,11 @@ class custom_menu_bar:
                             f"NOTE: If <MENU_ID> is 'None'(null), the main menu will be used. Also, if <INDEX> is 'None'(null), the item will be placed at the top." + "\n\n"
                             f"To see a list of all available menus:" + "\n"
                             f"{'-' * 37}" + "\n"
-                            f"- In the 'Script Examples (Basic)' menu, click the 'List All Menus' button to get a formatted list" + "\n"
+                            f"- In the '{menu_name_basic}' menu, click the 'List All Menus' button to get a formatted list" + "\n"
                             f"- Run 'qtm.gui.get_menu_items()' to get an unformatted list" + "\n\n"
                             f"To see a list of all available submenus:" + "\n"
                             f"{'-' * 40}" + "\n"
-                            f"- In the 'Script Examples (Basic)' menu, click the 'List All Submenus' button to get a formatted list" + "\n"
+                            f"- In the '{menu_name_basic}' menu, click the 'List All Submenus' button to get a formatted list" + "\n"
                             f"- Run 'qtm.gui.get_menu_items(<MENU_ID>) to get an unformatted list"
                             )
         add_command("menus_information", lambda: (print(lambda_print_msg)), lambda: (self._buttons_enabled is True))
@@ -196,7 +212,9 @@ class custom_menu_bar:
     # - - - - - - - - - - - - - - - -
     # region [ COLLAPSE / EXPAND ]
     def setup_menu_basic(self):
-        self._menu_id = qtm.gui.insert_menu_submenu(None, "Script Examples (Basic)")
+        self._menu_id = qtm.gui.insert_menu_submenu(None, menu_name_basic, self._menu_index)
+        if (self._menu_index is None):
+            self._menu_index = qtm.gui.get_menu_item_count(0)
         # Create the commands, which are callable by either running them directly or via a button
         # NOTE: Trying to create a command with the same name more than once will generate an error. The
         #       reason it works here is because we are calling 'add_command()' from 'HelpFuncsInternal.tools'.
@@ -206,8 +224,8 @@ class custom_menu_bar:
         self._add_commands_menus()
         self._add_command_clear_terminal()
 
-        # Add 'Switch to 'Script Examples (Advanced)' Button
-        add_menu_item(self._menu_id, "Switch to Script Examples (Advanced)", "toggle_menu_script_example")
+        # Add 'Switch to Advanced Menu Button
+        add_menu_item(self._menu_id, "Switch to " + menu_name_advanced, "toggle_menu_script_example")
 
         qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -257,7 +275,9 @@ class custom_menu_bar:
         self.set_hotkeys_basic()
 
     def setup_menu_advanced(self):
-        self._menu_id = qtm.gui.insert_menu_submenu(None, "Script Examples (Advanced)")
+        self._menu_id = qtm.gui.insert_menu_submenu(None, menu_name_advanced, self._menu_index)
+        if (self._menu_index is None):
+            self._menu_index = qtm.gui.get_menu_item_count(0)
         # Create the commands
         # NOTE: Trying to create a command with the same name more than once will generate an error. The
         #       reason it works here is because we are calling 'add_command()' from 'HelpFuncsInternal.tools'.
@@ -267,7 +287,7 @@ class custom_menu_bar:
         self._add_commands_miscellaneous()
         self._add_command_clear_terminal()
 
-        add_menu_item(self._menu_id, "Switch to Script Examples (Basic)", "toggle_menu_script_example")
+        add_menu_item(self._menu_id, "Switch to " + menu_name_basic, "toggle_menu_script_example")
 
         qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -305,5 +325,6 @@ class custom_menu_bar:
         self.set_hotkeys_advanced()
 
     def delete_menu(self):
+        self._update_menu_index()
         self._delete_this_menu()
     # endregion
