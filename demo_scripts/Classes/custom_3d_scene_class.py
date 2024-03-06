@@ -158,7 +158,7 @@ class custom_3d_scene:
         # NOTE: The order of which the translation & rotation matrices are multiplied matters
         tran_rot_matrix = translation_matrix * rotation_matrix
         # Load the 'utah-teapot.obj' mesh, scaled by the given ratio
-        qtm.gui._3d.draw_mesh(list(tran_rot_matrix), 1.5, "utah-teapot.obj")
+        qtm.gui._3d.draw_mesh(list(tran_rot_matrix), 0.1, "utah-teapot.obj")
     # endregion
 
     # - - - - - - - - - - - - - - - - - -
