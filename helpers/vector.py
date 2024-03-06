@@ -1,5 +1,8 @@
 import math
 
+# variables
+# WARNING: Adding variables here is potentially dangerous; variables are reset each time a script loads this module
+
 
 # - - - - - - - - - - - - - - - - - - -  - - - - - -
 # ////////   E X P O R T E D   C L A S S   ////////
