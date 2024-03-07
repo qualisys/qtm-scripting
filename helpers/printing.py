@@ -15,6 +15,7 @@ import menu_tools as tools
 _error_print_periodicity = 2.0  # As seconds
 _error_signatures_stack_size = 32
 # variables
+# WARNING: Adding variables here is potentially dangerous; variables are reset each time a script loads this module
 _prev_error_signatures = [""] * _error_signatures_stack_size
 _prev_error_index = 0
 _prev_time = datetime.datetime.now()

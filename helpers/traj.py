@@ -2,6 +2,8 @@ from vector import Vec3
 import menu_tools as tools
 import qtm
 
+# variables
+# WARNING: Adding variables here is potentially dangerous; variables are reset each time a script loads this module
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

@@ -1,7 +1,6 @@
 from helpers.menu_tools import clamp
 from helpers.traj import get_marker_positions, get_unlabeled_marker_ids
 from helpers.matrix import Mat4x4
-import sys
 import os
 import inspect
 import shutil
@@ -32,7 +31,8 @@ class custom_3d_scene:
         self._sphere_travel_switch = True
         self._hovering_arrow_positions_dict = {}
 
-    def _draw_rainbow_arrows_field(self, measurement_time, count, total_length, max_height):
+    @staticmethod
+    def _draw_rainbow_arrows_field(measurement_time, count, total_length, max_height):
         step_distance = total_length / count
         curr_x = total_length * 0.5
         curr_y = total_length * 0.5
@@ -82,7 +82,8 @@ class custom_3d_scene:
         qtm.gui._3d.draw_sphere([distance_from_center, -distance_from_center+(distance_from_center*2*self._sphere_travel_distance), self._sphere_height], radius, self._blue)
         qtm.gui._3d.draw_sphere([-distance_from_center+(distance_from_center*2*self._sphere_travel_distance), -distance_from_center, self._sphere_height], radius, self._orange_from_hsl)
 
-    def _draw_hovering_arrows(self, measurement_time, positions, arrow_length, color, hover_distance, hover_speed):
+    @staticmethod
+    def _draw_hovering_arrows(measurement_time, positions, arrow_length, color, hover_distance, hover_speed):
         for pos in positions:
             hover_val = clamp(abs(math.sin(measurement_time * hover_speed)), 0.0, 1.0) * hover_distance
             qtm.gui._3d.draw_arrow([pos[0], pos[1], pos[2] + arrow_length + hover_val], [pos[0], pos[1], pos[2] + hover_val], color)
@@ -122,14 +123,16 @@ class custom_3d_scene:
         # Draw another sphere under the first one with the color red
         qtm.gui._3d.draw_sphere([0, -2000, 750], 200, self._red)
 
-    def _draw_axis(self):
+    @staticmethod
+    def _draw_axis():
         # Create matrix defining the position at which the axes should be moved to
         translation_matrix = Mat4x4.create_translation_matrix([2000.0, 0.0, 1000.0])
         # Draw a 3-dimensional axis using the 'translation_matrix' to determine its position
         # NOTE: x_axis == red arrow, y_axis == green arrow, z_axis == blue arrow (as depicted in QTM)
         qtm.gui._3d.draw_axes(list(translation_matrix), 1000)
 
-    def _draw_mesh(self):
+    @staticmethod
+    def _draw_mesh():
         # NOTE: If you're not able to see your mesh (and no exception is being thrown),
         #       it is likely because the format (presumably the faces) is not as QTM is expecting.
         #       Here is one step-by-step alternative as to how you can reformat your obj:
@@ -158,7 +161,7 @@ class custom_3d_scene:
         # NOTE: The order of which the translation & rotation matrices are multiplied matters
         tran_rot_matrix = translation_matrix * rotation_matrix
         # Load the 'utah-teapot.obj' mesh, scaled by the given ratio
-        qtm.gui._3d.draw_mesh(list(tran_rot_matrix), 1.5, "utah-teapot.obj")
+        qtm.gui._3d.draw_mesh(list(tran_rot_matrix), 0.1, "utah-teapot.obj")
     # endregion
 
     # - - - - - - - - - - - - - - - - - -
@@ -166,7 +169,7 @@ class custom_3d_scene:
     # - - - - - - - - - - - - - - - -
     # region [ COLLAPSE / EXPAND ]
     def update_and_draw_advanced(self, measurement_time):
-        self._draw_rainbow_arrows_field(measurement_time, 10, 10000, 800)
+        custom_3d_scene._draw_rainbow_arrows_field(measurement_time, 10, 10000, 800)
         self._draw_bouncing_spheres(measurement_time, 200, 2, 5000, 0.25)
 
     def update_and_draw_basic(self):
@@ -174,11 +177,11 @@ class custom_3d_scene:
         # draw the objects correctly based on order-of-depth (z-buffer).
         self._draw_arrows()
         self._draw_spheres()
-        self._draw_axis()
-        self._draw_mesh()
+        custom_3d_scene._draw_axis()
+        custom_3d_scene._draw_mesh()
 
     def update_and_draw_arrows_unlabeled_traj(self, measurement_time):
-        self._draw_hovering_arrows(measurement_time, get_marker_positions(measurement_time, get_unlabeled_marker_ids()), 2000.0, self._red, 200.0, 3.0)
+        custom_3d_scene._draw_hovering_arrows(measurement_time, get_marker_positions(measurement_time, get_unlabeled_marker_ids()), 2000.0, self._red, 200.0, 3.0)
 
     def update_and_draw_decaying_arrows_unlabeled_traj(self, measurement_time):
         self._draw_hovering_arrows_with_decay(measurement_time, get_unlabeled_marker_ids(), 2000.0, self._white, 200.0, 3.0, 20)

@@ -9,6 +9,10 @@ from vector import Vec3
 import printing as printing
 import qtm
 
+=======
+# variables
+# WARNING: Adding variables here is potentially dangerous; variables are reset each time a script loads this module
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # ////////   P R I V A T E   F U N C T I O N S   ////////
