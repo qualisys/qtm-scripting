@@ -1,11 +1,20 @@
-from Classes.matrix import Mat4x4
+from pathlib import Path
+import sys
+import inspect
+
+current_script_dir = Path(inspect.getfile(inspect.currentframe())).resolve().parent
+this_dir = str(current_script_dir.parents[1])
+if this_dir not in sys.path:
+    sys.path.append(this_dir)
+
+from helpers.matrix import Mat4x4
 import unittest
 
 
 # HOW TO RUN TESTS
 # ----------------
 # 1. Open a Python interpreter
-# 2. Change directory to ..\qtm\Api\Python\Scripts
+# 2. Change directory to ..\qtm-scripting\demo_scripts\Tests
 # 3. Run the command: python -m unittest discover -v
 
 
