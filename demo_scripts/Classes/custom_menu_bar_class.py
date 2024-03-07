@@ -11,6 +11,7 @@ import qtm
 import importlib
 
 importlib.reload(helpers.menu_tools)
+importlib.reload(helpers.selection)
 importlib.reload(helpers.printing)
 
 # constants
@@ -27,6 +28,9 @@ class custom_menu_bar:
     # - - - - - - - - - - - - - - - - -
     # region [ COLLAPSE / EXPAND ]
     def __init__(self):
+        # constants
+        self._root_help_command = "root_help_"
+        # variables
         self._buttons_enabled = True
         self._menu_id = 0
         self._menu_index = None
@@ -57,7 +61,8 @@ class custom_menu_bar:
         suggestion_msg = "Use 'force_print' or 'try_print' from 'HelpFuncsInternal.printing' to create these structured messages."
         force_print("PRINT", comment_msg, suggestion_msg)
 
-    def _print_all_menus_formatted(self):
+    @staticmethod
+    def _print_all_menus_formatted():
         list_of_all_menus_as_dicts = qtm.gui.get_menu_items()
         print_msg = ""
         for curr_menu in list_of_all_menus_as_dicts:
@@ -66,7 +71,8 @@ class custom_menu_bar:
             print_msg += " (ID: " + str(curr_menu["submenu"]) + ")"
         print(print_msg)
 
-    def _print_all_submenus_formatted(self):
+    @staticmethod
+    def _print_all_submenus_formatted():
         list_of_all_menus_as_dicts = qtm.gui.get_menu_items()
         print_msg = ""
         for curr_menu in list_of_all_menus_as_dicts:
@@ -115,8 +121,8 @@ class custom_menu_bar:
     def _add_commands_printing(self):
         lambda_print_msg = "\nClicking the 'String (Lambda)' button calls a created lambda which prints this message."
         add_command("print_lambda", lambda: (print(lambda_print_msg)), lambda: (self._buttons_enabled is True))
-        add_command("print_structured_string", self._print_structured_string, lambda: (self._buttons_enabled is True))
-        add_command("print_string", self._print_string, lambda: (self._buttons_enabled is True))
+        add_command("print_structured_string", custom_menu_bar._print_structured_string, lambda: (self._buttons_enabled is True))
+        add_command("print_string", custom_menu_bar._print_string, lambda: (self._buttons_enabled is True))
 
     def _add_commands_commands(self):
         lambda_print_msg = ("\n" + "To call an existing command you can (in a script or in the terminal):" + "\n"
@@ -150,10 +156,10 @@ class custom_menu_bar:
                             f"- Run 'qtm.gui.get_menu_items(<MENU_ID>) to get an unformatted list"
                             )
         add_command("menus_information", lambda: (print(lambda_print_msg)), lambda: (self._buttons_enabled is True))
-        add_command("list_all_menus", lambda: (self._print_all_menus_formatted()), lambda: (self._buttons_enabled is True))
-        add_command("list_all_submenus", lambda: (self._print_all_submenus_formatted()), lambda: (self._buttons_enabled is True))
+        add_command("list_all_menus", lambda: (custom_menu_bar._print_all_menus_formatted()), lambda: (self._buttons_enabled is True))
+        add_command("list_all_submenus", lambda: (custom_menu_bar._print_all_submenus_formatted()), lambda: (self._buttons_enabled is True))
         add_command("new_button_command", lambda: (print("\n" + "HOW DID THIS BUTTON GET HERE!?")))
-        add_command("add_button_to_all_menus", lambda: (self._add_button_to_all_menus()), lambda: (self._buttons_enabled is True))
+        add_command("add_button_to_all_menus", lambda: (custom_menu_bar._add_button_to_all_menus()), lambda: (self._buttons_enabled is True))
         add_command("delete_top_button", lambda: (self._delete_top_button()), lambda: (self._buttons_enabled is True))
         add_command("delete_this_menu", lambda: (self._delete_this_menu()), lambda: (self._buttons_enabled is True))
 
@@ -166,6 +172,11 @@ class custom_menu_bar:
     @staticmethod
     def _add_command_clear_terminal():
         add_command("clear_terminal", qtm.gui.terminal.clear)
+
+    def _add_commands_root_help(self):
+        root_help_topics = custom_menu_bar._get_root_help_topics()
+        for curr_root_topic in root_help_topics:
+            add_command((self._root_help_command + curr_root_topic), lambda topic=curr_root_topic: (print("\n\n\n" + qtm.utilities.documentation.get_help_text(topic))))
 
     @staticmethod
     def set_hotkeys_basic():
@@ -205,6 +216,86 @@ class custom_menu_bar:
                         add_command("open_script_" + curr_file, lambda local_var=file_path: subprocess.Popen(["notepad.exe", local_var], shell=True))
                         add_menu_item(open_scripts_menu_id, curr_file, "open_script_" + curr_file)
 
+    @staticmethod
+    def _parse_help_output(output):
+        topics = []
+        for line in output.splitlines():
+            if '|' in line and 'Topic' not in line:
+                topic = line.split('|')[1].strip()
+                topic = topic.strip('"')  # Remove quotation marks from found 'topics' 
+                topics.append(topic)
+        return topics
+
+    @staticmethod
+    def _get_root_help_topics():
+        help_output = qtm.utilities.documentation.get_help_text()
+        return custom_menu_bar._parse_help_output(help_output)
+
+    def _add_root_help_menu_items(self):
+        sub_menu_index = qtm.gui.insert_menu_submenu(self._menu_id, "Help (Main Topics)")
+        for curr_command in qtm.gui.get_commands():
+            if self._root_help_command in curr_command:
+                saved_command = curr_command
+                button_text = curr_command[len(self._root_help_command):]
+                button_text = button_text.capitalize()
+                add_menu_item(sub_menu_index, button_text, saved_command)
+
+    @staticmethod
+    def _all_modules_help_create_commands_and_sub_menu_menu_items(sub_menu_id, module_names_arr, module_funcs_arr):
+        for curr_module_name in module_names_arr:
+            # Dynamically access the module using getattr, navigating through nested modules
+            module_parts = curr_module_name.split('.')
+            curr_module = qtm  # Start from the root module
+            for part in module_parts[1:]:  # Skip the 'qtm' part
+                try:
+                    curr_module = getattr(curr_module, part)
+                except AttributeError as e:
+                    print(f"Error accessing part '{part}' of '{curr_module_name}': {e}")
+                    continue  # Skip and continue
+            try:
+                curr_sub_menu_id = qtm.gui.insert_menu_submenu(sub_menu_id, curr_module_name)
+            except Exception as e:
+                print(f"Error inserting submenu for '{curr_module_name}': {e}")
+                continue  # Skip to the next module if submenu insertion fails
+
+            for curr_func_name in module_funcs_arr[curr_module_name]:
+                try:
+                    command_name = (curr_module_name + "_" + curr_func_name)
+                    command_func = None
+                    # If function name is 'help', it's the module-level 'help'...
+                    if curr_func_name == "help":
+                        # ... so we call 'help' without a parameter
+                        command_func = lambda curr_module=curr_module: (print(str("\n\n\n" + curr_module.help())))
+                    else: # Otherwise, pass the function name as a parameter
+                        command_func = lambda curr_func_name=curr_func_name, curr_module=curr_module: print(str("\n\n\n" + curr_module.help(curr_func_name)))
+                    add_command(command_name, command_func)
+                    # Use the dynamically defined command function for the menu button
+                    qtm.gui.insert_menu_button(curr_sub_menu_id, curr_func_name, command_name)
+                except Exception as e:
+                    print(f"Error inserting button for '{curr_func_name}' in '{curr_module_name}': {e}")
+
+    def _add_all_modules_help_menu_items(self):
+        module_names = []
+        module_functions = {}  # Dictionary uses module names as keys
+
+        try:
+            module_count = qtm.utilities.documentation.get_module_count()
+            for curr_module_index in range(module_count):
+                curr_module_name = qtm.utilities.documentation.get_module_path(curr_module_index)
+                curr_module_method_count = qtm.utilities.documentation.get_method_count(curr_module_index)
+                module_names.append(curr_module_name)
+                module_functions[curr_module_name] = []
+                for curr_function_index in range(curr_module_method_count):
+                    method_name = qtm.utilities.documentation.get_method_name(curr_module_index, curr_function_index)
+                    module_functions[curr_module_name].append(method_name)
+        except Exception as e:
+            print(f"Error loading module documentation: {e}")
+            return  # Exit the function if there's an error in loading documentation
+        try:
+            index = qtm.gui.insert_menu_submenu(self._menu_id, "Help (Modules)")
+            custom_menu_bar._all_modules_help_create_commands_and_sub_menu_menu_items(index, module_names, module_functions)
+        except Exception as e:
+            print(f"Error setting up help menu: {e}")
     # endregion
 
     # - - - - - - - - - - - - - - - - - -
@@ -223,6 +314,7 @@ class custom_menu_bar:
         self._add_commands_commands()
         self._add_commands_menus()
         self._add_command_clear_terminal()
+        self._add_commands_root_help()
 
         # Add Switch to Advanced Menu Button
         add_menu_item(self._menu_id, "Switch to " + menu_name_advanced, "toggle_menu_script_example")
@@ -271,6 +363,12 @@ class custom_menu_bar:
         # Add Submenus, Commands, & Buttons for Opening Script Files / Folders
         self._add_commands_and_buttons_open_files_folders(qtm.gui.insert_menu_submenu(self._menu_id, "Open Folder"), qtm.gui.insert_menu_submenu(self._menu_id, "Open Script"))
 
+        qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
+
+        # Add help-related GUI buttons
+        self._add_root_help_menu_items()
+        self._add_all_modules_help_menu_items() # NOTE: Also creates commands
+
         # Add hotkeys last to ensure all commands have been created
         self.set_hotkeys_basic()
 
@@ -286,7 +384,8 @@ class custom_menu_bar:
         self._add_commands_menus()
         self._add_commands_miscellaneous()
         self._add_command_clear_terminal()
-
+        self._add_commands_root_help()
+        
         add_menu_item(self._menu_id, "Switch to " + menu_name_basic, "toggle_menu_script_example")
 
         qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
@@ -321,7 +420,11 @@ class custom_menu_bar:
 
         self._add_commands_and_buttons_open_files_folders(qtm.gui.insert_menu_submenu(self._menu_id, "Open Folder"), qtm.gui.insert_menu_submenu(self._menu_id, "Open Script"))
 
-        # Add hotkeys last to ensure all commands have been created
+        qtm.gui.insert_menu_separator(self._menu_id)  # - - - - - - - - - - - - - - - - - - - - - - - -
+
+        self._add_root_help_menu_items()
+        self._add_all_modules_help_menu_items()
+
         self.set_hotkeys_advanced()
 
     def delete_menu(self):

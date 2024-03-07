@@ -19,6 +19,7 @@ if tools_dir not in sys.path:
 user_dir = os.path.join(this_dir, "user")
 if user_dir not in sys.path:
     sys.path.append(user_dir)
+import qtm
 
 # NOTE ON ADDING NEW MENU FILES
 #
