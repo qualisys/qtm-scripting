@@ -2,6 +2,9 @@ import traj
 import sys
 import qtm
 
+# variables
+# WARNING: Adding variables here is potentially dangerous; variables are reset each time a script loads this module
+
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # ////////   E X P O R T E D   F U N C T I O N S   ////////

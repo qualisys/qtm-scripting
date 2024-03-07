@@ -10,7 +10,7 @@ import printing as printing
 import qtm
 
 # variables
-_toggle_button_menu_ids = {}
+# WARNING: Adding variables here is potentially dangerous; variables are reset each time a script loads this module
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -117,9 +117,8 @@ def set_toggleable_command_hotkey(ctrl_modifier, alt_modifier, shift_modifier, k
 
 
 def add_command(name, execute_func, update_func=None):
-    if name in qtm.gui.get_commands():
-        return False  # E A R L Y   E X I T
-    qtm.gui.add_command(name)
+    if name not in qtm.gui.get_commands():
+        qtm.gui.add_command(name)
     qtm.gui.set_command_execute_function(name, execute_func)
     if update_func is not None:
         qtm.gui.set_command_update_function(name, update_func)
@@ -148,10 +147,6 @@ def add_menu_item(menu_id, button_text, command_name, index=None):
 def add_menu_item_toggleable(menu_id, button_text_state_one, button_text_state_two, command_name, index=None):
     # Generate command-name that toggles the button (also calls the ACTUAL command)
     toggle_command_name = str(command_name + "_internal")
-    if toggle_command_name not in globals()["_toggle_button_menu_ids"]:
-        # This is the first time creating this toggle, so we add the command
-        add_command(toggle_command_name, lambda: (_toggle_menu_button(globals()["_toggle_button_menu_ids"][toggle_command_name], button_text_state_one, button_text_state_two, toggle_command_name, command_name)))
-    # Update (or add, if first time) 'toggle_command_name' & menu ID key-value pair
-    globals()["_toggle_button_menu_ids"][toggle_command_name] = menu_id
-    add_menu_item(globals()["_toggle_button_menu_ids"][toggle_command_name], button_text_state_one, toggle_command_name, index)
+    add_command(toggle_command_name, lambda menu_id=menu_id: _toggle_menu_button(menu_id, button_text_state_one, button_text_state_two, toggle_command_name, command_name))
+    add_menu_item(menu_id, button_text_state_one, toggle_command_name, index)
 # endregion
