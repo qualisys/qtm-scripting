@@ -10,7 +10,7 @@ import printing as printing
 import qtm
 
 # variables
-_toggle_button_menu_ids = {}
+# WARNING: Adding variables here is potentially dangerous; variables are reset each time a script loads this module
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
