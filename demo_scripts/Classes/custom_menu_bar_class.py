@@ -34,6 +34,9 @@ class custom_menu_bar:
         self._buttons_enabled = True
         self._menu_id = 0
         self._menu_index = None
+        # Dummy command, used to reset hotkeys between menus
+        qtm.gui.add_command("dummy_func")
+        qtm.gui.set_command_execute_function("dummy_func", None)
 
     def _update_menu_index(self):
         if (self._menu_index is None):
@@ -193,6 +196,13 @@ class custom_menu_bar:
         set_toggleable_command_hotkey(True, False, False, "3", "toggle_drawing_arrows_unlabeled_traj")
         set_toggleable_command_hotkey(True, False, False, "4", "toggle_drawing_decaying_arrows_unlabeled_traj")
         qtm.gui.set_accelerator({"ctrl": False, "alt": False, "shift": True, "key": "r"}, "clear_terminal")
+    
+    @staticmethod
+    def _reset_hotkeys():
+        qtm.gui.set_accelerator({"ctrl": True, "alt": False, "shift": False, "key": "1"}, "dummy_func")
+        qtm.gui.set_accelerator({"ctrl": True, "alt": False, "shift": False, "key": "2"}, "dummy_func")
+        qtm.gui.set_accelerator({"ctrl": True, "alt": False, "shift": False, "key": "3"}, "dummy_func")
+        qtm.gui.set_accelerator({"ctrl": True, "alt": False, "shift": False, "key": "4"}, "dummy_func")
 
     @staticmethod
     def _add_commands_and_buttons_open_files_folders(open_folders_menu_id, open_scripts_menu_id):
@@ -430,4 +440,5 @@ class custom_menu_bar:
     def delete_menu(self):
         self._update_menu_index()
         self._delete_this_menu()
+        self._reset_hotkeys()
     # endregion
