@@ -24,7 +24,7 @@ This repository contains example scripts and useful script based tools for QTM.
     - Have a module variable, an integer, called "menu_priority" and give it a value greater than 0 
     - The startup_tools.py script will find your file and function and invoke it upon startup.  You can create a "user" sub-folder and use it instead of the tools folder if you wish to keep your files separated.
 ## Installing modules such as numpy
-1. Open a command prompt window
+1. Open a command prompt window (as administrator):
     - Go to the QTM installation folder, usually "C:\Program Files (x86)\Qualisys\Qualisys Track Manager"
     - Invoke the pip installer with a command like this, "python -m pip install numpy"
     
