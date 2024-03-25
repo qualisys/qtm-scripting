@@ -1,5 +1,5 @@
 site_name: QTM Scripting Interface
-use_directory_urls: false
+use_directory_urls: true
 
 nav:
   - Home: index.md
