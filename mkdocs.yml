@@ -44,7 +44,7 @@ markdown_extensions:
   - pymdownx.superfences
 
 copyright: |
-   Copyright 2023 Qualisys AB
+   Copyright 2024 Qualisys AB
 
 extra:
  generator: false
