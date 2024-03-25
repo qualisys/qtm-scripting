@@ -10,19 +10,19 @@
       
       
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.5">
     
     
       
-        <title>QTM Scripting Interface</title>
+        <title>qtm.gui.message - QTM Scripting Interface</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.7a7fce14.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -32,9 +32,9 @@
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,6 +62,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#qtmguimessage" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -78,9 +83,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/index.html" title="QTM Scripting Interface" class="md-header__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
+    <a href="index.html" title="QTM Scripting Interface" class="md-header__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
       
-  <img src="/assets/images/Q.png" alt="logo">
+  <img src="assets/images/Q.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -96,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              qtm.gui.message
             
           </span>
         </div>
@@ -183,9 +188,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/index.html" title="QTM Scripting Interface" class="md-nav__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
+    <a href="index.html" title="QTM Scripting Interface" class="md-nav__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
       
-  <img src="/assets/images/Q.png" alt="logo">
+  <img src="assets/images/Q.png" alt="logo">
 
     </a>
     QTM Scripting Interface
@@ -201,7 +206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/index.html" class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         Home
       </a>
     </li>
@@ -216,7 +221,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/modules.html" class="md-nav__link">
+      <a href="modules.html" class="md-nav__link">
         Modules
       </a>
     </li>
@@ -231,7 +236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/types.html" class="md-nav__link">
+      <a href="types.html" class="md-nav__link">
         Types
       </a>
     </li>
@@ -246,7 +251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/changelog.html" class="md-nav__link">
+      <a href="changelog.html" class="md-nav__link">
         Changelog
       </a>
     </li>
@@ -270,6 +275,30 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add_message" class="md-nav__link">
+    add_message
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    help
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -281,8 +310,69 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="qtmguimessage">qtm.gui.message</h1>
+<p>Interface to the messages window.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Lua</label><label for="__tabbed_1_3">REST</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">qtm</span>
+
+<span class="n">qtm</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;information message&quot;</span><span class="p">,</span> <span class="s2">&quot;detailed information&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+<span class="n">qtm</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;warning message&quot;</span><span class="p">,</span> <span class="s2">&quot;detailed information&quot;</span><span class="p">,</span> <span class="s2">&quot;warning&quot;</span><span class="p">)</span>
+
+<span class="n">qtm</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;error message&quot;</span><span class="p">,</span> <span class="s2">&quot;detailed information&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">qtm</span><span class="p">.</span><span class="n">gui</span><span class="p">.</span><span class="n">message</span><span class="p">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;information message&quot;</span><span class="p">,</span> <span class="s2">&quot;detailed information&quot;</span><span class="p">,</span> <span class="s2">&quot;info&quot;</span><span class="p">)</span>
+
+<span class="n">qtm</span><span class="p">.</span><span class="n">gui</span><span class="p">.</span><span class="n">message</span><span class="p">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;warning message&quot;</span><span class="p">,</span> <span class="s2">&quot;detailed information&quot;</span><span class="p">,</span> <span class="s2">&quot;warning&quot;</span><span class="p">)</span>
+
+<span class="n">qtm</span><span class="p">.</span><span class="n">gui</span><span class="p">.</span><span class="n">message</span><span class="p">.</span><span class="n">add_message</span><span class="p">(</span><span class="s2">&quot;error message&quot;</span><span class="p">,</span> <span class="s2">&quot;detailed information&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>curl --json <span class="s2">&quot;[\&quot;</span>information message\<span class="s2">&quot;, \&quot;</span>detailed information\<span class="s2">&quot;, \&quot;</span>info\<span class="s2">&quot;]&quot;</span> http://localhost:7979/api/scripting/qtm/gui/message/add_message/
+
+curl --json <span class="s2">&quot;[\&quot;</span>warning message\<span class="s2">&quot;, \&quot;</span>detailed information\<span class="s2">&quot;, \&quot;</span>warning\<span class="s2">&quot;]&quot;</span> http://localhost:7979/api/scripting/qtm/gui/message/add_message/
+
+curl --json <span class="s2">&quot;[\&quot;</span>error message\<span class="s2">&quot;, \&quot;</span>detailed information\<span class="s2">&quot;, \&quot;</span>error\<span class="s2">&quot;]&quot;</span> http://localhost:7979/api/scripting/qtm/gui/message/add_message/
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="add_message">add_message</h2>
+<p>Add a message.
+<div class="highlight"><pre><span></span><code>qtm.gui.message.add_message(message, details, type)
+</code></pre></div></p>
+<p><strong>Parameters</strong></p>
+<p><code>message</code> <code>string</code><br/>
+The message (shown in the message log).</p>
+<p><code>details</code> <code>string</code><br/>
+Detailed information (shown when double-clicking the message).</p>
+<p><code>type</code> <code>"info"|"warning"|"error"</code><br/>
+The type of message.</p>
+<hr />
+<h2 id="help">help</h2>
+<p>Get the documentation for a module or method.
+<div class="highlight"><pre><span></span><code>qtm.gui.message.help(method?)
+</code></pre></div></p>
+<p><strong>Parameters</strong></p>
+<p><code>method</code> <code>string?</code><br/>
+The name of the method (if null, the documentation for the module will be returned instead).</p>
+<p><strong>Returns</strong></p>
+<p><code>string</code> </p>
+<hr />
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -316,10 +406,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/", "features": ["content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "/assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="assets/javascripts/bundle.407015b8.min.js"></script>
       
     
   </body>

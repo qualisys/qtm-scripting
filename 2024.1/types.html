@@ -9,20 +9,24 @@
       
       
       
+        <link rel="prev" href="modules.html">
       
-      <link rel="icon" href="/assets/images/favicon.png">
+      
+        <link rel="next" href="changelog.html">
+      
+      <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.5">
     
     
       
-        <title>QTM Scripting Interface</title>
+        <title>Types - QTM Scripting Interface</title>
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.7a7fce14.min.css">
       
         
-        <link rel="stylesheet" href="/assets/stylesheets/palette.a0c5b2b5.min.css">
+        <link rel="stylesheet" href="assets/stylesheets/palette.a0c5b2b5.min.css">
       
       
 
@@ -32,9 +36,9 @@
       
     
     
-      <link rel="stylesheet" href="/assets/stylesheets/extra.css">
+      <link rel="stylesheet" href="assets/stylesheets/extra.css">
     
-    <script>__md_scope=new URL("/",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -62,6 +66,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#types" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -78,9 +87,9 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="/index.html" title="QTM Scripting Interface" class="md-header__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
+    <a href="index.html" title="QTM Scripting Interface" class="md-header__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
       
-  <img src="/assets/images/Q.png" alt="logo">
+  <img src="assets/images/Q.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -96,7 +105,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              
+              Types
             
           </span>
         </div>
@@ -183,9 +192,9 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="/index.html" title="QTM Scripting Interface" class="md-nav__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
+    <a href="index.html" title="QTM Scripting Interface" class="md-nav__button md-logo" aria-label="QTM Scripting Interface" data-md-component="logo">
       
-  <img src="/assets/images/Q.png" alt="logo">
+  <img src="assets/images/Q.png" alt="logo">
 
     </a>
     QTM Scripting Interface
@@ -201,7 +210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/index.html" class="md-nav__link">
+      <a href="index.html" class="md-nav__link">
         Home
       </a>
     </li>
@@ -216,7 +225,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/modules.html" class="md-nav__link">
+      <a href="modules.html" class="md-nav__link">
         Modules
       </a>
     </li>
@@ -229,11 +238,21 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="/types.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="types.html" class="md-nav__link md-nav__link--active">
         Types
       </a>
+      
     </li>
   
 
@@ -246,7 +265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="/changelog.html" class="md-nav__link">
+      <a href="changelog.html" class="md-nav__link">
         Changelog
       </a>
     </li>
@@ -270,6 +289,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -281,8 +302,70 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-  <h1>404 - Not found</h1>
+                  
 
+
+<h1 id="types">Types</h1>
+<table>
+<thead>
+<tr>
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bool</td>
+<td>Boolean (true or false).</td>
+</tr>
+<tr>
+<td>integer</td>
+<td>64-bit signed integer.</td>
+</tr>
+<tr>
+<td>float</td>
+<td>64-bit floating-point number.</td>
+</tr>
+<tr>
+<td>string</td>
+<td>8-bit ansi string (codepage depends on the user settings in windows).</td>
+</tr>
+<tr>
+<td>function</td>
+<td>Any callable object such as a function or a lambda.</td>
+</tr>
+<tr>
+<td>enumeration</td>
+<td>String from a predefined set (e.g. "enumerator1"|"enumerator2" can be either "enumerator1" or "enumerator2").</td>
+</tr>
+<tr>
+<td>matrix</td>
+<td>NxM matrix or 1xM vector with integer or float values (e.g. mat4x4f means a 4x4 matrix of floats, and vec3i means a 1x3 vector of integers).</td>
+</tr>
+<tr>
+<td>structure</td>
+<td>Map with predefined string keys (e.g. {"field1": integer, "field2": vec3f}).</td>
+</tr>
+<tr>
+<td>optional</td>
+<td>Nullable (e.g. bool? can be either a bool or null).</td>
+</tr>
+<tr>
+<td>vector</td>
+<td>List/array (e.g. [float] means a vector with float elements). For linear algebra vectors, see 'matrix' above.</td>
+</tr>
+<tr>
+<td>map</td>
+<td>Dictionary/table (e.g. {integer: string} means a map with integer keys and string values).</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+                
               </article>
             </div>
           
@@ -316,10 +399,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "/", "features": ["content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "/assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="/assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="assets/javascripts/bundle.407015b8.min.js"></script>
       
     
   </body>

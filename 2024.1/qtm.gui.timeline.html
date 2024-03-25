@@ -10,14 +10,12 @@
       
       
       
-        <link rel="next" href="modules.html">
-      
       <link rel="icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.1.5">
     
     
       
-        <title>QTM Scripting Interface</title>
+        <title>qtm.gui.timeline - QTM Scripting Interface</title>
       
     
     
@@ -65,7 +63,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#qtm-scripting-interface" class="md-skip">
+        <a href="#qtmguitimeline" class="md-skip">
           Skip to content
         </a>
       
@@ -103,7 +101,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              qtm.gui.timeline
             
           </span>
         </div>
@@ -206,21 +204,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
         Home
       </a>
-      
     </li>
   
 
@@ -290,6 +278,98 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#get_frequency" class="md-nav__link">
+    get_frequency
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_frame_count" class="md-nav__link">
+    get_frame_count
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_current_time" class="md-nav__link">
+    get_current_time
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_current_frame" class="md-nav__link">
+    get_current_frame
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set_current_frame" class="md-nav__link">
+    set_current_frame
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_measured_range" class="md-nav__link">
+    get_measured_range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set_measured_range" class="md-nav__link">
+    set_measured_range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_selected_range" class="md-nav__link">
+    get_selected_range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set_selected_range" class="md-nav__link">
+    set_selected_range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get_trace_range" class="md-nav__link">
+    get_trace_range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set_trace_range" class="md-nav__link">
+    set_trace_range
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#help" class="md-nav__link">
+    help
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -303,44 +383,141 @@
                   
 
 
-<h1 id="qtm-scripting-interface">QTM Scripting Interface</h1>
-<p>The QTM Scripting Interface provides scripting support
-for QTM (Qualisys Track Manager). Scripting is supported through both
-<a href="https://www.python.org/">Python</a> and <a href="https://www.lua.org/">Lua</a>.
-Additionally, the QTM Scripting Interface is also exposed through a REST API.</p>
-<p>The API's functionality (that is, what QTM functionality can be accessed) is
-exposed through a number of modules. This documentation provides a language
-agnostic description of the modules. For more details, see the <a href="modules.html">list of
-modules</a>. Below follows some short examples:</p>
+<h1 id="qtmguitimeline">qtm.gui.timeline</h1>
+<p>Interface to the measurement timeline.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Lua</label><label for="__tabbed_1_3">REST</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">qtm.data.series</span> <span class="kn">import</span> <span class="n">_3d</span>
-<span class="kn">from</span> <span class="nn">qtm.data.object</span> <span class="kn">import</span> <span class="n">trajectory</span>
-<span class="c1"># Get the data series identifier of a trajectory with the label &quot;F_HeadFront&quot;.</span>
-<span class="nb">id</span> <span class="o">=</span> <span class="n">trajectory</span><span class="o">.</span><span class="n">find_trajectory</span><span class="p">(</span><span class="s2">&quot;F_HeadFront&quot;</span><span class="p">)</span>
-<span class="c1"># Get the first sample of this trajectory.</span>
-<span class="n">_3d</span><span class="o">.</span><span class="n">get_sample</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="c1"># {&#39;position&#39;: [-1193.8392806851402, 1428.9096641692772, 1677.330950395389], &#39;residual&#39;: 1.933161315987386}</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">qtm</span>
+
+<span class="n">measured_range</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_measured_range</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measured_range</span><span class="p">)</span>
+<span class="c1"># {&#39;start&#39;: 0, &#39;end&#39;: 322}</span>
+
+<span class="nb">range</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.10</span><span class="p">),</span> <span class="s2">&quot;end&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.90</span><span class="p">)}</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">set_selected_range</span><span class="p">(</span><span class="nb">range</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_selected_range</span><span class="p">())</span>
+<span class="c1"># {&#39;start&#39;: 32, &#39;end&#39;: 289}</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><span class="c1">-- Get the data series identifier of a trajectory with the label &quot;F_HeadFront&quot;.</span>
-<span class="n">id</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">find_trajectory</span><span class="p">(</span><span class="s2">&quot;F_HeadFront&quot;</span><span class="p">)</span>
-<span class="c1">-- Get the first sample of this trajectory.</span>
-<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">series</span><span class="p">.</span><span class="n">_3d</span><span class="p">.</span><span class="n">get_sample</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="c1">-- {position = {-1193.8392806851, 1428.9096641693, 1677.3309503954}, residual = 1.9331613159874}</span>
+<div class="highlight"><pre><span></span><code><span class="n">measured_range</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">gui</span><span class="p">.</span><span class="n">timeline</span><span class="p">.</span><span class="n">get_measured_range</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measured_range</span><span class="p">)</span>
+<span class="c1">-- {start: 0, end: 322}</span>
+
+<span class="n">range</span> <span class="o">=</span> <span class="p">{[</span><span class="s2">&quot;start&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">math.floor</span><span class="p">(</span><span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.10</span><span class="p">),</span> <span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">math.floor</span><span class="p">(</span><span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">*</span><span class="mf">0.90</span><span class="p">)}</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">gui</span><span class="p">.</span><span class="n">timeline</span><span class="p">.</span><span class="n">set_selected_range</span><span class="p">(</span><span class="n">range</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">gui</span><span class="p">.</span><span class="n">timeline</span><span class="p">.</span><span class="n">get_selected_range</span><span class="p">())</span>
+<span class="c1">-- {start: 32, end: 289}</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code>curl --json <span class="s2">&quot;[\&quot;</span>F_HeadFront\<span class="s2">&quot;]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/find_trajectory
-<span class="p">:</span><span class="c1">:  2985</span>
-curl --json <span class="s2">&quot;[2985, 0]&quot;</span> http://localhost:7979/api/scripting/qtm/data/series/_3d/get_sample
-<span class="p">:</span><span class="c1">: {&quot;position&quot;:[-1193.8392806851402,1428.9096641692772,1677.330950395389],&quot;residual&quot;:1.9331613159873859}</span>
+<div class="highlight"><pre><span></span><code>curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/gui/timeline/get_measured_range/
+<span class="p">:</span><span class="c1">: {&quot;end&quot;:322,&quot;start&quot;:0}</span>
+
+<span class="k">set</span> <span class="nv">range</span><span class="p">=</span>{\<span class="s2">&quot;start\&quot;</span>: 32, \<span class="s2">&quot;end\&quot;</span>: 289}
+curl --json <span class="s2">&quot;[</span><span class="nv">%range%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/gui/timeline/set_selected_range/
+
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/gui/timeline/get_selected_range/
+<span class="p">:</span><span class="c1">: {&quot;end&quot;:289,&quot;start&quot;:32}</span>
 </code></pre></div>
 </div>
 </div>
 </div>
+<h2 id="get_frequency">get_frequency</h2>
+<p>Get the frequency.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.get_frequency()
+</code></pre></div></p>
+<p><strong>Returns</strong></p>
+<p><code>float</code> </p>
+<hr />
+<h2 id="get_frame_count">get_frame_count</h2>
+<p>Get the total number of frames.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.get_frame_count()
+</code></pre></div></p>
+<p><strong>Returns</strong></p>
+<p><code>integer</code> </p>
+<hr />
+<h2 id="get_current_time">get_current_time</h2>
+<p>Get the current time.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.get_current_time()
+</code></pre></div></p>
+<p><strong>Returns</strong></p>
+<p><code>float</code> The current time (in seconds).</p>
+<hr />
+<h2 id="get_current_frame">get_current_frame</h2>
+<p>Get the current frame number.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.get_current_frame()
+</code></pre></div></p>
+<p><strong>Returns</strong></p>
+<p><code>integer</code> </p>
+<hr />
+<h2 id="set_current_frame">set_current_frame</h2>
+<p>Set the current frame number.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.set_current_frame(frame)
+</code></pre></div></p>
+<p><strong>Parameters</strong></p>
+<p><code>frame</code> <code>integer</code><br/>
+The new current frame number (must be within the current selected range).</p>
+<hr />
+<h2 id="get_measured_range">get_measured_range</h2>
+<p>Get the measured range.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.get_measured_range()
+</code></pre></div></p>
+<p><strong>Returns</strong></p>
+<p><code>{"start": integer, "end": integer}</code> </p>
+<hr />
+<h2 id="set_measured_range">set_measured_range</h2>
+<p>Set the measured range.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.set_measured_range(range)
+</code></pre></div></p>
+<p>This is equivalent to doing a trim operation.</p>
+<p><strong>Parameters</strong></p>
+<p><code>range</code> <code>{"start": integer, "end": integer}</code><br/>
+The new measured range.</p>
+<hr />
+<h2 id="get_selected_range">get_selected_range</h2>
+<p>Get the selected range.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.get_selected_range()
+</code></pre></div></p>
+<p><strong>Returns</strong></p>
+<p><code>{"start": integer, "end": integer}</code> </p>
+<hr />
+<h2 id="set_selected_range">set_selected_range</h2>
+<p>Set the selected range.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.set_selected_range(range)
+</code></pre></div></p>
+<p><strong>Parameters</strong></p>
+<p><code>range</code> <code>{"start": integer, "end": integer}</code><br/>
+The new selected range (must be within the measured range).</p>
+<hr />
+<h2 id="get_trace_range">get_trace_range</h2>
+<p>Get the trace range.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.get_trace_range()
+</code></pre></div></p>
+<p><strong>Returns</strong></p>
+<p><code>{"start": integer, "end": integer}</code> </p>
+<hr />
+<h2 id="set_trace_range">set_trace_range</h2>
+<p>Set the trace range.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.set_trace_range(range)
+</code></pre></div></p>
+<p><strong>Parameters</strong></p>
+<p><code>range</code> <code>{"start": integer, "end": integer}</code><br/>
+The new trace range (must be within the current selected range).</p>
+<hr />
+<h2 id="help">help</h2>
+<p>Get the documentation for a module or method.
+<div class="highlight"><pre><span></span><code>qtm.gui.timeline.help(method?)
+</code></pre></div></p>
+<p><strong>Parameters</strong></p>
+<p><code>method</code> <code>string?</code><br/>
+The name of the method (if null, the documentation for the module will be returned instead).</p>
+<p><strong>Returns</strong></p>
+<p><code>string</code> </p>
+<hr />
 
 
 
