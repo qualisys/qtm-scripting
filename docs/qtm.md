@@ -22,6 +22,9 @@ Interface to the qtm application.
 ## get_version
 
 Get the version number of qtm.
+```
+qtm.get_version()
+```
 
 **Returns**
 
@@ -32,6 +35,9 @@ Get the version number of qtm.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.help(method?)
+```
 
 **Parameters**
 

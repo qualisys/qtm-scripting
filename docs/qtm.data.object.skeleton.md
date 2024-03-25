@@ -106,6 +106,9 @@ Access skeletons.
 ## get_skeleton_id
 
 Get a skeleton identifier by index.
+```
+qtm.data.object.skeleton.get_skeleton_id(index)
+```
 
 **Parameters**
 
@@ -122,6 +125,9 @@ The index of the skeleton.
 ## get_skeleton_ids
 
 Get all skeleton identifiers.
+```
+qtm.data.object.skeleton.get_skeleton_ids()
+```
 
 **Returns**
 
@@ -132,6 +138,9 @@ Get all skeleton identifiers.
 ## get_skeleton_count
 
 Get the number of skeletons.
+```
+qtm.data.object.skeleton.get_skeleton_count()
+```
 
 **Returns**
 
@@ -142,6 +151,9 @@ Get the number of skeletons.
 ## get_skeleton_name
 
 Get the name of a skeleton.
+```
+qtm.data.object.skeleton.get_skeleton_name(skeleton_id)
+```
 
 **Parameters**
 
@@ -158,6 +170,9 @@ The skeleton identifier.
 ## get_skeleton_scale
 
 Get the scale of a skeleton.
+```
+qtm.data.object.skeleton.get_skeleton_scale(skeleton_id)
+```
 
 The scale represents the size of the skeleton relative to e.g. an avatar. It is used when exporting and streaming such that the scale of the output is always 1.0.
 
@@ -176,6 +191,9 @@ The skeleton identifier.
 ## get_skeleton_root_id
 
 Get the root segment identifier in a skeleton.
+```
+qtm.data.object.skeleton.get_skeleton_root_id(skeleton_id)
+```
 
 **Parameters**
 
@@ -192,6 +210,9 @@ The skeleton identifier.
 ## get_segment_id
 
 Get a segment identifier in a skeleton by index.
+```
+qtm.data.object.skeleton.get_segment_id(skeleton_id, index)
+```
 
 **Parameters**
 
@@ -211,6 +232,9 @@ The segment index.
 ## get_segment_ids
 
 Get all segment identifiers in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_ids(skeleton_id)
+```
 
 **Parameters**
 
@@ -227,6 +251,9 @@ The skeleton identifier.
 ## get_segment_count
 
 Get the number of segments in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_count(skeleton_id)
+```
 
 **Parameters**
 
@@ -243,6 +270,9 @@ The skeleton identifier.
 ## get_segment_name
 
 Get the name of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_name(segment_id)
+```
 
 **Parameters**
 
@@ -259,6 +289,9 @@ The segment identifier.
 ## get_segment_solver
 
 Get the solver of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_solver(segment_id)
+```
 
 A skeleton can have multiple solvers (e.g. the hands may be solved separately from the rest of the body). In this case, the solving will be done in a hierarchical manner, starting with the root (which must have a solver). Descendant body parts are then solved locally in the coordinate systems of their parent segments.
 
@@ -277,6 +310,9 @@ The segment identifier.
 ## get_segment_transform
 
 Get the transform of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_transform(segment_id)
+```
 
 The transform represents the calibrated pose of the skeleton, and is used as the initial solution when solving.
 
@@ -295,6 +331,9 @@ The segment identifier.
 ## get_segment_default_transform
 
 Get the default transform of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_default_transform(segment_id)
+```
 
 The default transform brings skeletons with different zero poses (the pose where all segment rotations are zero) to the same default pose (e.g. a t-pose). This is mainly used for retargeting.
 
@@ -313,6 +352,9 @@ The segment identifier.
 ## get_segment_degrees_of_freedom
 
 Get the degrees of freedom of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_degrees_of_freedom(segment_id)
+```
 
 **Parameters**
 
@@ -329,6 +371,9 @@ The segment identifier.
 ## get_segment_endpoint
 
 Get the endpoint of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_endpoint(segment_id)
+```
 
 **Parameters**
 
@@ -345,6 +390,9 @@ The segment identifier.
 ## get_segment_markers
 
 Get the markers of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_markers(segment_id)
+```
 
 **Parameters**
 
@@ -361,6 +409,9 @@ The segment identifier.
 ## get_segment_rigid_bodies
 
 Get the rigid bodies of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_rigid_bodies(segment_id)
+```
 
 **Parameters**
 
@@ -377,6 +428,9 @@ The segment identifier.
 ## get_segment_skeleton_id
 
 Get the skeleton identifier of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_skeleton_id(segment_id)
+```
 
 **Parameters**
 
@@ -393,6 +447,9 @@ The segment identifier.
 ## get_segment_parent_id
 
 Get the parent segment identifier of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_parent_id(segment_id)
+```
 
 **Parameters**
 
@@ -409,6 +466,9 @@ The segment identifier.
 ## get_segment_child_id
 
 Get a child segment identifier of a segment in a skeleton by index.
+```
+qtm.data.object.skeleton.get_segment_child_id(segment_id, index)
+```
 
 **Parameters**
 
@@ -428,6 +488,9 @@ The child index.
 ## get_segment_child_ids
 
 Get all child segment identifiers of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_child_ids(segment_id)
+```
 
 **Parameters**
 
@@ -444,6 +507,9 @@ The segment identifier.
 ## get_segment_child_count
 
 Get the number of child segments of a segment in a skeleton.
+```
+qtm.data.object.skeleton.get_segment_child_count(segment_id)
+```
 
 **Parameters**
 
@@ -460,6 +526,9 @@ The segment identifier.
 ## find_skeleton
 
 Find a skeleton by name.
+```
+qtm.data.object.skeleton.find_skeleton(name)
+```
 
 **Parameters**
 
@@ -476,6 +545,9 @@ The name of the skeleton.
 ## find_segment
 
 Find a segment in a skeleton by name.
+```
+qtm.data.object.skeleton.find_segment(skeleton_id, name)
+```
 
 **Parameters**
 
@@ -495,6 +567,9 @@ The name of the segment.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.data.object.skeleton.help(method?)
+```
 
 **Parameters**
 

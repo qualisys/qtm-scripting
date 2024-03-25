@@ -66,6 +66,9 @@ Events consist of a label, a time (in seconds) and an optional color (in 0xbbggr
 ## add_event
 
 Add an event.
+```
+qtm.data.object.event.add_event(event)
+```
 
 **Parameters**
 
@@ -79,6 +82,9 @@ The event to add.
 ## get_event_count
 
 Get the total number of events.
+```
+qtm.data.object.event.get_event_count()
+```
 
 **Returns**
 
@@ -89,6 +95,9 @@ Get the total number of events.
 ## get_events
 
 Get all events.
+```
+qtm.data.object.event.get_events()
+```
 
 **Returns**
 
@@ -99,6 +108,9 @@ Get all events.
 ## clear_events
 
 Delete all events.
+```
+qtm.data.object.event.clear_events()
+```
 
 
 ---
@@ -106,6 +118,9 @@ Delete all events.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.data.object.event.help(method?)
+```
 
 **Parameters**
 

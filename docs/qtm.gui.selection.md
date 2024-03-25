@@ -72,6 +72,9 @@ Selections consists of a type, an identifier and an optional part index (only re
 ## clear_selections
 
 Remove all selections.
+```
+qtm.gui.selection.clear_selections(type?)
+```
 
 **Parameters**
 
@@ -85,6 +88,9 @@ The selection type to remove (if null, all selection types will be removed).
 ## is_selected
 
 Get whether an object is currently selected.
+```
+qtm.gui.selection.is_selected(selection)
+```
 
 **Parameters**
 
@@ -101,6 +107,9 @@ The object.
 ## get_selection_count
 
 Get the current number of selections.
+```
+qtm.gui.selection.get_selection_count(type?)
+```
 
 **Parameters**
 
@@ -117,6 +126,9 @@ The selection type to count (if null, all selection types will be counted).
 ## get_selections
 
 Get the current selections.
+```
+qtm.gui.selection.get_selections(type?)
+```
 
 **Parameters**
 
@@ -133,6 +145,9 @@ The selection type to get (if null, all selection types will be returned).
 ## set_selections
 
 Set the current selections.
+```
+qtm.gui.selection.set_selections(selections)
+```
 
 This will overwrite any existing selections.
 
@@ -148,6 +163,9 @@ The selections.
 ## select
 
 Select objects.
+```
+qtm.gui.selection.select(selections)
+```
 
 **Parameters**
 
@@ -161,6 +179,9 @@ The objects to select.
 ## deselect
 
 Deselect objects.
+```
+qtm.gui.selection.deselect(selections)
+```
 
 **Parameters**
 
@@ -174,6 +195,9 @@ The objects to deselect.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.gui.selection.help(method?)
+```
 
 **Parameters**
 

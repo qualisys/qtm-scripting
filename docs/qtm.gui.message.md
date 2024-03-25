@@ -31,6 +31,9 @@ Interface to the messages window.
 ## add_message
 
 Add a message.
+```
+qtm.gui.message.add_message(message, details, type)
+```
 
 **Parameters**
 
@@ -50,6 +53,9 @@ The type of message.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.gui.message.help(method?)
+```
 
 **Parameters**
 

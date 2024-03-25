@@ -37,6 +37,9 @@ Access and modify tsv export settings.
 ## get_export_2d
 
 Get whether to export 2d data.
+```
+qtm.settings.export.tsv.get_export_2d()
+```
 
 **Returns**
 
@@ -47,6 +50,9 @@ Get whether to export 2d data.
 ## set_export_2d
 
 Set whether to export 2d data.
+```
+qtm.settings.export.tsv.set_export_2d(enable)
+```
 
 **Parameters**
 
@@ -60,6 +66,9 @@ True if 2d data should be exported, otherwise false.
 ## get_export_3d
 
 Get whether to export 3d data.
+```
+qtm.settings.export.tsv.get_export_3d()
+```
 
 **Returns**
 
@@ -70,6 +79,9 @@ Get whether to export 3d data.
 ## set_export_3d
 
 Set whether to export 3d data.
+```
+qtm.settings.export.tsv.set_export_3d(enable)
+```
 
 **Parameters**
 
@@ -83,6 +95,9 @@ True if 3d data should be exported, otherwise false.
 ## get_export_6d
 
 Get whether to export 6dof data.
+```
+qtm.settings.export.tsv.get_export_6d()
+```
 
 **Returns**
 
@@ -93,6 +108,9 @@ Get whether to export 6dof data.
 ## set_export_6d
 
 Set whether to export 6dof data.
+```
+qtm.settings.export.tsv.set_export_6d(enable)
+```
 
 **Parameters**
 
@@ -106,6 +124,9 @@ True if 6dof data should be exported, otherwise false.
 ## get_export_analog
 
 Get whether to export analog data.
+```
+qtm.settings.export.tsv.get_export_analog()
+```
 
 **Returns**
 
@@ -116,6 +137,9 @@ Get whether to export analog data.
 ## set_export_analog
 
 Set whether to export analog data.
+```
+qtm.settings.export.tsv.set_export_analog(enable)
+```
 
 **Parameters**
 
@@ -129,6 +153,9 @@ True if analog data should be exported, otherwise false.
 ## get_export_force
 
 Get whether to export force data.
+```
+qtm.settings.export.tsv.get_export_force()
+```
 
 **Returns**
 
@@ -139,6 +166,9 @@ Get whether to export force data.
 ## set_export_force
 
 Set whether to export force data.
+```
+qtm.settings.export.tsv.set_export_force(enable)
+```
 
 **Parameters**
 
@@ -152,6 +182,9 @@ True if force data should be exported, otherwise false.
 ## get_export_eye
 
 Get whether to export eye data.
+```
+qtm.settings.export.tsv.get_export_eye()
+```
 
 **Returns**
 
@@ -162,6 +195,9 @@ Get whether to export eye data.
 ## set_export_eye
 
 Set whether to export eye data.
+```
+qtm.settings.export.tsv.set_export_eye(enable)
+```
 
 **Parameters**
 
@@ -175,6 +211,9 @@ True if eye data should be exported, otherwise false.
 ## get_export_skeleton
 
 Get whether to export skeleton data.
+```
+qtm.settings.export.tsv.get_export_skeleton()
+```
 
 **Returns**
 
@@ -185,6 +224,9 @@ Get whether to export skeleton data.
 ## set_export_skeleton
 
 Set whether to export skeleton data.
+```
+qtm.settings.export.tsv.set_export_skeleton(enable)
+```
 
 **Parameters**
 
@@ -198,6 +240,9 @@ True if skeleton data should be exported, otherwise false.
 ## get_export_time
 
 Get whether to export sample times.
+```
+qtm.settings.export.tsv.get_export_time()
+```
 
 **Returns**
 
@@ -208,6 +253,9 @@ Get whether to export sample times.
 ## set_export_time
 
 Set whether to export sample times.
+```
+qtm.settings.export.tsv.set_export_time(enable)
+```
 
 **Parameters**
 
@@ -221,6 +269,9 @@ True if sample times should be exported, otherwise false.
 ## get_export_event
 
 Get whether to export events.
+```
+qtm.settings.export.tsv.get_export_event()
+```
 
 **Returns**
 
@@ -231,6 +282,9 @@ Get whether to export events.
 ## set_export_event
 
 Set whether to export events.
+```
+qtm.settings.export.tsv.set_export_event(enable)
+```
 
 Events require file header to be exported (see 'set_export_file_header').
 
@@ -246,6 +300,9 @@ True if events should be exported, otherwise false.
 ## get_export_point_type
 
 Get whether to export 3d point types.
+```
+qtm.settings.export.tsv.get_export_point_type()
+```
 
 **Returns**
 
@@ -256,6 +313,9 @@ Get whether to export 3d point types.
 ## set_export_point_type
 
 Set whether to export 3d point types.
+```
+qtm.settings.export.tsv.set_export_point_type(enable)
+```
 
 **Parameters**
 
@@ -269,6 +329,9 @@ True if 3d point types should be exported, otherwise false.
 ## get_export_file_header
 
 Get whether to export a file header.
+```
+qtm.settings.export.tsv.get_export_file_header()
+```
 
 **Returns**
 
@@ -279,6 +342,9 @@ Get whether to export a file header.
 ## set_export_file_header
 
 Set whether to export a file header.
+```
+qtm.settings.export.tsv.set_export_file_header(enable)
+```
 
 **Parameters**
 
@@ -292,6 +358,9 @@ True if a file header should be exported, otherwise false.
 ## get_export_column_header
 
 Get whether to export column headers.
+```
+qtm.settings.export.tsv.get_export_column_header()
+```
 
 **Returns**
 
@@ -302,6 +371,9 @@ Get whether to export column headers.
 ## set_export_column_header
 
 Set whether to export column headers.
+```
+qtm.settings.export.tsv.set_export_column_header(enable)
+```
 
 Column headers require file header to be exported (see 'set_export_file_header').
 
@@ -317,6 +389,9 @@ True if column headers should be exported, otherwise false.
 ## get_null_string
 
 Get the null string.
+```
+qtm.settings.export.tsv.get_null_string()
+```
 
 **Returns**
 
@@ -327,6 +402,9 @@ Get the null string.
 ## set_null_string
 
 Set the null string.
+```
+qtm.settings.export.tsv.set_null_string(string)
+```
 
 **Parameters**
 
@@ -340,6 +418,9 @@ The null string.
 ## get_exclude_unidentified
 
 Get whether to exclude unidentified trajectories.
+```
+qtm.settings.export.tsv.get_exclude_unidentified()
+```
 
 **Returns**
 
@@ -350,6 +431,9 @@ Get whether to exclude unidentified trajectories.
 ## set_exclude_unidentified
 
 Set whether to exclude unidentified trajectories.
+```
+qtm.settings.export.tsv.set_exclude_unidentified(enable)
+```
 
 **Parameters**
 
@@ -363,6 +447,9 @@ True if unidentified trajectories should be excluded, otherwise false.
 ## get_exclude_empty
 
 Get whether to exclude empty trajectories.
+```
+qtm.settings.export.tsv.get_exclude_empty()
+```
 
 **Returns**
 
@@ -373,6 +460,9 @@ Get whether to exclude empty trajectories.
 ## set_exclude_empty
 
 Set whether to exclude empty trajectories.
+```
+qtm.settings.export.tsv.set_exclude_empty(enable)
+```
 
 **Parameters**
 
@@ -386,6 +476,9 @@ True if empty trajectories should be excluded, otherwise false.
 ## get_exclude_partially_labeled
 
 Get whether to exclude partially labeled frames.
+```
+qtm.settings.export.tsv.get_exclude_partially_labeled()
+```
 
 **Returns**
 
@@ -396,6 +489,9 @@ Get whether to exclude partially labeled frames.
 ## set_exclude_partially_labeled
 
 Set whether to exclude partially labeled frames.
+```
+qtm.settings.export.tsv.set_exclude_partially_labeled(enable)
+```
 
 This will override the exported range.
 
@@ -411,6 +507,9 @@ True if partially labeled frames should be excluded, otherwise false.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.settings.export.tsv.help(method?)
+```
 
 **Parameters**
 

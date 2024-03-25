@@ -52,6 +52,9 @@ Access and modify euler angle settings.
 ## get_convention
 
 Get the euler angle convention.
+```
+qtm.settings.euler.get_convention()
+```
 
 **Returns**
 
@@ -62,6 +65,9 @@ Get the euler angle convention.
 ## set_convention
 
 Set the euler angle convention.
+```
+qtm.settings.euler.set_convention(convention)
+```
 
 **Parameters**
 
@@ -75,6 +81,9 @@ The euler angle convention.
 ## get_sequence
 
 Get the euler angle sequence.
+```
+qtm.settings.euler.get_sequence()
+```
 
 **Returns**
 
@@ -85,6 +94,9 @@ Get the euler angle sequence.
 ## set_sequence
 
 Set the euler angle sequence.
+```
+qtm.settings.euler.set_sequence(sequence)
+```
 
 This method requires 'custom' convention (see 'set_convention').
 
@@ -100,6 +112,9 @@ The euler angle sequence.
 ## get_use_extrinsic_axes
 
 Get whether to use extrinsic (fixed) axes.
+```
+qtm.settings.euler.get_use_extrinsic_axes()
+```
 
 **Returns**
 
@@ -110,6 +125,9 @@ Get whether to use extrinsic (fixed) axes.
 ## set_use_extrinsic_axes
 
 Set whether to use extrinsic (fixed) axes.
+```
+qtm.settings.euler.set_use_extrinsic_axes(enable)
+```
 
 This method requires 'custom' convention (see 'set_convention').
 
@@ -125,6 +143,9 @@ True if extrinsic axes should be used, otherwise false.
 ## get_first_axis_name
 
 Get the name of the first rotation axis.
+```
+qtm.settings.euler.get_first_axis_name()
+```
 
 **Returns**
 
@@ -135,6 +156,9 @@ Get the name of the first rotation axis.
 ## set_first_axis_name
 
 Set the name of the first rotation axis.
+```
+qtm.settings.euler.set_first_axis_name(name)
+```
 
 This method requires 'custom' convention (see 'set_convention').
 
@@ -150,6 +174,9 @@ The name of the first rotation axis.
 ## get_second_axis_name
 
 Get the name of the second rotation axis.
+```
+qtm.settings.euler.get_second_axis_name()
+```
 
 **Returns**
 
@@ -160,6 +187,9 @@ Get the name of the second rotation axis.
 ## set_second_axis_name
 
 Set the name of the second rotation axis.
+```
+qtm.settings.euler.set_second_axis_name(name)
+```
 
 This method requires 'custom' convention (see 'set_convention').
 
@@ -175,6 +205,9 @@ The name of the second rotation axis.
 ## get_third_axis_name
 
 Get the name of the third rotation axis.
+```
+qtm.settings.euler.get_third_axis_name()
+```
 
 **Returns**
 
@@ -185,6 +218,9 @@ Get the name of the third rotation axis.
 ## set_third_axis_name
 
 Set the name of the third rotation axis.
+```
+qtm.settings.euler.set_third_axis_name(name)
+```
 
 This method requires 'custom' convention (see 'set_convention').
 
@@ -200,6 +236,9 @@ The name of the third rotation axis.
 ## get_first_angle_left_handed
 
 Get whether to use left-handed first rotation angle.
+```
+qtm.settings.euler.get_first_angle_left_handed()
+```
 
 Left-handed means counter-clockwise facing positive direction of rotation axis.
 
@@ -212,6 +251,9 @@ Left-handed means counter-clockwise facing positive direction of rotation axis.
 ## set_first_angle_left_handed
 
 Set whether to use left-handed first rotation angle.
+```
+qtm.settings.euler.set_first_angle_left_handed(enable)
+```
 
 Left-handed means counter-clockwise facing positive direction of rotation axis. This method requires 'custom' convention (see 'set_convention').
 
@@ -227,6 +269,9 @@ True if left-handed first rotation angle should be used, otherwise false.
 ## get_second_angle_left_handed
 
 Get whether to use left-handed second rotation angle.
+```
+qtm.settings.euler.get_second_angle_left_handed()
+```
 
 Left-handed means counter-clockwise facing positive direction of rotation axis.
 
@@ -239,6 +284,9 @@ Left-handed means counter-clockwise facing positive direction of rotation axis.
 ## set_second_angle_left_handed
 
 Set whether to use left-handed second rotation angle.
+```
+qtm.settings.euler.set_second_angle_left_handed(enable)
+```
 
 Left-handed means counter-clockwise facing positive direction of rotation axis. This method requires 'custom' convention (see 'set_convention').
 
@@ -254,6 +302,9 @@ True if left-handed second rotation angle should be used, otherwise false.
 ## get_third_angle_left_handed
 
 Get whether to use left-handed third rotation angle.
+```
+qtm.settings.euler.get_third_angle_left_handed()
+```
 
 Left-handed means counter-clockwise facing positive direction of rotation axis.
 
@@ -266,6 +317,9 @@ Left-handed means counter-clockwise facing positive direction of rotation axis.
 ## set_third_angle_left_handed
 
 Set whether to use left-handed third rotation angle.
+```
+qtm.settings.euler.set_third_angle_left_handed(enable)
+```
 
 Left-handed means counter-clockwise facing positive direction of rotation axis. This method requires 'custom' convention (see 'set_convention').
 
@@ -281,6 +335,9 @@ True if left-handed third rotation angle should be used, otherwise false.
 ## get_first_angle_range
 
 Get the range of the first rotation angle.
+```
+qtm.settings.euler.get_first_angle_range()
+```
 
 **Returns**
 
@@ -291,6 +348,9 @@ Get the range of the first rotation angle.
 ## set_first_angle_range
 
 Set the range of the first rotation angle.
+```
+qtm.settings.euler.set_first_angle_range(range)
+```
 
 This method requires 'custom' convention (see 'set_convention').
 
@@ -306,6 +366,9 @@ The range of the first rotation angle (must be either [-180, 180] or [0, 360]).
 ## get_third_angle_range
 
 Get the range of the third rotation angle.
+```
+qtm.settings.euler.get_third_angle_range()
+```
 
 **Returns**
 
@@ -316,6 +379,9 @@ Get the range of the third rotation angle.
 ## set_third_angle_range
 
 Set the range of the third rotation angle.
+```
+qtm.settings.euler.set_third_angle_range(range)
+```
 
 This method requires 'custom' convention (see 'set_convention').
 
@@ -331,6 +397,9 @@ The range of the third rotation angle (must be either [-180, 180] or [0, 360]).
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.settings.euler.help(method?)
+```
 
 **Parameters**
 

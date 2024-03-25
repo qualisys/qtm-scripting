@@ -39,6 +39,9 @@ Access and modify fbx export settings.
 ## get_file_format
 
 Get the file format.
+```
+qtm.settings.export.fbx.get_file_format()
+```
 
 **Returns**
 
@@ -49,6 +52,9 @@ Get the file format.
 ## set_file_format
 
 Set the file format.
+```
+qtm.settings.export.fbx.set_file_format(format)
+```
 
 **Parameters**
 
@@ -62,6 +68,9 @@ The file format.
 ## get_export_optical
 
 Get whether to export opticals.
+```
+qtm.settings.export.fbx.get_export_optical()
+```
 
 **Returns**
 
@@ -72,6 +81,9 @@ Get whether to export opticals.
 ## set_export_optical
 
 Set whether to export opticals.
+```
+qtm.settings.export.fbx.set_export_optical(enable)
+```
 
 **Parameters**
 
@@ -85,6 +97,9 @@ True if opticals should be exported, otherwise false.
 ## get_export_actor
 
 Get whether to export motionbuilder actors.
+```
+qtm.settings.export.fbx.get_export_actor()
+```
 
 **Returns**
 
@@ -95,6 +110,9 @@ Get whether to export motionbuilder actors.
 ## set_export_actor
 
 Set whether to export motionbuilder actors.
+```
+qtm.settings.export.fbx.set_export_actor(enable)
+```
 
 Actors require opticals to be exported (see 'set_export_optical').
 
@@ -110,6 +128,9 @@ True if motionbuilder actors should be exported, otherwise false.
 ## get_export_skeleton
 
 Get whether to export skeletons.
+```
+qtm.settings.export.fbx.get_export_skeleton()
+```
 
 **Returns**
 
@@ -120,6 +141,9 @@ Get whether to export skeletons.
 ## set_export_skeleton
 
 Set whether to export skeletons.
+```
+qtm.settings.export.fbx.set_export_skeleton(enable)
+```
 
 **Parameters**
 
@@ -133,6 +157,9 @@ True if skeletons should be exported, otherwise false.
 ## get_export_character
 
 Get whether to export characters.
+```
+qtm.settings.export.fbx.get_export_character()
+```
 
 **Returns**
 
@@ -143,6 +170,9 @@ Get whether to export characters.
 ## set_export_character
 
 Set whether to export characters.
+```
+qtm.settings.export.fbx.set_export_character(enable)
+```
 
 Characters require skeletons to be exported (see 'set_export_skeleton').
 
@@ -158,6 +188,9 @@ True if characters should be exported, otherwise false.
 ## get_export_camera
 
 Get whether to export cameras.
+```
+qtm.settings.export.fbx.get_export_camera()
+```
 
 **Returns**
 
@@ -168,6 +201,9 @@ Get whether to export cameras.
 ## set_export_camera
 
 Set whether to export cameras.
+```
+qtm.settings.export.fbx.set_export_camera(enable)
+```
 
 **Parameters**
 
@@ -181,6 +217,9 @@ True if cameras should be exported, otherwise false.
 ## get_export_timecode
 
 Get whether to export timecodes.
+```
+qtm.settings.export.fbx.get_export_timecode()
+```
 
 **Returns**
 
@@ -191,6 +230,9 @@ Get whether to export timecodes.
 ## set_export_timecode
 
 Set whether to export timecodes.
+```
+qtm.settings.export.fbx.set_export_timecode(enable)
+```
 
 **Parameters**
 
@@ -204,6 +246,9 @@ True if timecodes should be exported, otherwise false.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.settings.export.fbx.help(method?)
+```
 
 **Parameters**
 

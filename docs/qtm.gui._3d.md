@@ -104,6 +104,9 @@ Interface to the measurement 3d view with methods for custom drawing.
 ## draw_sphere
 
 Draw a sphere.
+```
+qtm.gui._3d.draw_sphere(position, size, color?)
+```
 
 This method may only be used in a draw callback function (see 'set_draw_function').
 
@@ -125,6 +128,9 @@ The color of the sphere (in 0xbbggrr format, see 'qtm.utilities.color' module). 
 ## draw_arrow
 
 Draw an arrow.
+```
+qtm.gui._3d.draw_arrow(position, endpoint, color?)
+```
 
 This method may only be used in a draw callback function (see 'set_draw_function').
 
@@ -146,6 +152,9 @@ The color of the arrow (in 0xbbggrr format, see 'qtm.utilities.color' module). I
 ## draw_axes
 
 Draw coordinate system axes.
+```
+qtm.gui._3d.draw_axes(transform, size)
+```
 
 This method may only be used in a draw callback function (see 'set_draw_function').
 
@@ -164,6 +173,9 @@ The size of the axes (in millimeters).
 ## draw_mesh
 
 Draw a mesh.
+```
+qtm.gui._3d.draw_mesh(transform, scale, filename)
+```
 
 This method may only be used in a draw callback function (see 'set_draw_function').
 
@@ -185,6 +197,9 @@ The filename of the mesh. Only .obj files are supported. The file must be locate
 ## draw_text_2d
 
 Draw 2d text.
+```
+qtm.gui._3d.draw_text_2d(position, size, text, origin?, alignment?, color?)
+```
 
 This method may only be used in a draw callback function (see 'set_draw_function').
 
@@ -215,6 +230,9 @@ The color of the text (in 0xbbggrr format, see 'qtm.utilities.color' module). If
 ## set_draw_function
 
 Set a draw callback function.
+```
+qtm.gui._3d.set_draw_function(function?)
+```
 
 **Parameters**
 
@@ -228,6 +246,9 @@ The function to invoke when the 3d view is redrawn (if null, custom drawing will
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.gui._3d.help(method?)
+```
 
 **Parameters**
 

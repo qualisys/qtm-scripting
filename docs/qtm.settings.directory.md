@@ -47,14 +47,17 @@ Access and modify directory settings.
     curl --json "" http://localhost:7979/api/scripting/qtm/settings/directory/get_auto_save_directory/
     :: "C:\\Users\\<username>\\AppData\\Local\\Temp\\"
     
-    set auto_save_directory=\"C:\\Users\\<username>\\Documents\\Project\\AutoSave\\\"
-    curl --json "[%auto_save_directory%]" http://localhost:7979/api/scripting/qtm/settings/camera/set_auto_save_directory/
+    set auto_save_directory=\"C:\\Users\\^<username^>\\Documents\\Project\\AutoSave\\\\\"
+    curl --json "[%auto_save_directory%]" http://localhost:7979/api/scripting/qtm/settings/directory/set_auto_save_directory/
     curl --json "" http://localhost:7979/api/scripting/qtm/settings/directory/get_auto_save_directory/
     :: "C:\\Users\\<username>\\Documents\\Project\\AutoSave\\"
     ```
 ## get_project_directory
 
 Get the project directory path.
+```
+qtm.settings.directory.get_project_directory()
+```
 
 **Returns**
 
@@ -65,6 +68,9 @@ Get the project directory path.
 ## get_calibration_directory
 
 Get the calibration directory path.
+```
+qtm.settings.directory.get_calibration_directory()
+```
 
 **Returns**
 
@@ -75,6 +81,9 @@ Get the calibration directory path.
 ## set_calibration_directory
 
 Set the calibration directory path.
+```
+qtm.settings.directory.set_calibration_directory(directory)
+```
 
 **Parameters**
 
@@ -88,6 +97,9 @@ The calibration directory path.
 ## get_aim_directory
 
 Get the aim model directory path.
+```
+qtm.settings.directory.get_aim_directory()
+```
 
 **Returns**
 
@@ -98,6 +110,9 @@ Get the aim model directory path.
 ## set_aim_directory
 
 Set the aim model directory path.
+```
+qtm.settings.directory.set_aim_directory(directory)
+```
 
 **Parameters**
 
@@ -111,6 +126,9 @@ The aim model directory path.
 ## get_default_project_directory
 
 Get the default project directory path.
+```
+qtm.settings.directory.get_default_project_directory()
+```
 
 **Returns**
 
@@ -121,6 +139,9 @@ Get the default project directory path.
 ## set_default_project_directory
 
 Set the default project directory path.
+```
+qtm.settings.directory.set_default_project_directory(directory)
+```
 
 **Parameters**
 
@@ -134,6 +155,9 @@ The default project directory path.
 ## get_temp_video_directory
 
 Get the temporary video directory path.
+```
+qtm.settings.directory.get_temp_video_directory()
+```
 
 **Returns**
 
@@ -144,6 +168,9 @@ Get the temporary video directory path.
 ## set_temp_video_directory
 
 Set the temporary video directory path.
+```
+qtm.settings.directory.set_temp_video_directory(directory)
+```
 
 **Parameters**
 
@@ -157,6 +184,9 @@ The temporary video directory path.
 ## get_auto_save_directory
 
 Get the auto save directory path.
+```
+qtm.settings.directory.get_auto_save_directory()
+```
 
 **Returns**
 
@@ -167,6 +197,9 @@ Get the auto save directory path.
 ## set_auto_save_directory
 
 Set the auto save directory path.
+```
+qtm.settings.directory.set_auto_save_directory(directory)
+```
 
 **Parameters**
 
@@ -180,6 +213,9 @@ The auto save directory path.
 ## get_linearization_directory
 
 Get the linearization directory path.
+```
+qtm.settings.directory.get_linearization_directory()
+```
 
 **Returns**
 
@@ -190,6 +226,9 @@ Get the linearization directory path.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.settings.directory.help(method?)
+```
 
 **Parameters**
 

@@ -37,6 +37,9 @@ Access and modify mat export settings.
 ## get_export_3d
 
 Get whether to export 3d data.
+```
+qtm.settings.export.mat.get_export_3d()
+```
 
 **Returns**
 
@@ -47,6 +50,9 @@ Get whether to export 3d data.
 ## set_export_3d
 
 Set whether to export 3d data.
+```
+qtm.settings.export.mat.set_export_3d(enable)
+```
 
 **Parameters**
 
@@ -60,6 +66,9 @@ True if 3d data should be exported, otherwise false.
 ## get_export_6d
 
 Get whether to export 6dof data.
+```
+qtm.settings.export.mat.get_export_6d()
+```
 
 **Returns**
 
@@ -70,6 +79,9 @@ Get whether to export 6dof data.
 ## set_export_6d
 
 Set whether to export 6dof data.
+```
+qtm.settings.export.mat.set_export_6d(enable)
+```
 
 **Parameters**
 
@@ -83,6 +95,9 @@ True if 6dof data should be exported, otherwise false.
 ## get_export_analog
 
 Get whether to export analog data.
+```
+qtm.settings.export.mat.get_export_analog()
+```
 
 **Returns**
 
@@ -93,6 +108,9 @@ Get whether to export analog data.
 ## set_export_analog
 
 Set whether to export analog data.
+```
+qtm.settings.export.mat.set_export_analog(enable)
+```
 
 **Parameters**
 
@@ -106,6 +124,9 @@ True if analog data should be exported, otherwise false.
 ## get_export_force
 
 Get whether to export force data.
+```
+qtm.settings.export.mat.get_export_force()
+```
 
 **Returns**
 
@@ -116,6 +137,9 @@ Get whether to export force data.
 ## set_export_force
 
 Set whether to export force data.
+```
+qtm.settings.export.mat.set_export_force(enable)
+```
 
 **Parameters**
 
@@ -129,6 +153,9 @@ True if force data should be exported, otherwise false.
 ## get_export_eye
 
 Get whether to export eye data.
+```
+qtm.settings.export.mat.get_export_eye()
+```
 
 **Returns**
 
@@ -139,6 +166,9 @@ Get whether to export eye data.
 ## set_export_eye
 
 Set whether to export eye data.
+```
+qtm.settings.export.mat.set_export_eye(enable)
+```
 
 **Parameters**
 
@@ -152,6 +182,9 @@ True if eye data should be exported, otherwise false.
 ## get_export_skeleton
 
 Get whether to export skeleton data.
+```
+qtm.settings.export.mat.get_export_skeleton()
+```
 
 **Returns**
 
@@ -162,6 +195,9 @@ Get whether to export skeleton data.
 ## set_export_skeleton
 
 Set whether to export skeleton data.
+```
+qtm.settings.export.mat.set_export_skeleton(enable)
+```
 
 **Parameters**
 
@@ -175,6 +211,9 @@ True if skeleton data should be exported, otherwise false.
 ## get_export_timecode
 
 Get whether to export timecodes.
+```
+qtm.settings.export.mat.get_export_timecode()
+```
 
 **Returns**
 
@@ -185,6 +224,9 @@ Get whether to export timecodes.
 ## set_export_timecode
 
 Set whether to export timecodes.
+```
+qtm.settings.export.mat.set_export_timecode(enable)
+```
 
 **Parameters**
 
@@ -198,6 +240,9 @@ True if timecodes should be exported, otherwise false.
 ## get_export_event
 
 Get whether to export events.
+```
+qtm.settings.export.mat.get_export_event()
+```
 
 **Returns**
 
@@ -208,6 +253,9 @@ Get whether to export events.
 ## set_export_event
 
 Set whether to export events.
+```
+qtm.settings.export.mat.set_export_event(enable)
+```
 
 **Parameters**
 
@@ -221,6 +269,9 @@ True if events should be exported, otherwise false.
 ## get_exclude_unidentified
 
 Get whether to exclude unidentified trajectories.
+```
+qtm.settings.export.mat.get_exclude_unidentified()
+```
 
 **Returns**
 
@@ -231,6 +282,9 @@ Get whether to exclude unidentified trajectories.
 ## set_exclude_unidentified
 
 Set whether to exclude unidentified trajectories.
+```
+qtm.settings.export.mat.set_exclude_unidentified(enable)
+```
 
 **Parameters**
 
@@ -244,6 +298,9 @@ True if unidentified trajectories should be excluded, otherwise false.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.settings.export.mat.help(method?)
+```
 
 **Parameters**
 

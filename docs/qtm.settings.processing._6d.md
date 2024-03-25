@@ -64,6 +64,9 @@ Access and modify 6dof processing settings.
 ## get_identify_partial_bodies
 
 Get whether to identify partially visible rigid bodies.
+```
+qtm.settings.processing._6d.get_identify_partial_bodies(source)
+```
 
 **Parameters**
 
@@ -80,6 +83,9 @@ The settings source.
 ## set_identify_partial_bodies
 
 Set whether to identify partially visible rigid bodies.
+```
+qtm.settings.processing._6d.set_identify_partial_bodies(source, enable)
+```
 
 **Parameters**
 
@@ -96,6 +102,9 @@ True if partially visible rigid bodies should be identified, otherwise false.
 ## get_calculate_missing_markers
 
 Get whether to calculate missing markers in rigid bodies.
+```
+qtm.settings.processing._6d.get_calculate_missing_markers(source)
+```
 
 **Parameters**
 
@@ -112,6 +121,9 @@ The settings source.
 ## set_calculate_missing_markers
 
 Set whether to calculate missing markers in rigid bodies.
+```
+qtm.settings.processing._6d.set_calculate_missing_markers(source, enable)
+```
 
 **Parameters**
 
@@ -128,6 +140,9 @@ True if missing markers should be calculated, otherwise false.
 ## add_body
 
 Add a rigid body.
+```
+qtm.settings.processing._6d.add_body(source)
+```
 
 **Parameters**
 
@@ -144,6 +159,9 @@ The settings source.
 ## add_point
 
 Add a point to a rigid body.
+```
+qtm.settings.processing._6d.add_point(source, body_index)
+```
 
 **Parameters**
 
@@ -163,6 +181,9 @@ The index of the rigid body.
 ## delete_body
 
 Delete a rigid body.
+```
+qtm.settings.processing._6d.delete_body(source, body_index)
+```
 
 **Parameters**
 
@@ -179,6 +200,9 @@ The index of the rigid body.
 ## delete_point
 
 Delete a point in a rigid body.
+```
+qtm.settings.processing._6d.delete_point(source, body_index, point_index)
+```
 
 **Parameters**
 
@@ -198,6 +222,9 @@ The index of the point.
 ## get_body_count
 
 Get the number of rigid bodies.
+```
+qtm.settings.processing._6d.get_body_count(source)
+```
 
 **Parameters**
 
@@ -214,6 +241,9 @@ The settings source.
 ## get_point_count
 
 Get the number of points in a rigid body.
+```
+qtm.settings.processing._6d.get_point_count(source, body_index)
+```
 
 **Parameters**
 
@@ -233,6 +263,9 @@ The index of the rigid body.
 ## get_body_name
 
 Get the name of a rigid body.
+```
+qtm.settings.processing._6d.get_body_name(source, body_index)
+```
 
 **Parameters**
 
@@ -252,6 +285,9 @@ The index of the rigid body.
 ## set_body_name
 
 Set the name of a rigid body.
+```
+qtm.settings.processing._6d.set_body_name(source, body_index, name)
+```
 
 **Parameters**
 
@@ -268,9 +304,56 @@ The name of the rigid body.
 
 ---
 
+## get_body_is_enabled
+
+Get whether a rigid body is enabled.
+```
+qtm.settings.processing._6d.get_body_is_enabled(source, body_index)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`body_index` `integer`<br/>
+The index of the rigid body.
+
+
+**Returns**
+
+`bool` 
+
+---
+
+## set_body_is_enabled
+
+Set whether a rigid body is enabled.
+```
+qtm.settings.processing._6d.set_body_is_enabled(source, body_index, is_enabled)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`body_index` `integer`<br/>
+The index of the rigid body.
+
+`is_enabled` `bool`<br/>
+True if the rigid body should be enabled, otherwise false.
+
+
+
+---
+
 ## get_body_color
 
 Get the color of a rigid body.
+```
+qtm.settings.processing._6d.get_body_color(source, body_index)
+```
 
 **Parameters**
 
@@ -290,6 +373,9 @@ The index of the rigid body.
 ## set_body_color
 
 Set the color of a rigid body.
+```
+qtm.settings.processing._6d.set_body_color(source, body_index, color)
+```
 
 **Parameters**
 
@@ -309,6 +395,9 @@ The color of the rigid body (in 0xbbggrr format, see 'qtm.utilities.color' modul
 ## get_body_coordinate_system
 
 Get the coordinate system of a rigid body.
+```
+qtm.settings.processing._6d.get_body_coordinate_system(source, body_index)
+```
 
 **Parameters**
 
@@ -328,6 +417,9 @@ The index of the rigid body.
 ## set_body_coordinate_system
 
 Set the coordinate system of a rigid body.
+```
+qtm.settings.processing._6d.set_body_coordinate_system(source, body_index, coordinate_system)
+```
 
 **Parameters**
 
@@ -347,6 +439,9 @@ The coordinate system of the rigid body.
 ## get_body_min_marker_count
 
 Get the minimum marker count of a rigid body.
+```
+qtm.settings.processing._6d.get_body_min_marker_count(source, body_index)
+```
 
 **Parameters**
 
@@ -366,6 +461,9 @@ The index of the rigid body.
 ## set_body_min_marker_count
 
 Set the minimum marker count of a rigid body.
+```
+qtm.settings.processing._6d.set_body_min_marker_count(source, body_index, count)
+```
 
 **Parameters**
 
@@ -385,6 +483,9 @@ The minimum marker count of the rigid body (must be greater than or equal to 3).
 ## get_body_max_residual
 
 Get the maximum residual of a rigid body.
+```
+qtm.settings.processing._6d.get_body_max_residual(source, body_index)
+```
 
 **Parameters**
 
@@ -404,6 +505,9 @@ The index of the rigid body.
 ## set_body_max_residual
 
 Set the maximum residual of a rigid body.
+```
+qtm.settings.processing._6d.set_body_max_residual(source, body_index, residual)
+```
 
 **Parameters**
 
@@ -423,6 +527,9 @@ The maximum residual of the rigid body (in millimeters). Must be within the [0.0
 ## get_body_bone_length_tolerance
 
 Get the bone length tolerance of a rigid body.
+```
+qtm.settings.processing._6d.get_body_bone_length_tolerance(source, body_index)
+```
 
 **Parameters**
 
@@ -442,6 +549,9 @@ The index of the rigid body.
 ## set_body_bone_length_tolerance
 
 Set the bone length tolerance of a rigid body.
+```
+qtm.settings.processing._6d.set_body_bone_length_tolerance(source, body_index, tolerance)
+```
 
 **Parameters**
 
@@ -461,6 +571,9 @@ The bone length tolerance (in millimeters). Must be within the [0.01, 1000.0] ra
 ## get_point_name
 
 Get the name of a point in a rigid body.
+```
+qtm.settings.processing._6d.get_point_name(source, body_index, point_index)
+```
 
 **Parameters**
 
@@ -483,6 +596,9 @@ The index of the point.
 ## set_point_name
 
 Set the name of a point in a rigid body.
+```
+qtm.settings.processing._6d.set_point_name(source, body_index, point_index, name)
+```
 
 **Parameters**
 
@@ -505,6 +621,9 @@ The name of the point.
 ## get_point_position
 
 Get the position of a point in a rigid body.
+```
+qtm.settings.processing._6d.get_point_position(source, body_index, point_index)
+```
 
 **Parameters**
 
@@ -527,6 +646,9 @@ The index of the point.
 ## set_point_position
 
 Set the position of a point in a rigid body.
+```
+qtm.settings.processing._6d.set_point_position(source, body_index, point_index, position)
+```
 
 **Parameters**
 
@@ -549,6 +671,9 @@ The position of the point.
 ## get_point_is_virtual
 
 Get whether a point in a rigid body is virtual.
+```
+qtm.settings.processing._6d.get_point_is_virtual(source, body_index, point_index)
+```
 
 **Parameters**
 
@@ -571,6 +696,9 @@ The index of the point.
 ## set_point_is_virtual
 
 Set whether a point in a rigid body is virtual.
+```
+qtm.settings.processing._6d.set_point_is_virtual(source, body_index, point_index, is_virtual)
+```
 
 **Parameters**
 
@@ -593,6 +721,9 @@ True if the point is virtual, otherwise false.
 ## get_point_active_marker_id
 
 Get the (sequence coded) active marker identifier of a point in a rigid body.
+```
+qtm.settings.processing._6d.get_point_active_marker_id(source, body_index, point_index)
+```
 
 **Parameters**
 
@@ -615,6 +746,9 @@ The index of the point.
 ## set_point_active_marker_id
 
 Set the (sequence coded) active marker identifier of a point in a rigid body.
+```
+qtm.settings.processing._6d.set_point_active_marker_id(source, body_index, point_index, id?)
+```
 
 **Parameters**
 
@@ -637,6 +771,9 @@ The active marker identifier of the point (if null, the marker will be regarded 
 ## load_bodies
 
 Load rigid bodies from an xml file.
+```
+qtm.settings.processing._6d.load_bodies(source, filename)
+```
 
 This will overwrite any existing rigid bodies.
 
@@ -655,6 +792,9 @@ The xml filename to load.
 ## save_bodies
 
 Save rigid bodies to an xml file.
+```
+qtm.settings.processing._6d.save_bodies(source, filename)
+```
 
 **Parameters**
 
@@ -671,6 +811,9 @@ The xml filename to save.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.settings.processing._6d.help(method?)
+```
 
 **Parameters**
 

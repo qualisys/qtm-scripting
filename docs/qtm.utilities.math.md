@@ -7,6 +7,9 @@ This module has not yet been implemented.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.utilities.math.help(method?)
+```
 
 **Parameters**
 

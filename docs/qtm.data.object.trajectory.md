@@ -170,6 +170,9 @@ Access and modify trajectories.
 ## add_trajectory
 
 Add a trajectory.
+```
+qtm.data.object.trajectory.add_trajectory(label?)
+```
 
 **Parameters**
 
@@ -186,6 +189,9 @@ The label of the trajectory (if null, the trajectory will be unidentified).
 ## delete_trajectory
 
 Delete a trajectory.
+```
+qtm.data.object.trajectory.delete_trajectory(id)
+```
 
 **Parameters**
 
@@ -199,6 +205,9 @@ The identifier of the trajectory.
 ## smooth_trajectory
 
 Smooth a trajectory.
+```
+qtm.data.object.trajectory.smooth_trajectory(id, algorithm?, range?, settings?)
+```
 
 **Parameters**
 
@@ -221,6 +230,9 @@ The smooth settings to use (if null, or if any individual setting is null, the f
 ## fill_trajectory
 
 Fill a trajectory.
+```
+qtm.data.object.trajectory.fill_trajectory(id, algorithm?, range?, settings?)
+```
 
 All samples within the given range will be overwritten. To fill gaps only, use the ranges returned by 'qtm.data.series._3d.get_gap_ranges'.
 
@@ -245,6 +257,9 @@ The fill settings to use (if null, or if any individual setting is null, the fol
 ## find_trajectory
 
 Find a trajectory by label.
+```
+qtm.data.object.trajectory.find_trajectory(label)
+```
 
 **Parameters**
 
@@ -261,6 +276,9 @@ The label of the trajectory.
 ## clear_trajectories
 
 Delete all trajectories.
+```
+qtm.data.object.trajectory.clear_trajectories()
+```
 
 
 ---
@@ -268,6 +286,9 @@ Delete all trajectories.
 ## get_trajectory_id
 
 Get a trajectory identifier by index.
+```
+qtm.data.object.trajectory.get_trajectory_id(index)
+```
 
 This is equivalent to calling qtm.data.series._3d.get_series_id.
 
@@ -286,6 +307,9 @@ The index of the trajectory.
 ## get_trajectory_ids
 
 Get all trajectory identifiers.
+```
+qtm.data.object.trajectory.get_trajectory_ids()
+```
 
 This is equivalent to calling qtm.data.series._3d.get_series_ids.
 
@@ -298,6 +322,9 @@ This is equivalent to calling qtm.data.series._3d.get_series_ids.
 ## get_trajectory_count
 
 Get the number of trajectories.
+```
+qtm.data.object.trajectory.get_trajectory_count()
+```
 
 This is equivalent to calling qtm.data.series._3d.get_series_count.
 
@@ -310,6 +337,9 @@ This is equivalent to calling qtm.data.series._3d.get_series_count.
 ## get_part
 
 Get a part of a trajectory by index.
+```
+qtm.data.object.trajectory.get_part(id, index)
+```
 
 **Parameters**
 
@@ -329,6 +359,9 @@ The index of the part.
 ## get_parts
 
 Get all parts of a trajectory.
+```
+qtm.data.object.trajectory.get_parts(id)
+```
 
 **Parameters**
 
@@ -345,6 +378,9 @@ The identifier of the trajectory.
 ## get_part_count
 
 Get the number of parts of a trajectory.
+```
+qtm.data.object.trajectory.get_part_count(id)
+```
 
 **Parameters**
 
@@ -361,6 +397,9 @@ The identifier of the trajectory.
 ## delete_parts
 
 Delete parts of a trajectory.
+```
+qtm.data.object.trajectory.delete_parts(id, part_indices?)
+```
 
 **Parameters**
 
@@ -377,6 +416,9 @@ The indices of the parts to delete (if null, all parts will be deleted).
 ## move_parts
 
 Move parts from one trajectory to another.
+```
+qtm.data.object.trajectory.move_parts(id_from, id_to, part_indices?)
+```
 
 **Parameters**
 
@@ -396,6 +438,9 @@ The indices of the parts to move (if null, all parts will be moved).
 ## swap_parts
 
 Swap parts between two trajectories.
+```
+qtm.data.object.trajectory.swap_parts(id_1, id_2, part_indices_1?, part_indices_2?)
+```
 
 **Parameters**
 
@@ -418,6 +463,9 @@ The indices of the parts to swap from the second trajectory (if null, all parts 
 ## split_part
 
 Split a part of a trajectory.
+```
+qtm.data.object.trajectory.split_part(id, sample_index)
+```
 
 **Parameters**
 
@@ -434,6 +482,9 @@ The index of the last sample before the split.
 ## get_label
 
 Get the label of a trajectory.
+```
+qtm.data.object.trajectory.get_label(id)
+```
 
 **Parameters**
 
@@ -443,13 +494,16 @@ The identifier of the trajectory.
 
 **Returns**
 
-`string?` The label (or null, if the trajectory is unidentified).
+`string?` The label of the trajectory (or null, if the trajectory is unidentified).
 
 ---
 
 ## set_label
 
 Set the label of a trajectory.
+```
+qtm.data.object.trajectory.set_label(id, label?)
+```
 
 **Parameters**
 
@@ -457,7 +511,45 @@ Set the label of a trajectory.
 The identifier of the trajectory.
 
 `label` `string?`<br/>
-The label (if null, the trajectory will become unidentified).
+The label of the trajectory (if null, the trajectory will become unidentified).
+
+
+
+---
+
+## get_color
+
+Get the color of a trajectory.
+```
+qtm.data.object.trajectory.get_color(id)
+```
+
+**Parameters**
+
+`id` `integer`<br/>
+The identifier of the trajectory.
+
+
+**Returns**
+
+`integer` The color of the trajectory (in 0xbbggrr format).
+
+---
+
+## set_color
+
+Set the color of a trajectory.
+```
+qtm.data.object.trajectory.set_color(id, color)
+```
+
+**Parameters**
+
+`id` `integer`<br/>
+The identifier of the trajectory.
+
+`color` `integer`<br/>
+The color of the trajectory (in 0xbbggrr format, see 'qtm.utilities.color' module).
 
 
 
@@ -466,6 +558,9 @@ The label (if null, the trajectory will become unidentified).
 ## get_active_marker_id
 
 Get the (sequence coded) active marker identifier of a trajectory.
+```
+qtm.data.object.trajectory.get_active_marker_id(id)
+```
 
 **Parameters**
 
@@ -482,6 +577,9 @@ The identifier of the trajectory.
 ## get_rigid_body_id
 
 Get the rigid body identifier of a trajectory.
+```
+qtm.data.object.trajectory.get_rigid_body_id(id)
+```
 
 **Parameters**
 
@@ -498,6 +596,9 @@ The identifier of the trajectory.
 ## get_skeleton_segment_id
 
 Get the skeleton segment identifier of a trajectory.
+```
+qtm.data.object.trajectory.get_skeleton_segment_id(id)
+```
 
 If the trajectory is attached to multiple segments, only the identifier of the first found will be returned.
 
@@ -516,6 +617,9 @@ The identifier of the trajectory.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.data.object.trajectory.help(method?)
+```
 
 **Parameters**
 

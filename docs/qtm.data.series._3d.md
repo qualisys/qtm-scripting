@@ -48,6 +48,9 @@ Access and modify 3d data series.
 ## get_series_id
 
 Get a data series identifier by index.
+```
+qtm.data.series._3d.get_series_id(index)
+```
 
 **Parameters**
 
@@ -64,6 +67,9 @@ The index of the data series.
 ## get_series_ids
 
 Get all data series identifiers.
+```
+qtm.data.series._3d.get_series_ids()
+```
 
 **Returns**
 
@@ -74,6 +80,9 @@ Get all data series identifiers.
 ## get_series_count
 
 Get the number of data series.
+```
+qtm.data.series._3d.get_series_count()
+```
 
 **Returns**
 
@@ -84,6 +93,9 @@ Get the number of data series.
 ## get_sample_count
 
 Get the number of samples in a data series.
+```
+qtm.data.series._3d.get_sample_count(id)
+```
 
 **Parameters**
 
@@ -100,6 +112,9 @@ The data series identifier.
 ## get_sample_range
 
 Get the total sample index range in a data series (first to last).
+```
+qtm.data.series._3d.get_sample_range(id)
+```
 
 **Parameters**
 
@@ -109,13 +124,16 @@ The data series identifier.
 
 **Returns**
 
-`{"start": integer, "end": integer}` 
+`{"start": integer, "end": integer}?` The total sample index range (or null, if no samples existed).
 
 ---
 
 ## get_sample_ranges
 
 Get the contiguous sample index ranges in a data series.
+```
+qtm.data.series._3d.get_sample_ranges(id)
+```
 
 **Parameters**
 
@@ -132,6 +150,9 @@ The data series identifier.
 ## get_gap_ranges
 
 Get the contiguous sample index gap ranges in a data series.
+```
+qtm.data.series._3d.get_gap_ranges(id)
+```
 
 **Parameters**
 
@@ -148,6 +169,9 @@ The data series identifier.
 ## get_sample
 
 Get a single sample in a data series.
+```
+qtm.data.series._3d.get_sample(id, index)
+```
 
 **Parameters**
 
@@ -167,6 +191,9 @@ The index of the sample.
 ## get_samples
 
 Get a range of samples in a data series.
+```
+qtm.data.series._3d.get_samples(id, range?)
+```
 
 **Parameters**
 
@@ -186,6 +213,9 @@ The index range of the samples (if null, all samples will be returned).
 ## set_sample
 
 Set a single sample in a data series.
+```
+qtm.data.series._3d.set_sample(id, index, sample?)
+```
 
 **Parameters**
 
@@ -205,6 +235,9 @@ The sample (if null, any previously existing sample will be deleted).
 ## set_samples
 
 Set a range of samples in a data series.
+```
+qtm.data.series._3d.set_samples(id, range, samples)
+```
 
 **Parameters**
 
@@ -224,6 +257,9 @@ The samples (if a sample is null, any previously existing sample will be deleted
 ## delete_sample
 
 Delete a single sample in a data series.
+```
+qtm.data.series._3d.delete_sample(id, index)
+```
 
 **Parameters**
 
@@ -240,6 +276,9 @@ The index of the sample.
 ## delete_samples
 
 Delete a range of samples in a data series.
+```
+qtm.data.series._3d.delete_samples(id, range?)
+```
 
 **Parameters**
 
@@ -256,6 +295,9 @@ The index range of the samples (if null, all samples will be deleted).
 ## get_frequency
 
 Get the frequency of a data series.
+```
+qtm.data.series._3d.get_frequency(id)
+```
 
 **Parameters**
 
@@ -272,6 +314,9 @@ The data series identifier.
 ## get_offset
 
 Get the offset (start time) of a data series.
+```
+qtm.data.series._3d.get_offset(id)
+```
 
 The offset is relative to the start of the measurement and may be negative (in which case the data series begins before the measurement).
 
@@ -290,6 +335,9 @@ The data series identifier.
 ## get_sample_index_at_time
 
 Get the index of a sample in a data series at a given time.
+```
+qtm.data.series._3d.get_sample_index_at_time(id, time)
+```
 
 **Parameters**
 
@@ -309,6 +357,9 @@ The time relative to the start of the measurement (in seconds). May be negative.
 ## get_time_at_sample_index
 
 Get the start time of a sample in a data series.
+```
+qtm.data.series._3d.get_time_at_sample_index(id, index)
+```
 
 **Parameters**
 
@@ -328,6 +379,9 @@ The index of the sample.
 ## help
 
 Get the documentation for a module or method.
+```
+qtm.data.series._3d.help(method?)
+```
 
 **Parameters**
 
