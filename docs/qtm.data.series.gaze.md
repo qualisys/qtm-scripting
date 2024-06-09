@@ -2,49 +2,6 @@
 
 Access gaze data series.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    series_ids = qtm.data.series.gaze.get_series_ids()
-    print(series_ids)
-    # [389, 390]
-    
-    sample_ranges = qtm.data.series.gaze.get_sample_ranges(series_ids[0])
-    print(sample_ranges)
-    # [{'start': 0, 'end': 300}]
-    
-    sample_index = 100
-    print(qtm.data.series.gaze.get_sample(series_ids[0], sample_index))
-    # {'position': [25.00000037252903, -12.000000104308128, -25.00000037252903], 'direction': [-0.624884307384491, -0.01765182428061962, 0.7805178165435791]}
-    ```
-=== "Lua"
-    ``` lua
-    series_ids = qtm.data.series.gaze.get_series_ids()
-    print(series_ids)
-    -- {389, 390}
-    
-    sample_ranges = qtm.data.series.gaze.get_sample_ranges(series_ids[1])
-    print(sample_ranges)
-    -- {{end = 300, start = 0}}
-    
-    sample_index = 100
-    print(qtm.data.series.gaze.get_sample(series_ids[1], sample_index))
-    -- {position = {25.000000372529, -12.000000104308, -25.000000372529}, direction = {-0.62488430738449, -0.01765182428062, 0.78051781654358}}
-    ```
-=== "REST"
-    ``` bat
-    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/gaze/get_series_ids/
-    :: [389,390]
-    
-    set series_id=389
-    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/gaze/get_sample_ranges/
-    :: [{"end":300,"start":0}]
-    
-    set sample_index=100
-    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/gaze/get_sample/
-    :: {"direction":[-0.62488430738449097,-0.017651824280619621,0.7805178165435791],"position":[25.00000037252903,-12.000000104308128,-25.00000037252903]}
-    ```
 ## get_series_id
 
 Get a data series identifier by index.

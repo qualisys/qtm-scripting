@@ -1,5 +1,5 @@
 site_name: QTM Scripting Interface
-use_directory_urls: true
+use_directory_urls: false
 
 nav:
   - Home: index.md
@@ -23,7 +23,7 @@ theme:
  - content.tabs.link
  - content.code.annotation
  - content.code.copy
- language: "en"
+ language: en
  font: false
  palette:
   - media: "(prefers-color-scheme: light)"
@@ -34,6 +34,8 @@ theme:
 
   - media: "(prefers-color-scheme: dark)"
     scheme: slate
+    primary: custom
+    accent: custom
     toggle:
       icon: material/weather-sunny
       name: Switch to light mode

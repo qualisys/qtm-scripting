@@ -2,8 +2,8 @@
 
 | **Version** | **Changes** |
 | ------ | ------ |
-| 2023.2 | Initial release. | 
-| 2023.3 | - | 
+| 2024.2 | Added qtm.data.object.trajectory.get_is_discarded method. | 
+|  | Added qtm.data.object.trajectory.set_is_discarded method. | 
 | 2024.1 | qtm.data.series.*.get_sample_range method now returns null if there are no samples. | 
 |  | Added qtm.data.series._6d.set_sample method. | 
 |  | Added qtm.data.series._6d.set_samples method. | 
@@ -21,3 +21,5 @@
 |  | Added qtm.data.object.trajectory.get_color method. | 
 |  | Added qtm.data.object.trajectory.set_color method. | 
 |  | Added qtm.data.object.bone module. | 
+| 2023.3 | - | 
+| 2023.2 | Initial release. | 

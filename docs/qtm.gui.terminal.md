@@ -2,26 +2,6 @@
 
 Interface to the terminal window.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    qtm.gui.terminal.clear()
-    
-    qtm.gui.terminal.write("message in terminal")
-    ```
-=== "Lua"
-    ``` lua
-    qtm.gui.terminal.clear()
-    
-    qtm.gui.terminal.write("message in terminal")
-    ```
-=== "REST"
-    ``` bat
-    curl --json "" http://localhost:7979/api/scripting/qtm/gui/terminal/clear/
-    
-    curl --json "[\"message in terminal\"]" http://localhost:7979/api/scripting/qtm/gui/terminal/write/
-    ```
 ## clear
 
 Clear the terminal.

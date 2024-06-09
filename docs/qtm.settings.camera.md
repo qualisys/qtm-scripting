@@ -2,65 +2,6 @@
 
 Access and modify camera settings.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    print(qtm.settings.camera.get_system_type("measurement"))
-    # miqus
-    
-    camera_type = "miqus"
-    print(qtm.settings.camera.get_camera_count("measurement", camera_type))
-    # 10
-    
-    camera_index = 5
-    print(qtm.settings.camera.get_camera_model("measurement", camera_index))
-    # miqus m3
-    
-    print(qtm.settings.camera.get_serial_number("measurement", camera_index))
-    # 20658
-    
-    print(qtm.settings.camera.is_calibrated("measurement", camera_index))
-    # True
-    ```
-=== "Lua"
-    ``` lua
-    print(qtm.settings.camera.get_system_type("measurement"))
-    -- miqus
-    
-    camera_type = "miqus"
-    print(qtm.settings.camera.get_camera_count("measurement", camera_type))
-    -- 10
-    
-    camera_index = 5
-    print(qtm.settings.camera.get_camera_model("measurement", camera_index))
-    -- miqus m3
-    
-    print(qtm.settings.camera.get_serial_number("measurement", camera_index))
-    -- 20658
-    
-    print(qtm.settings.camera.is_calibrated("measurement", camera_index))
-    -- true
-    ```
-=== "REST"
-    ``` bat
-    curl --json "[\"measurement\"]" http://localhost:7979/api/scripting/qtm/settings/camera/get_system_type/
-    :: "miqus"
-    
-    set camera_type=\"miqus\"
-    curl --json "[\"measurement\", %camera_type%]" http://localhost:7979/api/scripting/qtm/settings/camera/get_camera_count/
-    :: 10
-    
-    set camera_index=5
-    curl --json "[\"measurement\", %camera_index%]" http://localhost:7979/api/scripting/qtm/settings/camera/get_camera_model/
-    :: miqus m3
-    
-    curl --json "[\"measurement\", %camera_index%]" http://localhost:7979/api/scripting/qtm/settings/camera/get_serial_number/
-    :: 20658
-    
-    curl --json "[\"measurement\", %camera_index%]" http://localhost:7979/api/scripting/qtm/settings/camera/is_calibrated/
-    :: true
-    ```
 ## get_system_type
 
 Get the camera system type.

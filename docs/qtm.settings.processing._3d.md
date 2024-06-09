@@ -2,38 +2,6 @@
 
 Access and modify 3d processing settings.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    min_trajectory_length = 2
-    qtm.settings.processing._3d.set_min_trajectory_length("project", min_trajectory_length)
-    print(qtm.settings.processing._3d.get_min_trajectory_length("project"))
-    # 2
-    
-    print(qtm.settings.processing._3d.get_bounding_box("measurement"))
-    # {'min_x': -10000.0, 'max_x': 10000.0, 'min_y': -10000.0, 'max_y': 10000.0, 'min_z': -10000.0, 'max_z': 10000.0}
-    ```
-=== "Lua"
-    ``` lua
-    min_trajectory_length = 2
-    qtm.settings.processing._3d.set_min_trajectory_length("project", min_trajectory_length)
-    print(qtm.settings.processing._3d.get_min_trajectory_length("project"))
-    -- 2
-    
-    print(qtm.settings.processing._3d.get_bounding_box("measurement"))
-    -- {min_y = -1000.0, max_x = 20000.0, max_z = 1500.0, min_z = -100.0, max_y = 1000.0, min_x = -2000.0}
-    ```
-=== "REST"
-    ``` bat
-    set min_trajectory_length=2
-    curl --json "[\"project\", %min_trajectory_length%]" http://localhost:7979/api/scripting/qtm/settings/processing/_3d/set_min_trajectory_length
-    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_3d/get_min_trajectory_length
-    :: 2
-    
-    curl --json "[\"measurement\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_3d/get_bounding_box
-    :: {"max_x":20000,"max_y":1000,"max_z":1500,"min_x":-2000,"min_y":-1000,"min_z":-100}
-    ```
 ## get_prediction_error
 
 Get the prediction error.

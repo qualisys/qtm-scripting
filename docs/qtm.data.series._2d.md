@@ -2,49 +2,6 @@
 
 Access 2d data series.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    series_ids = qtm.data.series._2d.get_series_ids()
-    print(series_ids)
-    # [106723, 106724, 106725, 106726, 106727, 106728, 106729, 106730, ... ...
-    
-    sample_ranges = qtm.data.series._2d.get_sample_ranges(series_ids[0])
-    print(sample_ranges)
-    # [{'start': 0, 'end': 322}]
-    
-    sample_index = 100
-    print(qtm.data.series._2d.get_sample(series_ids[0], sample_index))
-    # [[{'position': [119658, 5486], 'size': [978, 768]}, {'position': [120837, 8429], 'size': [1116, 1088]}, ... ...
-    ```
-=== "Lua"
-    ``` lua
-    series_ids = qtm.data.series._2d.get_series_ids()
-    print(series_ids)
-    -- {106723, 106724, 106725, 106726, 106727, 106728, 106729, 106730, ... ...
-    
-    sample_ranges = qtm.data.series._2d.get_sample_ranges(series_ids[1])
-    print(sample_ranges)
-    -- {{start = 0, end = 322}}
-    
-    sample_index = 100
-    print(qtm.data.series._2d.get_sample(series_ids[1], sample_index))
-    -- {{{size = {978, 768}, position = {119658, 5486}}, {size = {1116, 1088}, position = {120837, 8429}}, {size = {750, 704}, ... ...
-    ```
-=== "REST"
-    ``` bat
-    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/_2d/get_series_ids/
-    :: [106723,106724,106725,106726,106727,106728,106729,106730,106731,106732,106733,106734,106735,106736]
-    
-    set series_id=106723
-    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/_2d/get_sample_ranges/
-    :: [{"end":322,"start":0}]
-    
-    set sample_index=100
-    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/_2d/get_sample/
-    : [[{"position":[119658,5486],"size":[978,768]},{"position":[120837,8429],"size":[1116,1088]}, ... ...
-    ```
 ## get_series_id
 
 Get a data series identifier by index.
