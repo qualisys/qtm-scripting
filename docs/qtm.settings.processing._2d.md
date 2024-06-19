@@ -2,6 +2,35 @@
 
 Access and modify 2d processing settings.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    qtm.settings.processing._2d.set_use_max_marker_size("project", False)
+    print(qtm.settings.processing._2d.get_use_max_marker_size("project"))
+    # False
+    
+    print(qtm.settings.processing._2d.get_max_marker_size("measurement"))
+    # 4096
+    ```
+=== "Lua"
+    ``` lua
+    qtm.settings.processing._2d.set_use_max_marker_size("project", false)
+    print(qtm.settings.processing._2d.get_use_max_marker_size("project"))
+    -- false
+    
+    print(qtm.settings.processing._2d.get_max_marker_size("measurement"))
+    -- 4096
+    ```
+=== "REST"
+    ``` bat
+    curl --json "[\"project\", false]" http://localhost:7979/api/scripting/qtm/settings/processing/_2d/set_use_max_marker_size
+    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_2d/get_use_max_marker_size
+    :: false
+    
+    curl --json "[\"measurement\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_2d/get_max_marker_size
+    :: 4096
+    ```
 ## get_correct_center_points
 
 Get whether to correct center points.

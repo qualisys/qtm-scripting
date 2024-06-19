@@ -2,6 +2,32 @@
 
 Utilities for converting various color models to a qtm compatible format.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    print(qtm.utilities.color.rgb(0.855, 0.161, 0.11))
+    # 1845722
+    
+    print(qtm.utilities.color.hsl(4, 0.77, 0.48))
+    # 1845464
+    ```
+=== "Lua"
+    ``` lua
+    print(qtm.utilities.color.rgb(0.855, 0.161, 0.11))
+    -- 1845722
+    
+    print(qtm.utilities.color.hsl(4, 0.77, 0.48))
+    -- 1845464
+    ```
+=== "REST"
+    ``` bat
+    curl --json "[0.855, 0.161, 0.11]" http://localhost:7979/api/scripting/qtm/utilities/color/rgb/
+    :: 1845722
+    
+    curl --json "[4, 0.77, 0.48]" http://localhost:7979/api/scripting/qtm/utilities/color/hsl/
+    :: 1845464
+    ```
 ## rgb
 
 Make a color from rgb values (red, green, blue).

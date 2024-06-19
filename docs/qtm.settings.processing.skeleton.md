@@ -2,6 +2,115 @@
 
 Access and modify skeleton processing settings.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    skeleton_ids = qtm.settings.processing.skeleton.get_skeleton_ids("project")
+    print(skeleton_ids)
+    # [17, 173, 329]
+    
+    print(qtm.settings.processing.skeleton.get_skeleton_name("project", skeleton_ids[0]))
+    # Eli
+    
+    skeleton_name = "Eliott"
+    qtm.settings.processing.skeleton.set_skeleton_name("project", skeleton_ids[0], skeleton_name)
+    print(qtm.settings.processing.skeleton.get_skeleton_name("project", skeleton_ids[0]))
+    # Eliott
+    
+    print(qtm.settings.processing.skeleton.find_skeleton("project", skeleton_name))
+    # 17
+    
+    segment_ids = qtm.settings.processing.skeleton.get_segment_ids("project", skeleton_ids[0])
+    print(segment_ids)
+    # [18, 29, 37, 44, 50, 56, 62, 69, 77, 83, 89, 96, 104, 111, 119, 125, 132, 139, 146, 152, 159, 166]
+    
+    print(qtm.settings.processing.skeleton.get_segment_name("project", segment_ids[0]))
+    # Hips
+    
+    segment_child_ids = qtm.settings.processing.skeleton.get_segment_child_ids("project", segment_ids[0])
+    print(segment_child_ids)
+    # [29, 119, 146]
+    
+    print(qtm.settings.processing.skeleton.get_segment_name("project", segment_child_ids[0]))
+    # Spine
+    
+    segment_name = "Head"
+    segment_id = qtm.settings.processing.skeleton.find_segment("project", skeleton_ids[0], segment_name)
+    print(segment_id)
+    # 111
+    ```
+=== "Lua"
+    ``` lua
+    skeleton_ids = qtm.settings.processing.skeleton.get_skeleton_ids("project")
+    print(skeleton_ids)
+    -- {17, 173, 329}
+    
+    print(qtm.settings.processing.skeleton.get_skeleton_name("project", skeleton_ids[1]))
+    -- Eli
+    
+    skeleton_name = "Eliott"
+    qtm.settings.processing.skeleton.set_skeleton_name("project", skeleton_ids[1], skeleton_name)
+    print(qtm.settings.processing.skeleton.get_skeleton_name("project", skeleton_ids[1]))
+    -- Eliott
+    
+    print(qtm.settings.processing.skeleton.find_skeleton("project", skeleton_name))
+    -- 17
+    
+    segment_ids = qtm.settings.processing.skeleton.get_segment_ids("project", skeleton_ids[1])
+    print(segment_ids)
+    -- {18, 29, 37, 44, 50, 56, 62, 69, 77, 83, 89, 96, 104, 111, 119, 125, 132, 139, 146, 152, 159, 166}
+    
+    print(qtm.settings.processing.skeleton.get_segment_name("project", segment_ids[1]))
+    -- Hips
+    
+    segment_child_ids = qtm.settings.processing.skeleton.get_segment_child_ids("project", segment_ids[1])
+    print(segment_child_ids)
+    -- {29, 119, 146}
+    
+    print(qtm.settings.processing.skeleton.get_segment_name("project", segment_child_ids[1]))
+    -- Spine
+    
+    segment_name = "Head"
+    segment_id = qtm.settings.processing.skeleton.find_segment("project", skeleton_ids[1], segment_name)
+    print(segment_id)
+    -- 111
+    ```
+=== "REST"
+    ``` bat
+    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/get_skeleton_ids/
+    :: [17,173,329]
+    
+    set skeleton_id=17
+    curl --json "[\"project\", %skeleton_id%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/get_skeleton_name/
+    :: "Eli"
+    
+    set skeleton_name=\"Eliott\"
+    curl --json "[\"project\", %skeleton_id%, %skeleton_name%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/set_skeleton_name/
+    curl --json "[\"project\", %skeleton_id%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/get_skeleton_name/
+    :: "Eliott"
+    
+    curl --json "[\"project\", %skeleton_name%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/find_skeleton/
+    :: 17
+    
+    curl --json "[\"project\", %skeleton_id%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/get_segment_ids/
+    :: [18,29,37,44,50,56,62,69,77,83,89,96,104,111,119,125,132,139,146,152,159,166]
+    
+    set segment_id=18
+    curl --json "[\"project\", %segment_id%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/get_segment_name/
+    :: "Hips"
+    
+    curl --json "[\"project\", %segment_id%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/get_segment_child_ids/
+    :: [29,119,146]
+    
+    set segment_child_id=29
+    curl --json "[\"project\", %segment_child_id%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/get_segment_name/
+    :: "Spine"
+    
+    set segment_name=\"Head\"
+    curl --json "[\"project\", %skeleton_id%, %segment_name%]" http://localhost:7979/api/scripting/qtm/settings/processing/skeleton/find_segment/
+    :: 111
+    ```
 ## add_skeleton
 
 Add a skeleton.

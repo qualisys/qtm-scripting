@@ -2,6 +2,81 @@
 
 Various documentation utilities.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    print(qtm.utilities.documentation.get_package_name())
+    # qtm
+    
+    doc_qtm = qtm.utilities.documentation.get_package_documentation()
+    module_name = 'qtm.utilities.documentation'
+    module_index = next((index for (index, d) in enumerate(doc_qtm['modules']) if d["path"] == module_name), None)
+    print(module_index)
+    # 30
+    
+    print(qtm.utilities.documentation.get_module_brief(module_index))
+    # Various documentation utilities.
+    
+    doc_module = qtm.utilities.documentation.get_module_documentation(module_index)
+    method_name = 'get_parameter_documentation'
+    method_index = next((index for (index, d) in enumerate(doc_module['methods']) if d["name"] == method_name), None)
+    print(method_index)
+    # 17
+    
+    print(qtm.utilities.documentation.get_method_signature(module_index, method_index))
+    # get_parameter_documentation(module_index: integer, method_index: integer, parameter_index: integer) -> {"name": string, "type": string, "description": string}
+    
+    parameter_index = 0
+    print(qtm.utilities.documentation.get_parameter_documentation(module_index, method_index, parameter_index))
+    # {'name': 'module_index', 'type': 'integer', 'description': 'The index of the module.'}
+    ```
+=== "Lua"
+    ``` lua
+    print(qtm.utilities.documentation.get_package_name())
+    -- qtm
+    
+    doc_qtm = qtm.utilities.documentation.get_package_documentation()
+    module_name = 'qtm.utilities.documentation'
+    module_index = (function() for i,d in ipairs(doc_qtm.modules) do if d.path == module_name then return i end end end)()
+    module_index = module_index - 1
+    print(module_index)
+    -- 30
+    
+    print(qtm.utilities.documentation.get_module_brief(module_index))
+    -- Various documentation utilities.
+    
+    doc_module = qtm.utilities.documentation.get_module_documentation(module_index)
+    method_name = 'get_parameter_documentation'
+    method_index = (function() for i,d in ipairs(doc_module.methods) do if d.name == method_name then return i end end end)()
+    method_index = method_index - 1
+    print(method_index)
+    -- 17
+    
+    print(qtm.utilities.documentation.get_method_signature(module_index, method_index))
+    -- get_parameter_documentation(module_index: integer, method_index: integer, parameter_index: integer) -> {"name": string, "type": string, "description": string}
+    
+    parameter_index = 0
+    print(qtm.utilities.documentation.get_parameter_documentation(module_index, method_index, parameter_index))
+    -- {description = "The index of the module.", name = "module_index", type = "integer"}
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/utilities/documentation/get_package_name/
+    :: "qtm"
+    
+    set module_index=30
+    curl --json "[%module_index%]" http://localhost:7979/api/scripting/qtm/utilities/documentation/get_module_brief/
+    :: "Various documentation utilities."
+    
+    set method_index=17
+    curl --json "[%module_index%, %method_index%]" http://localhost:7979/api/scripting/qtm/utilities/documentation/get_method_signature/
+    :: "get_parameter_documentation(module_index: integer, method_index: integer, parameter_index: integer) -> {\"name\": string, \"type\": string, \"description\": string}"
+    
+    set parameter_index=0
+    curl --json "[%module_index%, %method_index%, %parameter_index%]" http://localhost:7979/api/scripting/qtm/utilities/documentation/get_parameter_documentation/
+    :: {"description":"The index of the module.","name":"module_index","type":"integer"}
+    ```
 ## get_package_name
 
 Get the name of the package.

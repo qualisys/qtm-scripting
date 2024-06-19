@@ -2,6 +2,65 @@
 
 Access and modify smpte (society of motion picture and television engineers) data series.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    series_ids = qtm.data.series.time.smpte.get_series_ids()
+    print(series_ids)
+    # [16315]
+    
+    print(qtm.data.series.time.smpte.get_sample_count(series_ids[0]))
+    # 1845
+    
+    print(qtm.data.series.time.smpte.get_frequency(series_ids[0]))
+    # 120.0
+    
+    sample_index = 150
+    print(qtm.data.series.time.smpte.get_sample(series_ids[0], sample_index))
+    # {'hour': 15, 'minute': 43, 'second': 40, 'frame': 19}
+    
+    print(qtm.data.series.time.smpte.get_time_at_sample_index(series_ids[0], sample_index))
+    # 1.25
+    ```
+=== "Lua"
+    ``` lua
+    series_ids = qtm.data.series.time.smpte.get_series_ids()
+    print(series_ids)
+    -- {16315}
+    
+    print(qtm.data.series.time.smpte.get_sample_count(series_ids[1]))
+    -- 1845
+    
+    print(qtm.data.series.time.smpte.get_frequency(series_ids[1]))
+    -- 120.0
+    
+    sample_index = 150
+    print(qtm.data.series.time.smpte.get_sample(series_ids[1], sample_index))
+    -- {frame = 19, second = 40, hour = 15, minute = 43}
+    
+    print(qtm.data.series.time.smpte.get_time_at_sample_index(series_ids[1], sample_index))
+    -- 1.25
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/time/smpte/get_series_ids/
+    :: [16315]
+    
+    set series_id=16315
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/time/smpte/get_sample_count/
+    :: 1845
+    
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/time/smpte/get_frequency/
+    :: 120
+    
+    set sample_index=150
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/time/smpte/get_sample/
+    :: {"frame":19,"hour":15,"minute":43,"second":40}
+    
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/time/smpte/get_time_at_sample_index/
+    :: 1.25
+    ```
 ## get_series_id
 
 Get a data series identifier by index.

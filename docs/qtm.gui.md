@@ -2,6 +2,122 @@
 
 Control and customize the graphical user interface.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    def my_function():
+        qtm.gui.terminal.write("my_function() was called")
+    
+    # - List all available built-in commands
+    print(qtm.gui.get_commands("builtin"))
+    # ['save_file_as', 'generate_aim_model_from_multiple_files', 'swap_trajectory_current_part', ... ...
+    
+    # - List all available user commands
+    print(qtm.gui.get_commands("user"))
+    # []
+    
+    # - Add a user command
+    my_command_name = "my_command"
+    qtm.gui.add_command(my_command_name)
+    
+    # - List all available user commands
+    print(qtm.gui.get_commands("user"))
+    # ['my_command']
+    
+    # - Set command execute function
+    qtm.gui.set_command_execute_function(my_command_name, my_function)
+    
+    # - Send command
+    qtm.gui.send_command(my_command_name)
+    # my_function() was called
+    
+    # - Set shortcut to a command
+    shortcut = {"ctrl": True, "alt": False, "shift": True, "key": "z"}
+    qtm.gui.set_accelerator(shortcut, my_command_name)
+    
+    # - Pressing "ctrl+shift+z":
+    # my_function() was called
+    
+    # - Add a menu in the main menu
+    menu_name = "My menu"
+    my_menu_handle = qtm.gui.insert_menu_submenu(None, menu_name)
+    
+    # - Add a menu button in "My menu" and connect it to "my_command"
+    menu_first_button_name = "User command: {}".format(my_command_name)
+    qtm.gui.insert_menu_button(my_menu_handle, menu_first_button_name, my_command_name)
+    
+    # - Add a submenu in "My menu"
+    submenu_name = "My submenu"
+    my_submenu_item_handle = qtm.gui.insert_menu_submenu(my_menu_handle, submenu_name)
+    
+    # - Add a menu button in the submenu "My submenu" and connect it to the built-in command "add_event".
+    add_event_command_name = "add_event"
+    menu_second_button_name = "Built-in command: {}".format(add_event_command_name)
+    qtm.gui.insert_menu_button(my_submenu_item_handle, menu_second_button_name, add_event_command_name)
+    
+    # - Add a separator between the button "My first button" and submenu "My submenu"
+    menu_index = 1
+    qtm.gui.insert_menu_separator(my_menu_handle, menu_index)
+    ```
+=== "Lua"
+    ``` lua
+    function my_function()
+        qtm.gui.terminal.write("my_function() was called")
+    end
+    
+    -- - List all available built-in commands
+    print(qtm.gui.get_commands("builtin"))
+    -- {"save_file_as", "generate_aim_model_from_multiple_files", "swap_trajectory_current_part", ... ...
+    
+    -- - List all available user commands
+    print(qtm.gui.get_commands("user"))
+    -- {}
+    
+    -- - Add a user command
+    my_command_name = "my_command"
+    qtm.gui.add_command(my_command_name)
+    
+    -- - List all available user commands
+    print(qtm.gui.get_commands("user"))
+    -- {"my_command"}
+    
+    -- - Set command execute function
+    qtm.gui.set_command_execute_function(my_command_name, my_function)
+    
+    -- - Send command
+    qtm.gui.send_command(my_command_name)
+    -- my_function() was called
+    
+    -- - Set shortcut to a command
+    shortcut = {ctrl = true, alt = false, shift = true, key = "z"}
+    qtm.gui.set_accelerator(shortcut, my_command_name)
+    
+    -- - Pressing "ctrl+shift+z":
+    -- my_function() was called
+    
+    -- - Add a menu in the main menu
+    menu_name = "My menu"
+    my_menu_handle = qtm.gui.insert_menu_submenu(nil, menu_name)
+    
+    -- - Add a menu button in "My menu" and connect it to "my_command"
+    menu_first_button_name = string.format("User command: %s", my_command_name)
+    qtm.gui.insert_menu_button(my_menu_handle, menu_first_button_name, my_command_name)
+    
+    -- - Add a submenu in "My menu"
+    submenu_name = "My submenu"
+    my_submenu_item_handle = qtm.gui.insert_menu_submenu(my_menu_handle, submenu_name)
+    
+    -- - Add a menu button in the submenu "My submenu" and connect it to the built-in command "add_event".
+    add_event_command_name = "add_event"
+    menu_second_button_name = string.format("Built-in command: %s", add_event_command_name)
+    
+    qtm.gui.insert_menu_button(my_submenu_item_handle, menu_second_button_name, add_event_command_name)
+    
+    -- - Add a separator between the button "My first button" and submenu "My submenu"
+    menu_index = 1
+    qtm.gui.insert_menu_separator(my_menu_handle, menu_index)
+    ```
 ## add_command
 
 Add a command.

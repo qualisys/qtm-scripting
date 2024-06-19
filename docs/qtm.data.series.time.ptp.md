@@ -2,6 +2,65 @@
 
 Access and modify ptp (precision time protocol) data series.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    series_ids = qtm.data.series.time.ptp.get_series_ids()
+    print(series_ids)
+    # [15664]
+    
+    print(qtm.data.series.time.ptp.get_sample_count(series_ids[0]))
+    # 12000
+    
+    print(qtm.data.series.time.ptp.get_frequency(series_ids[0]))
+    # 20.0
+    
+    sample_index = 150
+    print(qtm.data.series.time.ptp.get_sample(series_ids[0], sample_index))
+    # {'second': 1500388477, 'nanosecond': 203316000}
+    
+    print(qtm.data.series.time.ptp.get_time_at_sample_index(series_ids[0], sample_index))
+    # 7.5
+    ```
+=== "Lua"
+    ``` lua
+    series_ids = qtm.data.series.time.ptp.get_series_ids()
+    print(series_ids)
+    -- {15664}
+    
+    print(qtm.data.series.time.ptp.get_sample_count(series_ids[1]))
+    -- 12000
+    
+    print(qtm.data.series.time.ptp.get_frequency(series_ids[1]))
+    -- 20.0
+    
+    sample_index = 150
+    print(qtm.data.series.time.ptp.get_sample(series_ids[1], sample_index))
+    -- {second = 1500388477, nanosecond = 203316000}
+    
+    print(qtm.data.series.time.ptp.get_time_at_sample_index(series_ids[1], sample_index))
+    -- 7.5
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/time/ptp/get_series_ids/
+    :: [15664]
+    
+    set series_id=15664
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/time/ptp/get_sample_count/
+    :: 12000
+    
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/time/ptp/get_frequency/
+    :: 20
+    
+    set sample_index=150
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/time/ptp/get_sample/
+    :: {"nanosecond":203316000,"second":1500388477}
+    
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/time/ptp/get_time_at_sample_index/
+    :: 7.5
+    ```
 ## get_series_id
 
 Get a data series identifier by index.

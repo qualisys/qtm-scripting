@@ -2,6 +2,65 @@
 
 Access and modify irig (inter-range instrumentation group) data series.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    series_ids = qtm.data.series.time.irig.get_series_ids()
+    print(series_ids)
+    # [15642]
+    
+    print(qtm.data.series.time.irig.get_sample_count(series_ids[0]))
+    # 1000
+    
+    print(qtm.data.series.time.irig.get_frequency(series_ids[0]))
+    # 100.0
+    
+    sample_index = 150
+    print(qtm.data.series.time.irig.get_sample(series_ids[0], sample_index))
+    # {'year': 0, 'day': 40, 'hour': 12, 'minute': 23, 'second': 39, 'tenth': 7}
+    
+    print(qtm.data.series.time.irig.get_time_at_sample_index(series_ids[0], sample_index))
+    # 1.5
+    ```
+=== "Lua"
+    ``` lua
+    series_ids = qtm.data.series.time.irig.get_series_ids()
+    print(series_ids)
+    -- {15642}
+    
+    print(qtm.data.series.time.irig.get_sample_count(series_ids[1]))
+    -- 1000
+    
+    print(qtm.data.series.time.irig.get_frequency(series_ids[1]))
+    -- 100.0
+    
+    sample_index = 150
+    print(qtm.data.series.time.irig.get_sample(series_ids[1], sample_index))
+    -- {second = 39, day = 40, year = 0, tenth = 7, hour = 12, minute = 23}
+    
+    print(qtm.data.series.time.irig.get_time_at_sample_index(series_ids[1], sample_index))
+    -- 1.5
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/time/irig/get_series_ids/
+    :: [15642]
+    
+    set series_id=15642
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/time/irig/get_sample_count/
+    :: 1000
+    
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/time/irig/get_frequency/
+    :: 100
+    
+    set sample_index=150
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/time/irig/get_sample/
+    :: {"day":40,"hour":12,"minute":23,"second":39,"tenth":7,"year":0}
+    
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/time/irig/get_time_at_sample_index/
+    :: 1.5
+    ```
 ## get_series_id
 
 Get a data series identifier by index.

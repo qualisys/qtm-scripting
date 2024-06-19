@@ -2,6 +2,65 @@
 
 Access and modify 6dof processing settings.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    print(qtm.settings.processing._6d.get_body_count("measurement"))
+    # 3
+    
+    body_index = 2
+    print(qtm.settings.processing._6d.get_body_name("measurement", body_index))
+    # L_Frame
+    
+    print(qtm.settings.processing._6d.get_point_count("measurement", body_index))
+    # 4
+    
+    point_index = 0
+    print(qtm.settings.processing._6d.get_point_name("measurement", body_index, point_index))
+    # L_Frame - 1
+    
+    print(qtm.settings.processing._6d.get_point_position("measurement", body_index, point_index))
+    # [226.46037005049945, 0.6947789149269771, 1.19924822792081]
+    ```
+=== "Lua"
+    ``` lua
+    print(qtm.settings.processing._6d.get_body_count("measurement"))
+    -- 3
+    
+    body_index = 2
+    print(qtm.settings.processing._6d.get_body_name("measurement", body_index))
+    -- L_Frame
+    
+    print(qtm.settings.processing._6d.get_point_count("measurement", body_index))
+    -- 4
+    
+    point_index = 0
+    print(qtm.settings.processing._6d.get_point_name("measurement", body_index, point_index))
+    -- L_Frame - 1
+    
+    print(qtm.settings.processing._6d.get_point_position("measurement", body_index, point_index))
+    -- {226.4603700505, 0.69477891492698, 1.1992482279208}
+    ```
+=== "REST"
+    ``` bat
+    curl --json "[\"measurement\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/get_body_count
+    :: 3
+    
+    set body_index=2
+    curl --json "[\"measurement\", %body_index%]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/get_body_name
+    :: "L_Frame"
+    
+    curl --json "[\"measurement\", %body_index%]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/get_point_count
+    :: 4
+    
+    set point_index=0
+    curl --json "[\"measurement\", %body_index%, %point_index%]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/get_point_name
+    :: "L_Frame - 1"
+    
+    curl --json "[\"measurement\", %body_index%, %point_index%]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/get_point_position
+    :: [226.46037005049945,0.69477891492697708,1.1992482279208101]
+    ```
 ## get_identify_partial_bodies
 
 Get whether to identify partially visible rigid bodies.

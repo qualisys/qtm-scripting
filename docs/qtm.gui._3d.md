@@ -2,6 +2,105 @@
 
 Interface to the measurement 3d view with methods for custom drawing.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    def draw_sphere():
+        # Draw a red sphere located in (x=1000, y=500, z=750), with a diameter of 500 mm.
+        position = [1000, 500, 750]
+        diameter = 500
+        color = qtm.utilities.color.rgb(0.855, 0.161, 0.11)
+        qtm.gui._3d.draw_sphere(position, diameter, color)
+    
+    def draw_arrow():
+        # Draw a red arrow, with its base at (x=1000, y=-500, z=750), and points towards the sphere.
+        starting_point = [1000, -500, 750]
+        pointing_at = [1000, 150, 750]
+        color = qtm.utilities.color.rgb(0.855, 0.161, 0.11)
+        qtm.gui._3d.draw_arrow(starting_point, pointing_at, color)
+        
+    def draw_axes():
+        # Draw an axis in (x=-1000, y=-500, z=750) and 500 mm in size.
+        translation_matrix = ([
+                [1.0, 0.0, 0.0, -1000,0],
+                [0.0, 1.0, 0.0,  -500.0],
+                [0.0, 0.0, 1.0,   750.0],
+                [0.0, 0.0, 0.0,     1.0]
+            ])
+        size = 500
+        qtm.gui._3d.draw_axes(translation_matrix, size)
+    
+    def draw_text_2d(measurement_time):
+        # Draw the current frames measurement time in the middle of the 3D view.
+        position = [0, 0]
+        font_size = 24
+        text_to_draw = '{:.2f}'.format(measurement_time)
+        origin = {"horizontal": "center", "vertical": "center"}
+        alignment = {"horizontal": "center", "vertical": "center"}
+        color = qtm.utilities.color.rgb(0.855, 0.161, 0.11)
+        qtm.gui._3d.draw_text_2d(position, font_size, text_to_draw, origin, alignment, color)
+    
+    def draw_callback(measurement_time):
+        draw_sphere()
+        draw_arrow()
+        draw_axes()
+        draw_text_2d(measurement_time)
+    
+    # - Set "draw_callback" as the draw function
+    qtm.gui._3d.set_draw_function(draw_callback)
+    ```
+=== "Lua"
+    ``` lua
+    function draw_sphere()
+        -- Draw a red sphere located in (x=1000, y=500, z=750), with a diameter of 500 mm.
+        position = {1000, 500, 750}
+        diameter = 500
+        color = qtm.utilities.color.rgb(0.855, 0.161, 0.11)
+        qtm.gui._3d.draw_sphere(position, diameter, color)
+    end
+    
+    function draw_arrow()
+        -- Draw a red arrow, with its base at (x=1000, y=-500, z=750), and points towards the sphere.
+        starting_point = {1000, -500, 750}
+        pointing_at = {1000, 150, 750}
+        color = qtm.utilities.color.rgb(0.855, 0.161, 0.11)
+        qtm.gui._3d.draw_arrow(starting_point, pointing_at, color)
+    end
+    
+    function draw_axes()
+        -- Draw an axis in (x=-1000, y=-500, z=750) and 500 mm in size.
+        translation_matrix = {
+            {1.0, 0.0, 0.0, -1000.0},
+            {0.0, 1.0, 0.0,  -500.0},
+            {0.0, 0.0, 1.0,   750.0},
+            {0.0, 0.0, 0.0,     1.0}
+        }
+        qtm.gui._3d.draw_axes(translation_matrix, 500)
+    end
+    
+    function draw_text_2d(measurement_time)
+        -- Draw the current frames  measurement time in the middle of the 3D view.
+        position = {0, 0}
+        font_size = 24
+        text_to_draw = string.format("%.2f", measurement_time)
+        origin = {horizontal="center", vertical="center"}
+        alignment = {horizontal="center", vertical="center"}
+        color = qtm.utilities.color.rgb(0.855, 0.161, 0.11)
+        qtm.gui._3d.draw_text_2d(position, font_size, text_to_draw, origin, alignment, color)
+    end
+    
+    
+    function draw_callback(measurement_time)
+        draw_sphere()
+        draw_arrow()
+        draw_axes()
+        draw_text_2d(measurement_time)
+    end
+    
+    -- - Set "draw_callback" as the draw function
+    qtm.gui._3d.set_draw_function(draw_callback)
+    ```
 ## draw_sphere
 
 Draw a sphere.

@@ -2,6 +2,65 @@
 
 Access and modify processing settings.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    print(qtm.settings.processing.get_track_3d("realtime"))
+    # False
+    
+    qtm.settings.processing.set_track_3d("realtime", True)
+    
+    print(qtm.settings.processing.get_track_3d("realtime"))
+    # True
+    
+    print(qtm.settings.processing.get_calculate_force("capture"))
+    # False
+    
+    qtm.settings.processing.set_calculate_force("capture", True)
+    
+    print(qtm.settings.processing.get_calculate_force("capture"))
+    # True
+    ```
+=== "Lua"
+    ``` lua
+    print(qtm.settings.processing.get_track_3d("realtime"))
+    -- false
+    
+    qtm.settings.processing.set_track_3d("realtime", true)
+    
+    print(qtm.settings.processing.get_track_3d("realtime"))
+    -- true
+    
+    print(qtm.settings.processing.get_calculate_force("capture"))
+    -- false
+    
+    qtm.settings.processing.set_calculate_force("capture", true)
+    
+    print(qtm.settings.processing.get_calculate_force("capture"))
+    -- true
+    ```
+=== "REST"
+    ``` bat
+    set processing_type=\"realtime\"
+    curl --json "[%processing_type%]" http://localhost:7979/api/scripting/qtm/settings/processing/get_track_3d/
+    :: false
+    
+    set enable=true
+    curl --json "[%processing_type%, %enable%]" http://localhost:7979/api/scripting/qtm/settings/processing/set_track_3d/
+    
+    curl --json "[%processing_type%]" http://localhost:7979/api/scripting/qtm/settings/processing/get_track_3d/
+    :: true
+    
+    set processing_type=\"capture\"
+    curl --json "[%processing_type%]" http://localhost:7979/api/scripting/qtm/settings/processing/get_calculate_force/
+    :: false
+    
+    curl --json "[%processing_type%, %enable%]" http://localhost:7979/api/scripting/qtm/settings/processing/set_calculate_force/
+    
+    curl --json "[%processing_type%]" http://localhost:7979/api/scripting/qtm/settings/processing/get_calculate_force/
+    :: true
+    ```
 ## get_process_every_frame
 
 Get whether to process every frame during realtime.

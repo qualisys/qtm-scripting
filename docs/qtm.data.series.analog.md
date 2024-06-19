@@ -2,6 +2,49 @@
 
 Access analog data series.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    series_ids = qtm.data.series.analog.get_series_ids()
+    print(series_ids)
+    # [138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158]
+    
+    sample_ranges = qtm.data.series.analog.get_sample_ranges(series_ids[0])
+    print(sample_ranges)
+    # [{'start': 0, 'end': 3999}]
+    
+    sample_index = 100
+    print(qtm.data.series.analog.get_sample(series_ids[0], sample_index))
+    # 5.0121307373046875
+    ```
+=== "Lua"
+    ``` lua
+    series_ids = qtm.data.series.analog.get_series_ids()
+    print(series_ids)
+    -- {138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158}
+    
+    sample_ranges = qtm.data.series.analog.get_sample_ranges(series_ids[1])
+    print(sample_ranges)
+    -- {{end = 3999, start = 0}}
+    
+    sample_index = 100
+    print(qtm.data.series.analog.get_sample(series_ids[1], sample_index))
+    -- 5.0121307373047
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/analog/get_series_ids/
+    :: [138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158]
+    
+    set series_id=138
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/analog/get_sample_ranges/
+    :: [{"end":3999,"start":0}]
+    
+    set sample_index=100
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/analog/get_sample/
+    :: 5.0121307373046875
+    ```
 ## get_series_id
 
 Get a data series identifier by index.
