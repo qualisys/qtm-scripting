@@ -562,6 +562,111 @@
 
 <h1 id="qtmdataobjectskeleton">qtm.data.object.skeleton</h1>
 <p>Access skeletons.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Lua</label><label for="__tabbed_1_3">REST</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">qtm</span>
+
+<span class="n">skeleton_ids</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_skeleton_ids</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">skeleton_ids</span><span class="p">)</span>
+<span class="c1"># [8495, 8651]</span>
+
+<span class="n">skeleton_name</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_skeleton_name</span><span class="p">(</span><span class="n">skeleton_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">skeleton_name</span><span class="p">)</span>
+<span class="c1"># Eli</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">find_skeleton</span><span class="p">(</span><span class="n">skeleton_name</span><span class="p">))</span>
+<span class="c1"># 8495</span>
+
+<span class="n">segment_ids</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_segment_ids</span><span class="p">(</span><span class="n">skeleton_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">)</span>
+<span class="c1"># [8496, 8507, 8515, 8522, 8528, 8534, 8540, 8547, 8555, 8561, 8567, 8574, ... ...</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_segment_name</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="c1"># Hips</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_segment_markers</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="c1"># [{&#39;name&#39;: &#39;WaistRFront&#39;, &#39;position&#39;: [120.28204047346821, 202.23087588521537, ... ...</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_segment_degrees_of_freedom</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="c1"># {&#39;rotation_x&#39;: {&#39;constraint&#39;: None, &#39;couplings&#39;: [], &#39;goal&#39;: None}, &#39;rotation_y&#39;: ... ...</span>
+
+<span class="n">segment_child_ids</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_segment_child_ids</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">segment_child_ids</span><span class="p">)</span>
+<span class="c1"># [8507, 8597, 8624]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">skeleton</span><span class="o">.</span><span class="n">get_segment_name</span><span class="p">(</span><span class="n">segment_child_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="c1"># Spine</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">skeleton_ids</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_skeleton_ids</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">skeleton_ids</span><span class="p">)</span>
+<span class="c1">-- {8495, 8651}</span>
+
+<span class="n">skeleton_name</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_skeleton_name</span><span class="p">(</span><span class="n">skeleton_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">skeleton_name</span><span class="p">)</span>
+<span class="c1">-- Eli</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">find_skeleton</span><span class="p">(</span><span class="n">skeleton_name</span><span class="p">))</span>
+<span class="c1">-- 8495</span>
+
+<span class="n">segment_ids</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_segment_ids</span><span class="p">(</span><span class="n">skeleton_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">)</span>
+<span class="c1">-- {8496, 8507, 8515, 8522, 8528, 8534, 8540, 8547, 8555, 8561, 8567, 8574, ... ...</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_segment_name</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="c1">-- Hips</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_segment_markers</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="c1">-- {{weight = 1.0, name = &quot;WaistRFront&quot;, position = {120.28204047347, 202.23087588522, ... ...</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_segment_degrees_of_freedom</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="c1">-- {translation_x = {couplings = {}}, rotation_z = {couplings = {}}, rotation_x = ... ...</span>
+
+<span class="n">segment_child_ids</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_segment_child_ids</span><span class="p">(</span><span class="n">segment_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">segment_child_ids</span><span class="p">)</span>
+<span class="c1">-- {8507, 8597, 8624}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">skeleton</span><span class="p">.</span><span class="n">get_segment_name</span><span class="p">(</span><span class="n">segment_child_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="c1">-- Spine</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_skeleton_ids/
+<span class="p">:</span><span class="c1">: [8495,8651]</span>
+
+<span class="k">set</span> <span class="nv">skeleton_id</span><span class="p">=</span>8495
+curl --json <span class="s2">&quot;[</span><span class="nv">%skeleton_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_skeleton_name/
+<span class="p">:</span><span class="c1">: &quot;Eli&quot;</span>
+
+<span class="k">set</span> <span class="nv">skeleton_name</span><span class="p">=</span>\<span class="s2">&quot;Eli\&quot;</span>
+curl --json <span class="s2">&quot;[</span><span class="nv">%skeleton_name%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/find_skeleton/
+<span class="p">:</span><span class="c1">: 8495</span>
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%skeleton_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_segment_ids/
+<span class="p">:</span><span class="c1">: [8496,8507,8515,8522,8528,8534,8540,8547,8555,8561,8567,8574,8582,8589,8597,8603,8610,8617, ... ...</span>
+
+<span class="k">set</span> <span class="nv">segment_id</span><span class="p">=</span>8496
+curl --json <span class="s2">&quot;[</span><span class="nv">%segment_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_segment_name/
+<span class="p">:</span><span class="c1">: &quot;Hips&quot;</span>
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%segment_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_segment_markers/
+<span class="p">:</span><span class="c1">: [{&quot;name&quot;:&quot;WaistRFront&quot;,&quot;position&quot;:[120.28204047346821,202.23087588521537,61.546423666081523], ... ...</span>
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%segment_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_segment_degrees_of_freedom/
+<span class="p">:</span><span class="c1">: {&quot;rotation_x&quot;:{&quot;constraint&quot;:null,&quot;couplings&quot;:[],&quot;goal&quot;:null},&quot;rotation_y&quot;:{&quot;constraint&quot;:null, ... ...</span>
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%segment_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_segment_child_ids/
+<span class="p">:</span><span class="c1">: [8507,8597,8624]</span>
+
+<span class="k">set</span> <span class="nv">segment_child_id</span><span class="p">=</span>8507
+curl --json <span class="s2">&quot;[</span><span class="nv">%segment_child_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/skeleton/get_segment_name/
+<span class="p">:</span><span class="c1">: &quot;Spine&quot;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <h2 id="get_skeleton_id">get_skeleton_id</h2>
 <p>Get a skeleton identifier by index.
 <div class="highlight"><pre><span></span><code>qtm.data.object.skeleton.get_skeleton_id(index)

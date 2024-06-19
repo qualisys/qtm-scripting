@@ -436,6 +436,39 @@
 
 <h1 id="qtmsettingsprocessing_2d">qtm.settings.processing._2d</h1>
 <p>Access and modify 2d processing settings.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Lua</label><label for="__tabbed_1_3">REST</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">qtm</span>
+
+<span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">processing</span><span class="o">.</span><span class="n">_2d</span><span class="o">.</span><span class="n">set_use_max_marker_size</span><span class="p">(</span><span class="s2">&quot;project&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">processing</span><span class="o">.</span><span class="n">_2d</span><span class="o">.</span><span class="n">get_use_max_marker_size</span><span class="p">(</span><span class="s2">&quot;project&quot;</span><span class="p">))</span>
+<span class="c1"># False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">processing</span><span class="o">.</span><span class="n">_2d</span><span class="o">.</span><span class="n">get_max_marker_size</span><span class="p">(</span><span class="s2">&quot;measurement&quot;</span><span class="p">))</span>
+<span class="c1"># 4096</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">processing</span><span class="p">.</span><span class="n">_2d</span><span class="p">.</span><span class="n">set_use_max_marker_size</span><span class="p">(</span><span class="s2">&quot;project&quot;</span><span class="p">,</span> <span class="kc">false</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">processing</span><span class="p">.</span><span class="n">_2d</span><span class="p">.</span><span class="n">get_use_max_marker_size</span><span class="p">(</span><span class="s2">&quot;project&quot;</span><span class="p">))</span>
+<span class="c1">-- false</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">processing</span><span class="p">.</span><span class="n">_2d</span><span class="p">.</span><span class="n">get_max_marker_size</span><span class="p">(</span><span class="s2">&quot;measurement&quot;</span><span class="p">))</span>
+<span class="c1">-- 4096</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>curl --json <span class="s2">&quot;[\&quot;</span>project\<span class="s2">&quot;, false]&quot;</span> http://localhost:7979/api/scripting/qtm/settings/processing/_2d/set_use_max_marker_size
+curl --json <span class="s2">&quot;[\&quot;</span>project\<span class="s2">&quot;]&quot;</span> http://localhost:7979/api/scripting/qtm/settings/processing/_2d/get_use_max_marker_size
+<span class="p">:</span><span class="c1">: false</span>
+
+curl --json <span class="s2">&quot;[\&quot;</span>measurement\<span class="s2">&quot;]&quot;</span> http://localhost:7979/api/scripting/qtm/settings/processing/_2d/get_max_marker_size
+<span class="p">:</span><span class="c1">: 4096</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <h2 id="get_correct_center_points">get_correct_center_points</h2>
 <p>Get whether to correct center points.
 <div class="highlight"><pre><span></span><code>qtm.settings.processing._2d.get_correct_center_points(source)

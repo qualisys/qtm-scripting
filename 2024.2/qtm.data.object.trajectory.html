@@ -571,6 +571,175 @@
 
 <h1 id="qtmdataobjecttrajectory">qtm.data.object.trajectory</h1>
 <p>Access and modify trajectories.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Lua</label><label for="__tabbed_1_3">REST</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">qtm</span>
+
+<span class="c1"># - Create an empty labeled trajectory</span>
+<span class="n">trajectory_label</span> <span class="o">=</span> <span class="s2">&quot;trajectory&quot;</span>
+<span class="n">trajectory_id</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">trajectory_label</span><span class="p">)</span>
+
+<span class="c1"># - Get measurement range</span>
+<span class="n">measured_range</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">gui</span><span class="o">.</span><span class="n">timeline</span><span class="o">.</span><span class="n">get_measured_range</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measured_range</span><span class="p">)</span>
+<span class="c1"># {&#39;start&#39;: 0, &#39;end&#39;: 2999}</span>
+
+<span class="c1"># - Generate dummy 3d data</span>
+<span class="n">dummy_3d_data</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">x_value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">dummy_3d_data</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;position&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">x_value</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">],</span> <span class="s2">&quot;residual&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">})</span>
+
+<span class="c1"># - Add generated 3d data to the trajectory</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">_3d</span><span class="o">.</span><span class="n">set_samples</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">measured_range</span><span class="p">,</span> <span class="n">dummy_3d_data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">get_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1"># [{&#39;range&#39;: {&#39;start&#39;: 0, &#39;end&#39;: 2999}, &#39;type&#39;: &#39;virtual&#39;}]</span>
+
+<span class="c1"># - Split the trajectory in 3 parts</span>
+<span class="n">split_index_1</span> <span class="o">=</span> <span class="mi">1200</span>
+<span class="n">split_index_2</span> <span class="o">=</span> <span class="mi">1300</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">split_part</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">split_index_1</span><span class="p">)</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">split_part</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">split_index_2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">get_part_count</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1"># 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">get_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1"># [{&#39;range&#39;: {&#39;start&#39;: 0, &#39;end&#39;: 1200}, &#39;type&#39;: &#39;virtual&#39;}, {&#39;range&#39;: ... ...</span>
+
+<span class="c1"># - Remove the middle part of the trajectory</span>
+<span class="n">parts_to_remove_indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">delete_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">parts_to_remove_indices</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">get_part_count</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1"># 2</span>
+
+<span class="c1"># - Get the range of created gap</span>
+<span class="n">gap_ranges</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">series</span><span class="o">.</span><span class="n">_3d</span><span class="o">.</span><span class="n">get_gap_ranges</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gap_ranges</span><span class="p">)</span>
+<span class="c1"># [{&#39;start&#39;: 1201, &#39;end&#39;: 1300}]</span>
+
+<span class="c1"># - Use fill_trajectory to fill the created gap</span>
+<span class="n">fill_algorithm</span> <span class="o">=</span> <span class="s2">&quot;polynomial&quot;</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">fill_trajectory</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">fill_algorithm</span><span class="p">,</span> <span class="n">gap_ranges</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">get_part_count</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1"># 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">get_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1"># [ ... ... {&#39;range&#39;: {&#39;start&#39;: 1201, &#39;end&#39;: 1300}, &#39;type&#39;: &#39;filled&#39;}, ... ... ]</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1">-- - Create an empty labeled trajectory</span>
+<span class="n">trajectory_label</span> <span class="o">=</span> <span class="s2">&quot;trajectory&quot;</span>
+<span class="n">trajectory_id</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="n">trajectory_label</span><span class="p">)</span>
+
+<span class="c1">-- - Get measurement range</span>
+<span class="n">measured_range</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">gui</span><span class="p">.</span><span class="n">timeline</span><span class="p">.</span><span class="n">get_measured_range</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">measured_range</span><span class="p">)</span>
+<span class="c1">-- {start = 0, end = 2999}</span>
+
+<span class="c1">-- - Generate dummy 3d data</span>
+<span class="n">dummy_3d_data</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kr">for</span> <span class="n">x_value</span> <span class="o">=</span> <span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;start&quot;</span><span class="p">],</span> <span class="n">measured_range</span><span class="p">[</span><span class="s2">&quot;end&quot;</span><span class="p">]</span> <span class="kr">do</span>
+    <span class="nb">table.insert</span><span class="p">(</span><span class="n">dummy_3d_data</span><span class="p">,</span> <span class="p">{</span><span class="n">position</span> <span class="o">=</span> <span class="p">{</span><span class="n">x_value</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">},</span> <span class="n">residual</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">})</span>
+<span class="kr">end</span>
+
+<span class="c1">-- - Add generated 3d data to the trajectory</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">series</span><span class="p">.</span><span class="n">_3d</span><span class="p">.</span><span class="n">set_samples</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">measured_range</span><span class="p">,</span> <span class="n">dummy_3d_data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">get_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1">-- {{range = {start = 0, end = 2999}, type = &quot;virtual&quot;}}</span>
+
+<span class="c1">-- - Split the trajectory in 3 parts</span>
+<span class="n">split_index_1</span> <span class="o">=</span> <span class="mi">1200</span>
+<span class="n">split_index_2</span> <span class="o">=</span> <span class="mi">1300</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">split_part</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">split_index_1</span><span class="p">)</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">split_part</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">split_index_2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">get_part_count</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1">-- 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">get_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1">-- {{range = {start = 0, end = 1200}, type = &quot;virtual&quot;}, {range = ... ...</span>
+
+<span class="c1">-- - Remove the middle part of the trajectory</span>
+<span class="n">parts_to_remove_indices</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">}</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">delete_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">parts_to_remove_indices</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">get_part_count</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1">-- 2</span>
+
+<span class="c1">-- - Get the range of created gap</span>
+<span class="n">gap_ranges</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">series</span><span class="p">.</span><span class="n">_3d</span><span class="p">.</span><span class="n">get_gap_ranges</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">gap_ranges</span><span class="p">)</span>
+<span class="c1">-- {{end = 1300, start = 1201}}</span>
+
+<span class="c1">-- - Use fill_trajectory to fill the created gap</span>
+<span class="n">fill_algorithm</span> <span class="o">=</span> <span class="s2">&quot;polynomial&quot;</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">fill_trajectory</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">,</span> <span class="n">fill_algorithm</span><span class="p">,</span> <span class="n">gap_ranges</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">get_part_count</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1">-- 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">get_parts</span><span class="p">(</span><span class="n">trajectory_id</span><span class="p">))</span>
+<span class="c1">-- { ... ... {range = {start = 1201, end = 1300}, type = &quot;filled&quot;}, ... ...}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="c1">: - Create an empty labeled trajectory</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&quot;usebackq delims=&quot;</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span><span class="sb">`curl -s --json &quot;[\&quot;trajectory\&quot;]&quot; http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/`</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span>
+  <span class="k">set</span> <span class="s2">&quot;trajectory_id=</span><span class="se">%%</span><span class="s2">i&quot;</span>
+<span class="p">)</span>
+
+<span class="p">:</span><span class="c1">: - Get measurement range</span>
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/gui/timeline/get_measured_range/
+<span class="p">:</span><span class="c1">: {&quot;end&quot;:24,&quot;start&quot;:0}</span>
+
+<span class="k">set</span> <span class="nv">measured_range</span><span class="p">=</span>{\<span class="s2">&quot;start\&quot;</span>: 0, \<span class="s2">&quot;end\&quot;</span>: 24}
+
+<span class="p">:</span><span class="c1">: - Generate dummy 3d data</span>
+<span class="k">set</span> <span class="nv">dummy_3d_data</span><span class="p">=</span>[{\<span class="s2">&quot;position\&quot;</span>: [0, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [1, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [2, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [3, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [4, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [5, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [6, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [7, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [8, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [9, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [10, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [11, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [12, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [13, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [14, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [15, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [16, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [17, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [18, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [19, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [20, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [21, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [22, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [23, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}, {\<span class="s2">&quot;position\&quot;</span>: [24, 1000.0, 1000.0], \<span class="s2">&quot;residual\&quot;</span>: 0.0}]
+
+<span class="p">:</span><span class="c1">: - Add generated 3d data to the trajectory</span>
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">, </span><span class="nv">%measured_range%</span><span class="s2">, </span><span class="nv">%dummy_3d_data%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/series/_3d/set_samples/
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/get_parts/
+<span class="p">:</span><span class="c1">: [{&quot;range&quot;:{&quot;end&quot;:24,&quot;start&quot;:0},&quot;type&quot;:&quot;virtual&quot;}]</span>
+
+<span class="p">:</span><span class="c1">: - Split the trajectory in 3 parts</span>
+<span class="k">set</span> <span class="nv">split_index_1</span><span class="p">=</span>10
+<span class="k">set</span> <span class="nv">split_index_2</span><span class="p">=</span>15
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">, </span><span class="nv">%split_index_1%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/split_part/
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">, </span><span class="nv">%split_index_2%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/split_part/
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/get_part_count/
+<span class="p">:</span><span class="c1">: 3</span>
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/get_parts/
+<span class="p">:</span><span class="c1">: [{&quot;range&quot;:{&quot;end&quot;:10,&quot;start&quot;:0},&quot;type&quot;:&quot;virtual&quot;},{&quot;range&quot;:{&quot;end&quot;:15,&quot;start&quot;:11},&quot;type&quot;:&quot;virtual&quot;},{&quot;range&quot;:{&quot;end&quot;:24,&quot;start&quot;:16},&quot;type&quot;:&quot;virtual&quot;}]</span>
+
+<span class="p">:</span><span class="c1">: - Remove the middle part of the trajectory</span>
+<span class="k">set</span> <span class="nv">parts_to_remove_indices</span><span class="p">=</span>1
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">, [</span><span class="nv">%parts_to_remove_indices%</span><span class="s2">]]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/delete_parts/
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/get_part_count/
+<span class="p">:</span><span class="c1">: 2</span>
+
+<span class="p">:</span><span class="c1">: - Get the range of created gap</span>
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/series/_3d/get_gap_ranges/
+<span class="p">:</span><span class="c1">: [{&quot;end&quot;:15,&quot;start&quot;:11}]</span>
+
+<span class="k">set</span> <span class="nv">gap_range</span><span class="p">=</span>{\<span class="s2">&quot;end\&quot;</span>:15,\<span class="s2">&quot;start\&quot;</span>:11}
+
+<span class="p">:</span><span class="c1">: - Use fill_trajectory to fill the created gap</span>
+<span class="k">set</span> <span class="nv">fill_algorithm</span><span class="p">=</span>\<span class="s2">&quot;polynomial\&quot;</span>
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">, </span><span class="nv">%fill_algorithm%</span><span class="s2">, </span><span class="nv">%gap_range%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/fill_trajectory/
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/get_part_count/
+<span class="p">:</span><span class="c1">: 3</span>
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/get_parts/
+<span class="p">:</span><span class="c1">: [ ... ... ,{&quot;range&quot;:{&quot;end&quot;:15,&quot;start&quot;:11},&quot;type&quot;:&quot;filled&quot;}, ... ...]</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <h2 id="add_trajectory">add_trajectory</h2>
 <p>Add a trajectory.
 <div class="highlight"><pre><span></span><code>qtm.data.object.trajectory.add_trajectory(label?)
