@@ -1,5 +1,6 @@
 # QTM Scripting
-Scripting examples and tools for QTM.  Lua and Python are supported in the QTM Scripting Interface.  But for now these examples are all in Python.
+Example script created in the "Getting Started with Scripting in QTM: A Crash Course" video: https://youtu.be/m0Ff6Jkdf-U
+To run this, open QTM and navigate to "Project Options" --> "Miscellaneous" --> "Scripting", click on "Add", and then add this script
 ## Installation
 1. Download the repo to your machine.
 2. In QTM Project Options->Miscellaneous->Scripting:
