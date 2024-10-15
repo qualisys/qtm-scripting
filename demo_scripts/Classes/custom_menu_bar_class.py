@@ -35,8 +35,7 @@ class custom_menu_bar:
         self._menu_id = 0
         self._menu_index = None
         # Dummy command, used to reset hotkeys between menus
-        qtm.gui.add_command("dummy_func")
-        qtm.gui.set_command_execute_function("dummy_func", None)
+        add_command("dummy_func", None)
 
     def _update_menu_index(self):
         if (self._menu_index is None):
