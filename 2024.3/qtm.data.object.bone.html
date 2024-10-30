@@ -436,6 +436,93 @@
 
 <h1 id="qtmdataobjectbone">qtm.data.object.bone</h1>
 <p>Access and modify bones.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Lua</label><label for="__tabbed_1_3">REST</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">qtm</span>
+
+<span class="c1"># - Create two dummy trajectories</span>
+<span class="n">trajectory_id_1</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="s2">&quot;trajectory 1&quot;</span><span class="p">)</span>
+<span class="n">trajectory_id_2</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="s2">&quot;trajectory 2&quot;</span><span class="p">)</span>
+
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">fill_trajectory</span><span class="p">(</span><span class="n">trajectory_id_1</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1000.0</span><span class="p">,</span> <span class="mf">0000.0</span><span class="p">,</span> <span class="mf">0000.0</span><span class="p">]})</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">fill_trajectory</span><span class="p">(</span><span class="n">trajectory_id_2</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">0000.0</span><span class="p">]})</span>
+
+<span class="c1"># - Create a bone between the trajectories</span>
+<span class="n">bone_id</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">bone</span><span class="o">.</span><span class="n">add_bone</span><span class="p">(</span><span class="n">trajectory_id_1</span><span class="p">,</span> <span class="n">trajectory_id_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">bone</span><span class="o">.</span><span class="n">get_bone_count</span><span class="p">())</span>
+<span class="c1"># 1</span>
+
+<span class="c1"># - Change the color of the bone</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">qtm</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">rgb</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">bone</span><span class="o">.</span><span class="n">set_bone_color</span><span class="p">(</span><span class="n">bone_id</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+<span class="c1"># - Delete the bone</span>
+<span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">bone</span><span class="o">.</span><span class="n">delete_bone</span><span class="p">(</span><span class="n">bone_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">bone</span><span class="o">.</span><span class="n">get_bone_count</span><span class="p">())</span>
+<span class="c1"># 0</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="c1">-- - Create two dummy trajectories</span>
+<span class="n">trajectory_id_1</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="s2">&quot;trajectory 1&quot;</span><span class="p">)</span>
+<span class="n">trajectory_id_2</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">add_trajectory</span><span class="p">(</span><span class="s2">&quot;trajectory 2&quot;</span><span class="p">)</span>
+
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">fill_trajectory</span><span class="p">(</span><span class="n">trajectory_id_1</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="p">{</span><span class="n">offset</span><span class="o">=</span><span class="p">{</span><span class="mf">1000.0</span><span class="p">,</span> <span class="mf">0000.0</span><span class="p">,</span> <span class="mf">0000.0</span><span class="p">}})</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">trajectory</span><span class="p">.</span><span class="n">fill_trajectory</span><span class="p">(</span><span class="n">trajectory_id_2</span><span class="p">,</span> <span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">,</span> <span class="p">{</span><span class="n">offset</span><span class="o">=</span><span class="p">{</span><span class="mf">0000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">0000.0</span><span class="p">}})</span>
+
+<span class="c1">-- - Create a bone between the trajectories</span>
+<span class="n">bone_id</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">bone</span><span class="p">.</span><span class="n">add_bone</span><span class="p">(</span><span class="n">trajectory_id_1</span><span class="p">,</span> <span class="n">trajectory_id_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">bone</span><span class="p">.</span><span class="n">get_bone_count</span><span class="p">())</span>
+<span class="c1">-- 1</span>
+
+<span class="c1">-- - Change the color of the bone</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">qtm</span><span class="p">.</span><span class="n">utilities</span><span class="p">.</span><span class="n">color</span><span class="p">.</span><span class="n">rgb</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">bone</span><span class="p">.</span><span class="n">set_bone_color</span><span class="p">(</span><span class="n">bone_id</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
+
+<span class="c1">-- - Delete the bone</span>
+<span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">bone</span><span class="p">.</span><span class="n">delete_bone</span><span class="p">(</span><span class="n">bone_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">bone</span><span class="p">.</span><span class="n">get_bone_count</span><span class="p">())</span>
+<span class="c1">-- 0</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">:</span><span class="c1">: - Create two dummy trajectories</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&quot;usebackq delims=&quot;</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span><span class="sb">`curl -s --json &quot;[\&quot;trajectory 1\&quot;]&quot; http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/`</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span> 
+  <span class="k">set</span> <span class="s2">&quot;trajectory_id_1=</span><span class="se">%%</span><span class="s2">i&quot;</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&quot;usebackq delims=&quot;</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span><span class="sb">`curl -s --json &quot;[\&quot;trajectory 2\&quot;]&quot; http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/`</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span>
+  <span class="k">set</span> <span class="s2">&quot;trajectory_id_2=</span><span class="se">%%</span><span class="s2">i&quot;</span>
+<span class="p">)</span>
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id_1%</span><span class="s2">, \&quot;</span>static\<span class="s2">&quot;, null, {\&quot;</span>offset\<span class="s2">&quot;: [1000.0, 0, 0]}]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/fill_trajectory/
+curl --json <span class="s2">&quot;[</span><span class="nv">%trajectory_id_2%</span><span class="s2">, \&quot;</span>static\<span class="s2">&quot;, null, {\&quot;</span>offset\<span class="s2">&quot;: [0, 1000.0, 0]}]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/trajectory/fill_trajectory/
+
+<span class="p">:</span><span class="c1">: - Create a bone between the trajectories</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&quot;usebackq delims=&quot;</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span><span class="sb">`curl -s --json &quot;[</span><span class="nv">%trajectory_id_1%</span><span class="sb">, </span><span class="nv">%trajectory_id_2%</span><span class="sb">]&quot; http://localhost:7979/api/scripting/qtm/data/object/bone/add_bone/`</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span> 
+  <span class="k">set</span> <span class="s2">&quot;bone_id=</span><span class="se">%%</span><span class="s2">i&quot;</span>
+<span class="p">)</span>
+
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/bone/get_bone_count/
+<span class="p">:</span><span class="c1">: 1</span>
+
+<span class="p">:</span><span class="c1">: - Change the color of the bone</span>
+<span class="k">for</span> <span class="k">/f</span> <span class="s2">&quot;usebackq delims=&quot;</span> <span class="se">%%</span>i <span class="k">in</span> <span class="p">(</span><span class="sb">`curl -s --json &quot;[1.0, 0.0, 1.0]&quot; http://localhost:7979/api/scripting/qtm/utilities/color/rgb/`</span><span class="p">)</span> <span class="k">do</span> <span class="p">(</span> 
+  <span class="k">set</span> <span class="s2">&quot;color=</span><span class="se">%%</span><span class="s2">i&quot;</span>
+<span class="p">)</span>
+
+curl --json <span class="s2">&quot;[</span><span class="nv">%bone_id%</span><span class="s2">, </span><span class="nv">%color%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/bone/set_bone_color/
+
+<span class="p">:</span><span class="c1">: - Delete the bone</span>
+curl --json <span class="s2">&quot;[</span><span class="nv">%bone_id%</span><span class="s2">]&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/bone/delete_bone/
+
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/data/object/bone/get_bone_count/
+<span class="p">:</span><span class="c1">: 0</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <h2 id="add_bone">add_bone</h2>
 <p>Add a bone.
 <div class="highlight"><pre><span></span><code>qtm.data.object.bone.add_bone(trajectory_id_1, trajectory_id_2, color?)

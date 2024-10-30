@@ -544,6 +544,57 @@
 
 <h1 id="qtmsettingseuler">qtm.settings.euler</h1>
 <p>Access and modify euler angle settings.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Python</label><label for="__tabbed_1_2">Lua</label><label for="__tabbed_1_3">REST</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">qtm</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">euler</span><span class="o">.</span><span class="n">get_first_axis_name</span><span class="p">())</span>
+<span class="c1"># Roll</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">euler</span><span class="o">.</span><span class="n">get_first_angle_range</span><span class="p">())</span>
+<span class="c1"># {&#39;start&#39;: -180, &#39;end&#39;: 180}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">euler</span><span class="o">.</span><span class="n">get_second_axis_name</span><span class="p">())</span>
+<span class="c1"># Pitch</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">euler</span><span class="o">.</span><span class="n">get_third_axis_name</span><span class="p">())</span>
+<span class="c1"># Yaw</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="o">.</span><span class="n">settings</span><span class="o">.</span><span class="n">euler</span><span class="o">.</span><span class="n">get_third_angle_range</span><span class="p">())</span>
+<span class="c1"># {&#39;start&#39;: -180, &#39;end&#39;: 180}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">euler</span><span class="p">.</span><span class="n">get_first_axis_name</span><span class="p">())</span>
+<span class="c1">-- Roll</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">euler</span><span class="p">.</span><span class="n">get_first_angle_range</span><span class="p">())</span>
+<span class="c1">-- {start = -180, end = 180}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">euler</span><span class="p">.</span><span class="n">get_second_axis_name</span><span class="p">())</span>
+<span class="c1">-- Pitch</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">euler</span><span class="p">.</span><span class="n">get_third_axis_name</span><span class="p">())</span>
+<span class="c1">-- Yaw</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">qtm</span><span class="p">.</span><span class="n">settings</span><span class="p">.</span><span class="n">euler</span><span class="p">.</span><span class="n">get_third_angle_range</span><span class="p">())</span>
+<span class="c1">-- {start = -180, end = 180}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/settings/euler/get_first_axis_name/
+<span class="p">:</span><span class="c1">: &quot;Roll&quot;</span>
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/settings/euler/get_first_angle_range/
+<span class="p">:</span><span class="c1">: {&quot;end&quot;:180,&quot;start&quot;:-180}</span>
+
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/settings/euler/get_second_axis_name/
+<span class="p">:</span><span class="c1">: &quot;Pitch&quot;</span>
+
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/settings/euler/get_third_axis_name/
+<span class="p">:</span><span class="c1">: &quot;Yaw&quot;</span>
+curl --json <span class="s2">&quot;&quot;</span> http://localhost:7979/api/scripting/qtm/settings/euler/get_third_angle_range/
+<span class="p">:</span><span class="c1">: {&quot;end&quot;:180,&quot;start&quot;:-180}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <h2 id="get_convention">get_convention</h2>
 <p>Get the euler angle convention.
 <div class="highlight"><pre><span></span><code>qtm.settings.euler.get_convention()
