@@ -2,56 +2,6 @@
 
 Access and modify aim processing settings.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    print(qtm.settings.processing.aim.get_model_count("project"))
-    # 1
-    
-    model_index = 0
-    model_path = qtm.settings.processing.aim.get_model_path("project", model_index)
-    print(model_path)
-    # C:\Users\<username>\Documents\Project\AIM models\Animation.qam
-    
-    print(qtm.settings.processing.aim.get_model_is_applied("project", model_path))
-    # True
-    
-    print(qtm.settings.processing.aim.get_relative_bone_length_tolerance("project"))
-    # 75.0
-    ```
-=== "Lua"
-    ``` lua
-    print(qtm.settings.processing.aim.get_model_count("project"))
-    -- 1
-    
-    model_index = 0
-    model_path = qtm.settings.processing.aim.get_model_path("project", model_index)
-    print(model_path)
-    -- C:\Users\<username>\Documents\Project\AIM models\Animation.qam
-    
-    print(qtm.settings.processing.aim.get_model_is_applied("project", model_path))
-    -- true
-    
-    print(qtm.settings.processing.aim.get_relative_bone_length_tolerance("project"))
-    -- 75.0
-    ```
-=== "REST"
-    ``` bat
-    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/aim/get_model_count
-    :: 1
-    
-    set model_index=0
-    curl --json "[\"project\", %model_index%]" http://localhost:7979/api/scripting/qtm/settings/processing/aim/get_model_path
-    :: "C:\\Users\\<username>\\Documents\\Project\\AIM models\\Animation.qam"
-    
-    set model_path=\"C:\\Users\\^<username^>\\Documents\\Project\\AIM models\\Animation.qam\"
-    curl --json "[\"project\", %model_path%]" http://localhost:7979/api/scripting/qtm/settings/processing/aim/get_model_is_applied
-    :: true
-    
-    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/aim/get_relative_bone_length_tolerance
-    :: 75
-    ```
 ## add_model
 
 Add an aim model.

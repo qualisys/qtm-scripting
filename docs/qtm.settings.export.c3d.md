@@ -2,56 +2,6 @@
 
 Access and modify c3d export settings.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    qtm.settings.export.c3d.set_exclude_empty(True)
-    print(qtm.settings.export.c3d.get_exclude_empty())
-    # True
-    
-    qtm.settings.export.c3d.set_exclude_partially_labeled(False)
-    print(qtm.settings.export.c3d.get_exclude_partially_labeled())
-    # False
-    
-    zero_baseline_range = {"start": 0, "end": 9}
-    qtm.settings.export.c3d.set_use_zero_force_baseline(True)
-    qtm.settings.export.c3d.set_zero_force_baseline_range(zero_baseline_range)
-    print(qtm.settings.export.c3d.get_zero_force_baseline_range())
-    # {'start': 0, 'end': 9}
-    ```
-=== "Lua"
-    ``` lua
-    qtm.settings.export.c3d.set_exclude_empty(true)
-    print(qtm.settings.export.c3d.get_exclude_empty())
-    -- true
-    
-    qtm.settings.export.c3d.set_exclude_partially_labeled(false)
-    print(qtm.settings.export.c3d.get_exclude_partially_labeled())
-    -- false
-    
-    zero_baseline_range = {["start"] = 0, ["end"] = 9}
-    qtm.settings.export.c3d.set_use_zero_force_baseline(true)
-    qtm.settings.export.c3d.set_zero_force_baseline_range(zero_baseline_range)
-    print(qtm.settings.export.c3d.get_zero_force_baseline_range())
-    -- {start = 0, end = 9}
-    ```
-=== "REST"
-    ``` bat
-    curl --json "[true]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_exclude_empty/
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_exclude_empty/
-    :: true
-    
-    curl --json "[false]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_exclude_partially_labeled/
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_exclude_partially_labeled/
-    :: false
-    
-    set zero_baseline_range={\"start\": 0, \"end\": 9}
-    curl --json "[true]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_use_zero_force_baseline/
-    curl --json "[%zero_baseline_range%]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_zero_force_baseline_range/
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_zero_force_baseline_range/
-    :: {"end":9,"start":0}
-    ```
 ## get_exclude_unidentified
 
 Get whether to exclude unidentified trajectories.

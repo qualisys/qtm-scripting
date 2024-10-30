@@ -2,38 +2,6 @@
 
 Access and modify tsv export settings.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    qtm.settings.export.tsv.set_export_3d(True)
-    print(qtm.settings.export.tsv.get_export_3d())
-    # True
-    
-    qtm.settings.export.tsv.set_export_6d(False)
-    print(qtm.settings.export.tsv.get_export_6d())
-    # False
-    ```
-=== "Lua"
-    ``` lua
-    qtm.settings.export.tsv.set_export_3d(true)
-    print(qtm.settings.export.tsv.get_export_3d())
-    -- true
-    
-    qtm.settings.export.tsv.set_export_6d(false)
-    print(qtm.settings.export.tsv.get_export_6d())
-    -- false
-    ```
-=== "REST"
-    ``` bat
-    curl --json "[true]" http://localhost:7979/api/scripting/qtm/settings/export/tsv/set_export_3d/
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/tsv/get_export_3d/
-    :: true
-    
-    curl --json "[false]" http://localhost:7979/api/scripting/qtm/settings/export/tsv/set_export_6d/
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/tsv/get_export_6d/
-    :: false
-    ```
 ## get_export_2d
 
 Get whether to export 2d data.
@@ -499,6 +467,37 @@ This will override the exported range.
 
 `enable` `bool`<br/>
 True if partially labeled frames should be excluded, otherwise false.
+
+
+
+---
+
+## get_skeleton_reference_frame
+
+Get the skeleton reference frame.
+```
+qtm.settings.export.tsv.get_skeleton_reference_frame()
+```
+
+**Returns**
+
+`"global"|"local"` 
+
+---
+
+## set_skeleton_reference_frame
+
+Set the skeleton reference frame.
+```
+qtm.settings.export.tsv.set_skeleton_reference_frame(frame)
+```
+
+This method requires skeletons to be exported (see 'set_export_skeleton').
+
+**Parameters**
+
+`frame` `"global"|"local"`<br/>
+The skeleton reference frame.
 
 
 

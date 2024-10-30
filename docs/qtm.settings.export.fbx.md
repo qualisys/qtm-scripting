@@ -2,40 +2,6 @@
 
 Access and modify fbx export settings.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    file_format = "binary"
-    qtm.settings.export.fbx.set_file_format(file_format)
-    print(qtm.settings.export.fbx.get_file_format())
-    # binary
-    
-    qtm.settings.export.fbx.set_export_camera(True)
-    print(qtm.settings.export.fbx.get_export_camera())
-    # True
-    ```
-=== "Lua"
-    ``` lua
-    file_format = "binary"
-    qtm.settings.export.fbx.set_file_format(file_format)
-    print(qtm.settings.export.fbx.get_file_format())
-    -- binary
-    
-    qtm.settings.export.fbx.set_export_camera(true)
-    print(qtm.settings.export.fbx.get_export_camera())
-    -- true
-    ```
-=== "REST"
-    ``` bat
-    curl --json "[\"binary\"]" http://localhost:7979/api/scripting/qtm/settings/export/fbx/set_file_format/
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/fbx/get_file_format/
-    :: "binary"
-    
-    curl --json "[true]" http://localhost:7979/api/scripting/qtm/settings/export/fbx/set_export_camera/
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/fbx/get_export_camera/
-    :: true
-    ```
 ## get_file_format
 
 Get the file format.

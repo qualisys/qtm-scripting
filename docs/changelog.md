@@ -2,6 +2,10 @@
 
 | **Version** | **Changes** |
 | ------ | ------ |
+| 2024.3 | Added qtm.settings.export.mat.get_skeleton_reference_frame method. | 
+|  | Added qtm.settings.export.mat.set_skeleton_reference_frame method. | 
+|  | Added qtm.settings.export.tsv.get_skeleton_reference_frame method. | 
+|  | Added qtm.settings.export.tsv.set_skeleton_reference_frame method. | 
 | 2024.2 | Added qtm.data.object.trajectory.get_is_discarded method. | 
 |  | Added qtm.data.object.trajectory.set_is_discarded method. | 
 | 2024.1 | qtm.data.series.*.get_sample_range method now returns null if there are no samples. | 

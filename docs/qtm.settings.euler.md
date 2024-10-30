@@ -2,53 +2,6 @@
 
 Access and modify euler angle settings.
 
-=== "Python"
-    ``` py
-    import qtm
-    
-    print(qtm.settings.euler.get_first_axis_name())
-    # Roll
-    print(qtm.settings.euler.get_first_angle_range())
-    # {'start': -180, 'end': 180}
-    
-    print(qtm.settings.euler.get_second_axis_name())
-    # Pitch
-    
-    print(qtm.settings.euler.get_third_axis_name())
-    # Yaw
-    print(qtm.settings.euler.get_third_angle_range())
-    # {'start': -180, 'end': 180}
-    ```
-=== "Lua"
-    ``` lua
-    print(qtm.settings.euler.get_first_axis_name())
-    -- Roll
-    print(qtm.settings.euler.get_first_angle_range())
-    -- {start = -180, end = 180}
-    
-    print(qtm.settings.euler.get_second_axis_name())
-    -- Pitch
-    
-    print(qtm.settings.euler.get_third_axis_name())
-    -- Yaw
-    print(qtm.settings.euler.get_third_angle_range())
-    -- {start = -180, end = 180}
-    ```
-=== "REST"
-    ``` bat
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/euler/get_first_axis_name/
-    :: "Roll"
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/euler/get_first_angle_range/
-    :: {"end":180,"start":-180}
-    
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/euler/get_second_axis_name/
-    :: "Pitch"
-    
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/euler/get_third_axis_name/
-    :: "Yaw"
-    curl --json "" http://localhost:7979/api/scripting/qtm/settings/euler/get_third_angle_range/
-    :: {"end":180,"start":-180}
-    ```
 ## get_convention
 
 Get the euler angle convention.
