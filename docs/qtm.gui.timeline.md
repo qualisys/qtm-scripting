@@ -2,6 +2,43 @@
 
 Interface to the measurement timeline.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    measured_range = qtm.gui.timeline.get_measured_range()
+    print(measured_range)
+    # {'start': 0, 'end': 322}
+    
+    range = {"start": int(measured_range["end"]*0.10), "end": int(measured_range["end"]*0.90)}
+    qtm.gui.timeline.set_selected_range(range)
+    
+    print(qtm.gui.timeline.get_selected_range())
+    # {'start': 32, 'end': 289}
+    ```
+=== "Lua"
+    ``` lua
+    measured_range = qtm.gui.timeline.get_measured_range()
+    print(measured_range)
+    -- {start: 0, end: 322}
+    
+    range = {["start"] = math.floor(measured_range["end"]*0.10), ["end"] = math.floor(measured_range["end"]*0.90)}
+    qtm.gui.timeline.set_selected_range(range)
+    
+    print(qtm.gui.timeline.get_selected_range())
+    -- {start: 32, end: 289}
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/gui/timeline/get_measured_range/
+    :: {"end":322,"start":0}
+    
+    set range={\"start\": 32, \"end\": 289}
+    curl --json "[%range%]" http://localhost:7979/api/scripting/qtm/gui/timeline/set_selected_range/
+    
+    curl --json "" http://localhost:7979/api/scripting/qtm/gui/timeline/get_selected_range/
+    :: {"end":289,"start":32}
+    ```
 ## get_frequency
 
 Get the frequency.

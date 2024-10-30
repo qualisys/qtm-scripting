@@ -2,6 +2,49 @@
 
 Access and modify 3d data series.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    series_ids = qtm.data.series._3d.get_series_ids()
+    print(series_ids)
+    # [106038, 106043, 106047, 106051, 106053, 106055, 106057, 106059, ... ...
+    
+    sample_ranges = qtm.data.series._3d.get_sample_ranges(series_ids[0])
+    print(sample_ranges)
+    # [{'start': 0, 'end': 322}]
+    
+    sample_index = 100
+    print(qtm.data.series._3d.get_sample(series_ids[0], sample_index))
+    # {'position': [-5421.754065180638, -1070.7176908513354, 120.57418268723374], 'residual': 0.9671389652802037}
+    ```
+=== "Lua"
+    ``` lua
+    series_ids = qtm.data.series._3d.get_series_ids()
+    print(series_ids)
+    -- {106038, 106043, 106047, 106051, 106053, 106055, 106057, 106059, ... ...
+    
+    sample_ranges = qtm.data.series._3d.get_sample_ranges(series_ids[1])
+    print(sample_ranges)
+    -- {{end = 322, start = 0}}
+    
+    sample_index = 100
+    print(qtm.data.series._3d.get_sample(series_ids[1], sample_index))
+    -- {residual = 0.9671389652802, position = {-5421.7540651806, -1070.7176908513, 120.57418268723}}
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/_3d/get_series_ids/
+    :: [106038,106043,106047,106051,106053,106055,106057,106059, ... ...
+    
+    set series_id=106038
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/_3d/get_sample_ranges/
+    :: [{"end":322,"start":0}]
+    
+    set sample_index=100
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/_3d/get_sample/
+    :: {"position":[-5421.7540651806376,-1070.7176908513354,120.57418268723374],"residual":0.96713896528020371}
+    ```
 ## get_series_id
 
 Get a data series identifier by index.

@@ -2,6 +2,49 @@
 
 Access and modify 6dof data series.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    series_ids = qtm.data.series._6d.get_series_ids()
+    print(series_ids)
+    # [106751, 106752, 106753, 106754]
+    
+    sample_ranges = qtm.data.series._6d.get_sample_ranges(series_ids[0])
+    print(sample_ranges)
+    # [{'start': 0, 'end': 3380}]
+    
+    sample_index = 100
+    print(qtm.data.series._6d.get_sample(series_ids[0], sample_index))
+    # {'transform': [[-0.6398715972900391, 0.7683062553405762, 0.016427502036094666, 475.34625733104804], [-0.7682338953018188, -0.6400619745254517, 0.0117202028632164, -1057.2460105715884], [0.019519325345754623, -0.005120739806443453, 0.9997963905334473, 66.71982557748521], [0.0, 0.0, 0.0, 1.0]], 'residual': 0.6208022236824036}
+    ```
+=== "Lua"
+    ``` lua
+    series_ids = qtm.data.series._6d.get_series_ids()
+    print(series_ids)
+    -- {106751, 106752, 106753, 106754}
+    
+    sample_ranges = qtm.data.series._6d.get_sample_ranges(series_ids[1])
+    print(sample_ranges)
+    -- {{start = 0, end = 3380}}
+    
+    sample_index = 100
+    print(qtm.data.series._6d.get_sample(series_ids[1], sample_index))
+    -- {transform = {{-0.63987159729004, 0.76830625534058, 0.016427502036095, 475.34625733105}, {-0.76823389530182, -0.64006197452545, 0.011720202863216, -1057.2460105716}, {0.019519325345755, -0.0051207398064435, 0.99979639053345, 66.719825577485}, {0.0, 0.0, 0.0, 1.0}}, residual = 0.6208022236824}
+    ```
+=== "REST"
+    ``` bat
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/series/_6d/get_series_ids/
+    :: [106751,106752,106753,106754]
+    
+    set series_id=106751
+    curl --json "[%series_id%]" http://localhost:7979/api/scripting/qtm/data/series/_6d/get_sample_ranges/
+    :: [{"end":3380,"start":0}]
+    
+    set sample_index=100
+    curl --json "[%series_id%, %sample_index%]" http://localhost:7979/api/scripting/qtm/data/series/_6d/get_sample/
+    :: {"residual":0.62080222368240356,"transform":[[-0.63987159729003906,0.76830625534057617,0.016427502036094666,475.34625733104804],[-0.76823389530181885,-0.64006197452545166,0.0117202028632164,-1057.2460105715884],[0.019519325345754623,-0.0051207398064434528,0.99979639053344727,66.71982557748521],[0,0,0,1]]}
+    ```
 ## get_series_id
 
 Get a data series identifier by index.

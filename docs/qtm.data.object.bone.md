@@ -2,6 +2,89 @@
 
 Access and modify bones.
 
+=== "Python"
+    ``` py
+    import qtm
+    
+    # - Create two dummy trajectories
+    trajectory_id_1 = qtm.data.object.trajectory.add_trajectory("trajectory 1")
+    trajectory_id_2 = qtm.data.object.trajectory.add_trajectory("trajectory 2")
+    
+    qtm.data.object.trajectory.fill_trajectory(trajectory_id_1, "static", None, {"offset": [1000.0, 0000.0, 0000.0]})
+    qtm.data.object.trajectory.fill_trajectory(trajectory_id_2, "static", None, {"offset": [0000.0, 1000.0, 0000.0]})
+    
+    # - Create a bone between the trajectories
+    bone_id = qtm.data.object.bone.add_bone(trajectory_id_1, trajectory_id_2)
+    print(qtm.data.object.bone.get_bone_count())
+    # 1
+    
+    # - Change the color of the bone
+    color = qtm.utilities.color.rgb(1.0, 0.0, 1.0)
+    qtm.data.object.bone.set_bone_color(bone_id, color)
+    
+    # - Delete the bone
+    qtm.data.object.bone.delete_bone(bone_id)
+    print(qtm.data.object.bone.get_bone_count())
+    # 0
+    ```
+=== "Lua"
+    ``` lua
+    -- - Create two dummy trajectories
+    trajectory_id_1 = qtm.data.object.trajectory.add_trajectory("trajectory 1")
+    trajectory_id_2 = qtm.data.object.trajectory.add_trajectory("trajectory 2")
+    
+    qtm.data.object.trajectory.fill_trajectory(trajectory_id_1, "static", nil, {offset={1000.0, 0000.0, 0000.0}})
+    qtm.data.object.trajectory.fill_trajectory(trajectory_id_2, "static", nil, {offset={0000.0, 1000.0, 0000.0}})
+    
+    -- - Create a bone between the trajectories
+    bone_id = qtm.data.object.bone.add_bone(trajectory_id_1, trajectory_id_2)
+    print(qtm.data.object.bone.get_bone_count())
+    -- 1
+    
+    -- - Change the color of the bone
+    color = qtm.utilities.color.rgb(1.0, 0.0, 1.0)
+    qtm.data.object.bone.set_bone_color(bone_id, color)
+    
+    -- - Delete the bone
+    qtm.data.object.bone.delete_bone(bone_id)
+    print(qtm.data.object.bone.get_bone_count())
+    -- 0
+    ```
+=== "REST"
+    ``` bat
+    :: - Create two dummy trajectories
+    for /f "usebackq delims=" %%i in (`curl -s --json "[\"trajectory 1\"]" http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/`) do ( 
+      set "trajectory_id_1=%%i"
+    )
+    
+    for /f "usebackq delims=" %%i in (`curl -s --json "[\"trajectory 2\"]" http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/`) do (
+      set "trajectory_id_2=%%i"
+    )
+    
+    curl --json "[%trajectory_id_1%, \"static\", null, {\"offset\": [1000.0, 0, 0]}]" http://localhost:7979/api/scripting/qtm/data/object/trajectory/fill_trajectory/
+    curl --json "[%trajectory_id_2%, \"static\", null, {\"offset\": [0, 1000.0, 0]}]" http://localhost:7979/api/scripting/qtm/data/object/trajectory/fill_trajectory/
+    
+    :: - Create a bone between the trajectories
+    for /f "usebackq delims=" %%i in (`curl -s --json "[%trajectory_id_1%, %trajectory_id_2%]" http://localhost:7979/api/scripting/qtm/data/object/bone/add_bone/`) do ( 
+      set "bone_id=%%i"
+    )
+    
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/object/bone/get_bone_count/
+    :: 1
+    
+    :: - Change the color of the bone
+    for /f "usebackq delims=" %%i in (`curl -s --json "[1.0, 0.0, 1.0]" http://localhost:7979/api/scripting/qtm/utilities/color/rgb/`) do ( 
+      set "color=%%i"
+    )
+    
+    curl --json "[%bone_id%, %color%]" http://localhost:7979/api/scripting/qtm/data/object/bone/set_bone_color/
+    
+    :: - Delete the bone
+    curl --json "[%bone_id%]" http://localhost:7979/api/scripting/qtm/data/object/bone/delete_bone/
+    
+    curl --json "" http://localhost:7979/api/scripting/qtm/data/object/bone/get_bone_count/
+    :: 0
+    ```
 ## add_bone
 
 Add a bone.
