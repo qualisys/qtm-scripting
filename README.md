@@ -1,4 +1,5 @@
 # QTM Scripting
+Crash Course Video: https://youtu.be/m0Ff6Jkdf-U
 Scripting examples and tools for QTM.  Lua and Python are supported in the QTM Scripting Interface.  But for now these examples are all in Python.
 ## Installation
 1. Download the repo to your machine.
