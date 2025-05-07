@@ -2,6 +2,11 @@
 
 | **Version** | **Changes** |
 | ------ | ------ |
+| 2025.1 | Added qtm.gui.dialog module. | 
+|  | Added qtm.data.object.analog module. | 
+|  | Added qtm.file module. | 
+|  | Added qtm.settings.export.trc module. | 
+|  | Added qtm.settings.export.sto module. | 
 | 2024.3 | Added qtm.settings.export.mat.get_skeleton_reference_frame method. | 
 |  | Added qtm.settings.export.mat.set_skeleton_reference_frame method. | 
 |  | Added qtm.settings.export.tsv.get_skeleton_reference_frame method. | 

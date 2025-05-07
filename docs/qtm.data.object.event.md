@@ -37,7 +37,7 @@ Events consist of a label, a time (in seconds) and an optional color (in 0xbbggr
     -- 1
     
     print(qtm.data.object.event.get_events())
-    -- [{'label': 'New Event', 'time': 0.0, 'color': 255}]
+    -- {{label = "New Event", time = 0.0, color = 255}}
     
     qtm.data.object.event.clear_events()
     

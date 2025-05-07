@@ -1,6 +1,7 @@
 # Modules
 
  * [qtm](qtm.md) - Interface to the qtm application.
+ * [qtm.data.object.analog](qtm.data.object.analog.md) - Access and modify analog boards and channels.
  * [qtm.data.object.bone](qtm.data.object.bone.md) - Access and modify bones.
  * [qtm.data.object.event](qtm.data.object.event.md) - Access and modify events.
  * [qtm.data.object.skeleton](qtm.data.object.skeleton.md) - Access skeletons.
@@ -15,8 +16,10 @@
  * [qtm.data.series.time.irig](qtm.data.series.time.irig.md) - Access and modify irig (inter-range instrumentation group) data series.
  * [qtm.data.series.time.ptp](qtm.data.series.time.ptp.md) - Access and modify ptp (precision time protocol) data series.
  * [qtm.data.series.time.smpte](qtm.data.series.time.smpte.md) - Access and modify smpte (society of motion picture and television engineers) data series.
+ * [qtm.file](qtm.file.md) - Various methods related to measurement files.
  * [qtm.gui](qtm.gui.md) - Control and customize the graphical user interface.
  * [qtm.gui._3d](qtm.gui._3d.md) - Interface to the measurement 3d view with methods for custom drawing.
+ * [qtm.gui.dialog](qtm.gui.dialog.md) - Functions for showing various dialogs.
  * [qtm.gui.message](qtm.gui.message.md) - Interface to the messages window.
  * [qtm.gui.selection](qtm.gui.selection.md) - Access and modify the current selection.
  * [qtm.gui.terminal](qtm.gui.terminal.md) - Interface to the terminal window.
@@ -27,6 +30,8 @@
  * [qtm.settings.export.c3d](qtm.settings.export.c3d.md) - Access and modify c3d export settings.
  * [qtm.settings.export.fbx](qtm.settings.export.fbx.md) - Access and modify fbx export settings.
  * [qtm.settings.export.mat](qtm.settings.export.mat.md) - Access and modify mat export settings.
+ * [qtm.settings.export.sto](qtm.settings.export.sto.md) - Access and modify sto export settings.
+ * [qtm.settings.export.trc](qtm.settings.export.trc.md) - Access and modify trc export settings.
  * [qtm.settings.export.tsv](qtm.settings.export.tsv.md) - Access and modify tsv export settings.
  * [qtm.settings.processing](qtm.settings.processing.md) - Access and modify processing settings.
  * [qtm.settings.processing._2d](qtm.settings.processing._2d.md) - Access and modify 2d processing settings.
