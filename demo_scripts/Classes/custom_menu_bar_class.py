@@ -26,7 +26,7 @@ def _help_print_module(help_str):
     print(str("\n\n" + help_str))
 
 def _help_print_function(help_str, full_command_str):
-    print(str("\n\n" + help_str) + "\n\n" + "FULL COMMAND:" + "\n\t" + full_command_str + "(...)")
+    print(str("\n\n" + help_str) + "\n\n" + "FULL COMMAND:" + "\n\t" + full_command_str + "()")
 # endregion
 
 
@@ -287,7 +287,10 @@ class custom_menu_bar:
                         # ... so we call 'help' without a parameter
                         command_func = lambda curr_module=curr_module: _help_print_module(curr_module.help())
                     else: # Otherwise, pass the function name as a parameter
-                        command_func = lambda curr_func_name=curr_func_name, curr_module=curr_module: _help_print_function(curr_module.help(curr_func_name), command_name)
+                        command_func = lambda curr_func_name=curr_func_name,\
+                                              curr_module=curr_module,\
+                                              full_command=(curr_module_name + "." + curr_func_name):\
+                                              _help_print_function(curr_module.help(curr_func_name), full_command)
                     add_command(command_name, command_func)
                     # Use the dynamically defined command function for the menu button
                     qtm.gui.insert_menu_button(curr_sub_menu_id, curr_func_name, command_name)
