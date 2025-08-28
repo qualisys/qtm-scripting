@@ -26,7 +26,7 @@ def _help_print_module(help_str):
     print(str("\n\n" + help_str))
 
 def _help_print_function(help_str, full_command_str):
-    print(str("\n\n" + help_str) + "\n\n" + "COMMAND" + "\n\t" + full_command_str + "()")
+    print(str("\n\n" + help_str) + "\n\n" + "COMMAND" + "\n    " + full_command_str + "()")
 # endregion
 
 
