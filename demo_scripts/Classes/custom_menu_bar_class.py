@@ -18,6 +18,17 @@ importlib.reload(helpers.printing)
 menu_name_basic = "Script Examples (Basic)"
 menu_name_advanced = "Script Examples (Advanced)"
 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# ////////   P R I V A T E   F U N C T I O N S   ////////
+# - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# region [ COLLAPSE / EXPAND ]
+def _help_print_module(help_str):
+    print(str("\n\n" + help_str))
+
+def _help_print_function(help_str, full_command_str):
+    print(str("\n\n" + help_str) + "\n\n" + "COMMAND" + "\n    " + full_command_str + "()")
+# endregion
+
 
 # - - - - - - - - - - - - - - - - - - -  - - - - - -
 # ////////   E X P O R T E D   C L A S S   ////////
@@ -274,9 +285,12 @@ class custom_menu_bar:
                     # If function name is 'help', it's the module-level 'help'...
                     if curr_func_name == "help":
                         # ... so we call 'help' without a parameter
-                        command_func = lambda curr_module=curr_module: (print(str("\n\n\n" + curr_module.help())))
+                        command_func = lambda curr_module=curr_module: _help_print_module(curr_module.help())
                     else: # Otherwise, pass the function name as a parameter
-                        command_func = lambda curr_func_name=curr_func_name, curr_module=curr_module: print(str("\n\n\n" + curr_module.help(curr_func_name)))
+                        command_func = lambda curr_func_name=curr_func_name,\
+                                              curr_module=curr_module,\
+                                              full_command=(curr_module_name + "." + curr_func_name):\
+                                              _help_print_function(curr_module.help(curr_func_name), full_command)
                     add_command(command_name, command_func)
                     # Use the dynamically defined command function for the menu button
                     qtm.gui.insert_menu_button(curr_sub_menu_id, curr_func_name, command_name)
