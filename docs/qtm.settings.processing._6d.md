@@ -22,6 +22,10 @@ Access and modify 6dof processing settings.
     
     print(qtm.settings.processing._6d.get_point_position("measurement", body_index, point_index))
     # [226.46037005049945, 0.6947789149269771, 1.19924822792081]
+    
+    qtm.settings.processing._6d.set_settings("project", {'identify_partial_bodies': True, 'calculate_missing_markers': False, 'bodies': [{'name': 'Body_1', 'is_enabled': True, 'color': 255, 'coordinate_system': {'type': 'global', 'relative_body_index': None, 'fixed_transform': None}, 'min_marker_count': 3, 'max_residual': 10.0, 'bone_length_tolerance': 5.0, 'filter_type': 'multi_purpose', 'mesh_settings': {'filename': 'utah-teapot.obj', 'position': [1.0, 2.0, 3.0], 'rotation': [4.0, 5.0, 6.0], 'scale': 1.0, 'opacity': 1.0}, 'points': None}, {'name': 'Body_2', 'is_enabled': True, 'color': 65280, 'coordinate_system': {'type': 'global', 'relative_body_index': None, 'fixed_transform': None}, 'min_marker_count': 3, 'max_residual': 10.0, 'bone_length_tolerance': 5.0, 'filter_type': 'none', 'mesh_settings': {'filename': '', 'position': [0.0, 0.0, 0.0], 'rotation': [0.0, 0.0, 0.0], 'scale': 1.0, 'opacity': 1.0}, 'points': [{'name': 'Body_2 - 1', 'position': [0.0, 0.0, 0.0], 'is_virtual': False, 'active_marker_id': None}]}]})
+    print(qtm.settings.processing._6d.get_settings("project"))
+    # {'identify_partial_bodies': True, 'calculate_missing_markers': False, 'bodies': [{'name': 'Body_1', 'is_enabled': True, 'color': 255, 'coordinate_system': {'type': 'global', 'relative_body_index': None, 'fixed_transform': None}, 'min_marker_count': 3, 'max_residual': 10.0, 'bone_length_tolerance': 5.0, 'filter_type': 'multi_purpose', 'mesh_settings': {'filename': 'utah-teapot.obj', 'position': [1.0, 2.0, 3.0], 'rotation': [4.0, 5.0, 6.0], 'scale': 1.0, 'opacity': 1.0}, 'points': []}, {'name': 'Body_2', 'is_enabled': True, 'color': 65280, 'coordinate_system': {'type': 'global', 'relative_body_index': None, 'fixed_transform': None}, 'min_marker_count': 3, 'max_residual': 10.0, 'bone_length_tolerance': 5.0, 'filter_type': 'none', 'mesh_settings': {'filename': '', 'position': [0.0, 0.0, 0.0], 'rotation': [0.0, 0.0, 0.0], 'scale': 1.0, 'opacity': 1.0}, 'points': [{'name': 'Body_2 - 1', 'position': [0.0, 0.0, 0.0], 'is_virtual': False, 'active_marker_id': None}]}]}
     ```
 === "Lua"
     ``` lua
@@ -41,6 +45,10 @@ Access and modify 6dof processing settings.
     
     print(qtm.settings.processing._6d.get_point_position("measurement", body_index, point_index))
     -- {226.4603700505, 0.69477891492698, 1.1992482279208}
+    
+    qtm.settings.processing._6d.set_settings("project", {calculate_missing_markers = false, bodies = {{max_residual = 10.0, coordinate_system = {type = "global"}, mesh_settings = {filename = "utah-teapot.obj", position = {1.0, 2.0, 3.0}, opacity = 1.0, rotation = {4.0, 5.0, 6.0}, scale = 1.0}, bone_length_tolerance = 5.0, filter_type = "multi_purpose", min_marker_count = 3, color = 255, name = "Body_1", is_enabled = true}, {max_residual = 10.0, coordinate_system = {type = "global"}, mesh_settings = {filename = "", position = {0.0, 0.0, 0.0}, opacity = 1.0, rotation = {0.0, 0.0, 0.0}, scale = 1.0}, bone_length_tolerance = 5.0, points = {{position = {0.0, 0.0, 0.0}, name = "Body_2 - 1", is_virtual = false}}, filter_type = "none", min_marker_count = 3, color = 65280, name = "Body_2", is_enabled = true}}, identify_partial_bodies = true})
+    print(qtm.settings.processing._6d.get_settings("project"))
+    -- {calculate_missing_markers = false, bodies = {{max_residual = 10.0, coordinate_system = {type = "global"}, mesh_settings = {filename = "utah-teapot.obj", position = {1.0, 2.0, 3.0}, opacity = 1.0, rotation = {4.0, 5.0, 6.0}, scale = 1.0}, bone_length_tolerance = 5.0, points = {}, filter_type = "multi_purpose", min_marker_count = 3, color = 255, name = "Body_1", is_enabled = true}, {max_residual = 10.0, coordinate_system = {type = "global"}, mesh_settings = {filename = "", position = {0.0, 0.0, 0.0}, opacity = 1.0, rotation = {0.0, 0.0, 0.0}, scale = 1.0}, bone_length_tolerance = 5.0, points = {{position = {0.0, 0.0, 0.0}, name = "Body_2 - 1", is_virtual = false}}, filter_type = "none", min_marker_count = 3, color = 65280, name = "Body_2", is_enabled = true}}, identify_partial_bodies = true}
     ```
 === "REST"
     ``` bat
@@ -60,6 +68,10 @@ Access and modify 6dof processing settings.
     
     curl --json "[\"measurement\", %body_index%, %point_index%]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/get_point_position
     :: [226.46037005049945,0.69477891492697708,1.1992482279208101]
+    
+    curl --json "[\"project\", {\"bodies\":[{\"bone_length_tolerance\":5,\"color\":255,\"coordinate_system\":{\"fixed_transform\":null,\"relative_body_index\":null,\"type\":\"global\"},\"filter_type\":\"multi_purpose\",\"is_enabled\":true,\"max_residual\":10,\"mesh_settings\":{\"filename\":\"utah-teapot.obj\",\"opacity\":1,\"position\":[1,2,3],\"rotation\":[4,5,6],\"scale\":1},\"min_marker_count\":3,\"name\":\"Body_1\",\"points\":null},{\"bone_length_tolerance\":5,\"color\":65280,\"coordinate_system\":{\"fixed_transform\":null,\"relative_body_index\":null,\"type\":\"global\"},\"filter_type\":\"none\",\"is_enabled\":true,\"max_residual\":10,\"mesh_settings\":{\"filename\":\"\",\"opacity\":1,\"position\":[0,0,0],\"rotation\":[0,0,0],\"scale\":1},\"min_marker_count\":3,\"name\":\"Body_2\",\"points\":[{\"active_marker_id\":null,\"is_virtual\":false,\"name\":\"Body_2 - 1\",\"position\":[0,0,0]}]}],\"calculate_missing_markers\":false,\"identify_partial_bodies\":true}]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/set_settings
+    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_6d/get_settings
+    :: {"bodies":[{"bone_length_tolerance":5,"color":255,"coordinate_system":{"fixed_transform":null,"relative_body_index":null,"type":"global"},"filter_type":"multi_purpose","is_enabled":true,"max_residual":10,"mesh_settings":{"filename":"utah-teapot.obj","opacity":1,"position":[1,2,3],"rotation":[4,5,6],"scale":1},"min_marker_count":3,"name":"Body_1","points":[]},{"bone_length_tolerance":5,"color":65280,"coordinate_system":{"fixed_transform":null,"relative_body_index":null,"type":"global"},"filter_type":"none","is_enabled":true,"max_residual":10,"mesh_settings":{"filename":"","opacity":1,"position":[0,0,0],"rotation":[0,0,0],"scale":1},"min_marker_count":3,"name":"Body_2","points":[{"active_marker_id":null,"is_virtual":false,"name":"Body_2 - 1","position":[0,0,0]}]}],"calculate_missing_markers":false,"identify_partial_bodies":true}
     ```
 ## get_identify_partial_bodies
 
@@ -568,6 +580,94 @@ The bone length tolerance (in millimeters). Must be within the [0.01, 1000.0] ra
 
 ---
 
+## get_body_filter_type
+
+Get the filter type of a rigid body.
+```
+qtm.settings.processing._6d.get_body_filter_type(source, body_index)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`body_index` `integer`<br/>
+The index of the rigid body.
+
+
+**Returns**
+
+`"none"|"multi_purpose"|"high_stability"|"static_pose"` 
+
+---
+
+## set_body_filter_type
+
+Set the filter type of a rigid body.
+```
+qtm.settings.processing._6d.set_body_filter_type(source, body_index, filter_type)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`body_index` `integer`<br/>
+The index of the rigid body.
+
+`filter_type` `"none"|"multi_purpose"|"high_stability"|"static_pose"`<br/>
+The filter type.
+
+
+
+---
+
+## get_body_mesh_settings
+
+Get the mesh settings of a rigid body.
+```
+qtm.settings.processing._6d.get_body_mesh_settings(source, body_index)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`body_index` `integer`<br/>
+The index of the rigid body.
+
+
+**Returns**
+
+`{"filename": string?, "position": vec3f?, "rotation": vec3f?, "scale": float?, "opacity": float?}` 
+
+---
+
+## set_body_mesh_settings
+
+Set the mesh settings of a rigid body.
+```
+qtm.settings.processing._6d.set_body_mesh_settings(source, body_index, mesh_settings)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`body_index` `integer`<br/>
+The index of the rigid body.
+
+`mesh_settings` `{"filename": string?, "position": vec3f?, "rotation": vec3f?, "scale": float?, "opacity": float?}`<br/>
+The mesh settings. Scale must be within the [0.01, 1000.0] range and opacity within the [0.01, 1.0] range.
+
+
+
+---
+
 ## get_point_name
 
 Get the name of a point in a rigid body.
@@ -803,6 +903,44 @@ The settings source.
 
 `filename` `string`<br/>
 The xml filename to save.
+
+
+
+---
+
+## get_settings
+
+Get all settings.
+```
+qtm.settings.processing._6d.get_settings(source)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+
+**Returns**
+
+`{"identify_partial_bodies": bool?, "calculate_missing_markers": bool?, "bodies": [{"name": string?, "is_enabled": bool?, "color": integer?, "coordinate_system": {"type": "global"|"relative"|"fixed", "relative_body_index": integer?, "fixed_transform": mat4x4f?}?, "min_marker_count": integer?, "max_residual": float?, "bone_length_tolerance": float?, "filter_type": "none"|"multi_purpose"|"high_stability"|"static_pose"?, "mesh_settings": {"filename": string?, "position": vec3f?, "rotation": vec3f?, "scale": float?, "opacity": float?}?, "points": [{"name": string?, "position": vec3f?, "is_virtual": bool?, "active_marker_id": integer?}]?}]?}` 
+
+---
+
+## set_settings
+
+Set some or all settings.
+```
+qtm.settings.processing._6d.set_settings(source, settings)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`settings` `{"identify_partial_bodies": bool?, "calculate_missing_markers": bool?, "bodies": [{"name": string?, "is_enabled": bool?, "color": integer?, "coordinate_system": {"type": "global"|"relative"|"fixed", "relative_body_index": integer?, "fixed_transform": mat4x4f?}?, "min_marker_count": integer?, "max_residual": float?, "bone_length_tolerance": float?, "filter_type": "none"|"multi_purpose"|"high_stability"|"static_pose"?, "mesh_settings": {"filename": string?, "position": vec3f?, "rotation": vec3f?, "scale": float?, "opacity": float?}?, "points": [{"name": string?, "position": vec3f?, "is_virtual": bool?, "active_marker_id": integer?}]?}]?}`<br/>
+The settings (if a setting is omitted or null, then it will not be set).
 
 
 

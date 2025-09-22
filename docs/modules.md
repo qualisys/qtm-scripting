@@ -38,7 +38,11 @@
  * [qtm.settings.processing._3d](qtm.settings.processing._3d.md) - Access and modify 3d processing settings.
  * [qtm.settings.processing._6d](qtm.settings.processing._6d.md) - Access and modify 6dof processing settings.
  * [qtm.settings.processing.aim](qtm.settings.processing.aim.md) - Access and modify aim processing settings.
+ * [qtm.settings.processing.gap_fill](qtm.settings.processing.gap_fill.md) - Access and modify gap fill processing settings.
+ * [qtm.settings.processing.glove](qtm.settings.processing.glove.md) - Access and modify glove processing settings.
+ * [qtm.settings.processing.sal](qtm.settings.processing.sal.md) - Access and modify sal processing settings.
  * [qtm.settings.processing.skeleton](qtm.settings.processing.skeleton.md) - Access and modify skeleton processing settings.
  * [qtm.utilities.color](qtm.utilities.color.md) - Utilities for converting various color models to a qtm compatible format.
  * [qtm.utilities.documentation](qtm.utilities.documentation.md) - Various documentation utilities.
  * [qtm.utilities.math](qtm.utilities.math.md) - Various math utilities.
+ * [qtm.processing](qtm.processing.md) - Methods for processing measurement files.

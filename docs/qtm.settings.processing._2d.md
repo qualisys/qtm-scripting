@@ -12,6 +12,10 @@ Access and modify 2d processing settings.
     
     print(qtm.settings.processing._2d.get_max_marker_size("measurement"))
     # 4096
+    
+    qtm.settings.processing._2d.set_settings("project", {'correct_center_points': False, 'use_min_marker_size': True, 'use_max_marker_size': True, 'min_marker_size': 20, 'max_marker_size': 30})
+    print(qtm.settings.processing._2d.get_settings("project"))
+    # {'correct_center_points': False, 'use_software_marker_masks': None, 'use_min_marker_size': True, 'use_max_marker_size': True, 'min_marker_size': 20, 'max_marker_size': 30}
     ```
 === "Lua"
     ``` lua
@@ -21,6 +25,10 @@ Access and modify 2d processing settings.
     
     print(qtm.settings.processing._2d.get_max_marker_size("measurement"))
     -- 4096
+    
+    qtm.settings.processing._2d.set_settings("project", {use_max_marker_size = true, max_marker_size = 500, correct_center_points = false, use_min_marker_size = true, min_marker_size = 200})
+    qtm.settings.processing._2d.get_settings("project")
+    -- {use_max_marker_size = true, max_marker_size = 500, correct_center_points = false, use_min_marker_size = true, min_marker_size = 200}
     ```
 === "REST"
     ``` bat
@@ -30,6 +38,10 @@ Access and modify 2d processing settings.
     
     curl --json "[\"measurement\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_2d/get_max_marker_size
     :: 4096
+    
+    curl --json "[\"project\", {\"correct_center_points\":false,\"max_marker_size\":300,\"min_marker_size\":200,\"use_max_marker_size\":true,\"use_min_marker_size\":true}]" http://localhost:7979/api/scripting/qtm/settings/processing/_2d/set_settings/
+    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_2d/get_settings/
+    :: {"correct_center_points":false,"max_marker_size":300,"min_marker_size":200,"use_max_marker_size":true,"use_min_marker_size":true,"use_software_marker_masks":null}
     ```
 ## get_correct_center_points
 
@@ -57,7 +69,7 @@ Set whether to correct center points.
 qtm.settings.processing._2d.set_correct_center_points(source, enable)
 ```
 
-Center point correction requires circularity filtering to be enabled (see 'qtm.settings.camera.set_use_circularity_filtering').
+Center point correction requires circularity filtering to be enabled (see 'qtm.settings.camera.set_use_marker_circularity_filtering').
 
 **Parameters**
 
@@ -66,6 +78,44 @@ The settings source.
 
 `enable` `bool`<br/>
 True if center points should be corrected, otherwise false.
+
+
+
+---
+
+## get_use_software_marker_masks
+
+Get whether to use software marker masks.
+```
+qtm.settings.processing._2d.get_use_software_marker_masks(source)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+
+**Returns**
+
+`bool` 
+
+---
+
+## set_use_software_marker_masks
+
+Set whether to use software marker masks.
+```
+qtm.settings.processing._2d.set_use_software_marker_masks(source, enable)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`enable` `bool`<br/>
+True if software marker masks should be used, otherwise false.
 
 
 
@@ -222,6 +272,44 @@ The settings source.
 
 `size` `integer`<br/>
 The maximum marker size (in subpixels).
+
+
+
+---
+
+## get_settings
+
+Get all settings.
+```
+qtm.settings.processing._2d.get_settings(source)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+
+**Returns**
+
+`{"correct_center_points": bool?, "use_software_marker_masks": bool?, "use_min_marker_size": bool?, "use_max_marker_size": bool?, "min_marker_size": integer?, "max_marker_size": integer?}` 
+
+---
+
+## set_settings
+
+Set some or all settings.
+```
+qtm.settings.processing._2d.set_settings(source, settings)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`settings` `{"correct_center_points": bool?, "use_software_marker_masks": bool?, "use_min_marker_size": bool?, "use_max_marker_size": bool?, "min_marker_size": integer?, "max_marker_size": integer?}`<br/>
+The settings (if a setting is omitted or null, then it will not be set).
 
 
 

@@ -13,6 +13,10 @@ Access and modify 3d processing settings.
     
     print(qtm.settings.processing._3d.get_bounding_box("measurement"))
     # {'min_x': -10000.0, 'max_x': 10000.0, 'min_y': -10000.0, 'max_y': 10000.0, 'min_z': -10000.0, 'max_z': 10000.0}
+    
+    qtm.settings.processing._3d.set_settings("project", {"auto_join": True, "auto_limit_ray_length": False, "min_ray_length": 0, "max_ray_length": 1000})
+    qtm.settings.processing._3d.get_settings("project")
+    # {'auto_limit_ray_length': False, 'min_ray_length': 0.0, 'max_ray_length': 1000.0, 'auto_join': True, ...}
     ```
 === "Lua"
     ``` lua
@@ -23,6 +27,10 @@ Access and modify 3d processing settings.
     
     print(qtm.settings.processing._3d.get_bounding_box("measurement"))
     -- {min_y = -1000.0, max_x = 20000.0, max_z = 1500.0, min_z = -100.0, max_y = 1000.0, min_x = -2000.0}
+    
+    qtm.settings.processing._3d.set_settings("project", {auto_join = true, auto_limit_ray_length = false, min_ray_length = 0.0, max_ray_length = 1000.0})
+    qtm.settings.processing._3d.get_settings("project")
+    -- {auto_limit_ray_length = false, min_ray_length = 0.0, max_ray_length = 1000.0, auto_join = true, ...}
     ```
 === "REST"
     ``` bat
@@ -33,6 +41,10 @@ Access and modify 3d processing settings.
     
     curl --json "[\"measurement\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_3d/get_bounding_box
     :: {"max_x":20000,"max_y":1000,"max_z":1500,"min_x":-2000,"min_y":-1000,"min_z":-100}
+    
+    curl --json "[\"project\", {\"auto_join\":true,\"auto_limit_ray_length\":false,\"min_ray_length\":0,\"max_ray_length\":1000}]" http://localhost:7979/api/scripting/qtm/settings/processing/_3d/set_settings/
+    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/_3d/get_settings/
+    :: {"auto_join":true,"auto_limit_ray_length":false,"max_ray_length":1000,"min_ray_length":0...}
     ```
 ## get_prediction_error
 
@@ -533,6 +545,44 @@ The settings source.
 
 `enable` `bool`<br/>
 True if selected range should be automatically set, otherwise false.
+
+
+
+---
+
+## get_settings
+
+Get all settings.
+```
+qtm.settings.processing._3d.get_settings(source)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+
+**Returns**
+
+`{"prediction_error": float?, "max_residual": float?, "min_trajectory_length": integer?, "min_ray_count": integer?, "auto_limit_ray_length": bool?, "min_ray_length": float?, "max_ray_length": float?, "store_rays": bool?, "auto_join": bool?, "max_auto_join_gap_length": integer?, "use_bounding_box": bool?, "bounding_box": {"min_x": float, "max_x": float, "min_y": float, "max_y": float, "min_z": float, "max_z": float}?, "auto_select_range": bool?}` 
+
+---
+
+## set_settings
+
+Set some or all settings.
+```
+qtm.settings.processing._3d.set_settings(source, settings)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`settings` `{"prediction_error": float?, "max_residual": float?, "min_trajectory_length": integer?, "min_ray_count": integer?, "auto_limit_ray_length": bool?, "min_ray_length": float?, "max_ray_length": float?, "store_rays": bool?, "auto_join": bool?, "max_auto_join_gap_length": integer?, "use_bounding_box": bool?, "bounding_box": {"min_x": float, "max_x": float, "min_y": float, "max_y": float, "min_z": float, "max_z": float}?, "auto_select_range": bool?}`<br/>
+The settings (if a setting is omitted or null, then it will not be set).
 
 
 

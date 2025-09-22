@@ -90,35 +90,6 @@ True if every frame should be processed, otherwise false.
 
 ---
 
-## get_store_realtime
-
-Get whether to store realtime data during capture.
-```
-qtm.settings.processing.get_store_realtime()
-```
-
-**Returns**
-
-`bool` 
-
----
-
-## set_store_realtime
-
-Set whether to store realtime data during capture.
-```
-qtm.settings.processing.set_store_realtime(enable)
-```
-
-**Parameters**
-
-`enable` `bool`<br/>
-True if realtime data should be stored, otherwise false.
-
-
-
----
-
 ## get_auto_backup
 
 Get whether to automatically backup files before processing.
@@ -187,7 +158,7 @@ Set whether to process 2d data.
 qtm.settings.processing.set_process_2d(type, enable)
 ```
 
-This method requires post-processing to be enabled during capture (see 'set_store_realtime').
+This method requires post-processing to be enabled during capture.
 
 **Parameters**
 
@@ -229,7 +200,7 @@ Set whether to track 2d data.
 qtm.settings.processing.set_track_2d(type, enable)
 ```
 
-This method requires 'capture', 'batch', 'reprocess' or 'force' processing type. Additionally, post-processing must be enabled during capture (see 'set_store_realtime').
+This method requires 'capture', 'batch', 'reprocess' or 'force' processing type. Additionally, post-processing must be enabled during capture.
 
 **Parameters**
 
@@ -269,7 +240,7 @@ Set whether to track 3d data.
 qtm.settings.processing.set_track_3d(type, enable)
 ```
 
-This method requires post-processing to be enabled during capture (see 'set_store_realtime').
+This method requires post-processing to be enabled during capture.
 
 **Parameters**
 
@@ -285,7 +256,7 @@ True if 3d data should be tracked, otherwise false.
 
 ## get_merge_twin
 
-Get whether to merge with twin slave.
+Get whether to merge with twin secondary.
 ```
 qtm.settings.processing.get_merge_twin(type)
 ```
@@ -306,12 +277,12 @@ The processing type.
 
 ## set_merge_twin
 
-Set whether to merge with twin slave.
+Set whether to merge with twin secondary.
 ```
 qtm.settings.processing.set_merge_twin(type, enable)
 ```
 
-This method requires 'capture', 'batch', 'reprocess' or 'force' processing type. Additionally, post-processing must be enabled during capture (see 'set_store_realtime').
+This method requires 'capture', 'batch', 'reprocess' or 'force' processing type. Additionally, post-processing must be enabled during capture.
 
 **Parameters**
 
@@ -319,7 +290,7 @@ This method requires 'capture', 'batch', 'reprocess' or 'force' processing type.
 The processing type.
 
 `enable` `bool`<br/>
-True if twin slave should be merged with, otherwise false.
+True if twin secondary should be merged with, otherwise false.
 
 
 
@@ -487,11 +458,11 @@ True if skeletons should be solved, otherwise false.
 
 ---
 
-## get_apply_glove
+## get_apply_gloves
 
 Get whether to apply glove data.
 ```
-qtm.settings.processing.get_apply_glove(type)
+qtm.settings.processing.get_apply_gloves(type)
 ```
 
 **Parameters**
@@ -506,11 +477,11 @@ The processing type.
 
 ---
 
-## set_apply_glove
+## set_apply_gloves
 
 Set whether to apply glove data.
 ```
-qtm.settings.processing.set_apply_glove(type, enable)
+qtm.settings.processing.set_apply_gloves(type, enable)
 ```
 
 This method requires skeleton solving to be enabled during realtime and capture (see 'set_solve_skeletons').
@@ -593,7 +564,7 @@ Set whether to calculate force data.
 qtm.settings.processing.set_calculate_force(type, enable)
 ```
 
-This method requires post-processing to be enabled during capture (see 'set_store_realtime').
+This method requires post-processing to be enabled during capture.
 
 **Parameters**
 

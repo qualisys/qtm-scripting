@@ -19,6 +19,12 @@ Access and modify aim processing settings.
     
     print(qtm.settings.processing.aim.get_relative_bone_length_tolerance("project"))
     # 75.0
+    
+    aim_1_path = r"C:\Users\<username>\Documents\SampleAims\SampleAim_1.qam"
+    aim_2_path = r"C:\Users\<username>\Documents\SampleAims\SampleAim_2.qam"
+    qtm.settings.processing.aim.set_settings("project", {"keep_existing_labels": True,"models": {aim_1_path: {"is_applied": True},aim_2_path: {"is_applied": False}},"randomize_bone_colors": True,"relative_bone_length_tolerance": 1})
+    print(qtm.settings.processing.aim.get_settings("project"))
+    # {'keep_existing_labels': True,'models': {'C:\\Users\\<username>\\Documents\\SampleAims\\SampleAim_1.qam': {'is_applied': True},'C:\\Users\\<username>\\Documents\\SampleAims\\SampleAim_2.qam': {'is_applied': False}},'randomize_bone_colors': True,'relative_bone_length_tolerance': 1}
     ```
 === "Lua"
     ``` lua
@@ -35,6 +41,12 @@ Access and modify aim processing settings.
     
     print(qtm.settings.processing.aim.get_relative_bone_length_tolerance("project"))
     -- 75.0
+    
+    aim_1_path = "C:\\Users\\<username>\\Documents\\SampleAims\\SampleAim_1.qam"
+    aim_2_path = "C:\\Users\\<username>\\Documents\\SampleAims\\SampleAim_2.qam"
+    qtm.settings.processing.aim.set_settings("project", {randomize_bone_colors = true, models = {[aim_1_path] = {is_applied = false}, [aim_2_path] = {is_applied = true}}, keep_existing_labels = true, relative_bone_length_tolerance = 1.0})
+    print(qtm.settings.processing.aim.get_settings("project"))
+    -- {randomize_bone_colors = true, models = {C:\Users\<username>\Documents\SampleAims\SampleAim_1.qam = {is_applied = false}, C:\Users\<username>\Documents\SampleAims\SampleAim_2.qam = {is_applied = true}}, keep_existing_labels = true, relative_bone_length_tolerance = 1.0}
     ```
 === "REST"
     ``` bat
@@ -51,6 +63,12 @@ Access and modify aim processing settings.
     
     curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/aim/get_relative_bone_length_tolerance
     :: 75
+    
+    set aim_1_path=\"C:\\Users\\^<username^>\\Documents\\SampleAims\\SampleAim_1.qam\"
+    set aim_2_path=\"C:\\Users\\^<username^>\\Documents\\SampleAims\\SampleAim_2.qam\"
+    curl --json "[\"project\", {\"keep_existing_labels\":true,\"models\":{%aim_1_path%:{\"is_applied\":true},%aim_2_path%:{\"is_applied\":false}},\"randomize_bone_colors\":true,\"relative_bone_length_tolerance\":1}]" http://localhost:7979/api/scripting/qtm/settings/processing/aim/set_settings
+    curl --json "[\"project\"]" http://localhost:7979/api/scripting/qtm/settings/processing/aim/get_settings
+    :: {"keep_existing_labels":true,"models":{"C:\\Users\\<username>\\Documents\\SampleAims\\SampleAim_1.qam":{"is_applied":true},"C:\\Users\\<username>\\Documents\\SampleAims\\SampleAim_2.qam":{"is_applied":false},"randomize_bone_colors":true,"relative_bone_length_tolerance":1}
     ```
 ## add_model
 
@@ -212,50 +230,6 @@ True if the aim model should be applied, otherwise false.
 
 ---
 
-## get_model_application_count
-
-Get the number of applications of an aim model.
-```
-qtm.settings.processing.aim.get_model_application_count(source, path)
-```
-
-**Parameters**
-
-`source` `"project"|"measurement"`<br/>
-The settings source.
-
-`path` `string`<br/>
-The path of the aim model.
-
-
-**Returns**
-
-`integer` 
-
----
-
-## set_model_application_count
-
-Set the number of applications of an aim model.
-```
-qtm.settings.processing.aim.set_model_application_count(source, path, count)
-```
-
-**Parameters**
-
-`source` `"project"|"measurement"`<br/>
-The settings source.
-
-`path` `string`<br/>
-The path of the aim model.
-
-`count` `integer`<br/>
-The number of applications of the aim model.
-
-
-
----
-
 ## get_relative_bone_length_tolerance
 
 Get the relative bone length tolerance.
@@ -367,6 +341,44 @@ The settings source.
 
 `enable` `bool`<br/>
 True if bone colors should be randomized, otherwise false.
+
+
+
+---
+
+## get_settings
+
+Get all settings.
+```
+qtm.settings.processing.aim.get_settings(source)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+
+**Returns**
+
+`{"models": {string: {"is_applied": bool?}}?, "relative_bone_length_tolerance": float?, "keep_existing_labels": bool?, "randomize_bone_colors": bool?}` 
+
+---
+
+## set_settings
+
+Set some or all settings.
+```
+qtm.settings.processing.aim.set_settings(source, settings)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`settings` `{"models": {string: {"is_applied": bool?}}?, "relative_bone_length_tolerance": float?, "keep_existing_labels": bool?, "randomize_bone_colors": bool?}`<br/>
+The settings (if a setting is omitted or null, then it will not be set).
 
 
 
