@@ -2,6 +2,14 @@
 
 | **Version** | **Changes** |
 | ------ | ------ |
+| 2026.1 | Added qtm.settings.camera.get_lens_aperture method. | 
+|  | Added qtm.settings.camera.set_lens_aperture method. | 
+|  | Added qtm.settings.camera.get_lens_focus method. | 
+|  | Added qtm.settings.camera.set_lens_focus method. | 
+|  | Removed qtm.utilities.math module. | 
+|  | Removed qtm.gui.timeline.set_measured_range method. | 
+|  | Removed qtm.settings.processing._6d.load_bodies method. | 
+|  | Removed qtm.settings.processing._6d.save_bodies method. | 
 | 2025.2 | Renamed qtm.processing.apply_glove method. | 
 |  | Removed qtm.settings.processing.aim.get_model_application_count method. | 
 |  | Removed qtm.settings.processing.aim.set_model_application_count method. | 

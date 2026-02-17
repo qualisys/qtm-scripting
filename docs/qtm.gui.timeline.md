@@ -120,24 +120,6 @@ qtm.gui.timeline.get_measured_range()
 
 ---
 
-## set_measured_range
-
-Set the measured range.
-```
-qtm.gui.timeline.set_measured_range(range)
-```
-
-This is equivalent to doing a trim operation.
-
-**Parameters**
-
-`range` `{"start": integer, "end": integer}`<br/>
-The new measured range.
-
-
-
----
-
 ## get_selected_range
 
 Get the selected range.

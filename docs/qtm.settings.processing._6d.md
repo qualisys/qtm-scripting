@@ -868,46 +868,6 @@ The active marker identifier of the point (if null, the marker will be regarded 
 
 ---
 
-## load_bodies
-
-Load rigid bodies from an xml file.
-```
-qtm.settings.processing._6d.load_bodies(source, filename)
-```
-
-This will overwrite any existing rigid bodies.
-
-**Parameters**
-
-`source` `"project"|"measurement"`<br/>
-The settings source.
-
-`filename` `string`<br/>
-The xml filename to load.
-
-
-
----
-
-## save_bodies
-
-Save rigid bodies to an xml file.
-```
-qtm.settings.processing._6d.save_bodies(source, filename)
-```
-
-**Parameters**
-
-`source` `"project"|"measurement"`<br/>
-The settings source.
-
-`filename` `string`<br/>
-The xml filename to save.
-
-
-
----
-
 ## get_settings
 
 Get all settings.

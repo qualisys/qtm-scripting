@@ -24,6 +24,7 @@
  * [qtm.gui.selection](qtm.gui.selection.md) - Access and modify the current selection.
  * [qtm.gui.terminal](qtm.gui.terminal.md) - Interface to the terminal window.
  * [qtm.gui.timeline](qtm.gui.timeline.md) - Interface to the measurement timeline.
+ * [qtm.processing](qtm.processing.md) - Methods for processing measurement files.
  * [qtm.settings.camera](qtm.settings.camera.md) - Access and modify camera settings.
  * [qtm.settings.directory](qtm.settings.directory.md) - Access and modify directory settings.
  * [qtm.settings.euler](qtm.settings.euler.md) - Access and modify euler angle settings.
@@ -44,5 +45,3 @@
  * [qtm.settings.processing.skeleton](qtm.settings.processing.skeleton.md) - Access and modify skeleton processing settings.
  * [qtm.utilities.color](qtm.utilities.color.md) - Utilities for converting various color models to a qtm compatible format.
  * [qtm.utilities.documentation](qtm.utilities.documentation.md) - Various documentation utilities.
- * [qtm.utilities.math](qtm.utilities.math.md) - Various math utilities.
- * [qtm.processing](qtm.processing.md) - Methods for processing measurement files.

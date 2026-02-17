@@ -651,7 +651,7 @@ The settings source.
 The index of the camera.
 
 `threshold` `integer`<br/>
-The marker threshold (in percent).
+The threshold (in percent).
 
 
 
@@ -1167,7 +1167,7 @@ The index of the camera.
 
 **Returns**
 
-`integer` 
+`integer` The exposure delay (in microseconds).
 
 ---
 
@@ -1278,6 +1278,94 @@ The index of the camera.
 
 `rotation` `"0"|"90"|"180"|"270"`<br/>
 The view rotation.
+
+
+
+---
+
+## get_lens_aperture
+
+Get the lens aperture of a camera.
+```
+qtm.settings.camera.get_lens_aperture(source, index)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`index` `integer`<br/>
+The index of the camera.
+
+
+**Returns**
+
+`float` The aperture (in f-stops).
+
+---
+
+## set_lens_aperture
+
+Set the lens aperture of a camera.
+```
+qtm.settings.camera.set_lens_aperture(source, index, aperture)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`index` `integer`<br/>
+The index of the camera.
+
+`aperture` `float`<br/>
+The aperture (in f-stops).
+
+
+
+---
+
+## get_lens_focus
+
+Get the lens focus distance of a camera.
+```
+qtm.settings.camera.get_lens_focus(source, index)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`index` `integer`<br/>
+The index of the camera.
+
+
+**Returns**
+
+`float` The focus distance (in meters).
+
+---
+
+## set_lens_focus
+
+Set the lens focus distance of a camera.
+```
+qtm.settings.camera.set_lens_focus(source, index, focus)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`index` `integer`<br/>
+The index of the camera.
+
+`focus` `float`<br/>
+The focus distance (in meters).
 
 
 
