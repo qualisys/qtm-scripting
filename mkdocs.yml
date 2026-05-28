@@ -1,5 +1,9 @@
+INHERIT: .venv/Lib/site-packages/qualisys_mkdocs_theme/base.yml
+
 site_name: QTM Scripting Interface
-use_directory_urls: false
+
+theme:
+  custom_dir: .venv/Lib/site-packages/qualisys_mkdocs_theme/assets
 
 nav:
   - Home: index.md
@@ -7,48 +11,22 @@ nav:
   - Types: types.md
   - Changelog: changelog.md
 
+# INHERIT replaces (not merges) the parent's plugin list. The
+# inherited plugins from base.yml are repeated here; markdownextradata
+# and print-site are omitted: the former mis-parses `{{ ... }}`
+# content in the generated API pages, the latter is for PDF export
+# which QSI doesn't use.
 plugins:
-    - search
-    - exclude-search:
-        exclude: 
-          - modules.md
+  - search
+  - offline
+  - autorefs: {}
 
-extra_css:
-  - assets/stylesheets/extra.css
-
-theme:
- logo: assets/images/Q.png
- name: material
- features:
- - content.tabs.link
- - content.code.annotation
- - content.code.copy
- language: en
- font: false
- palette:
-  - media: "(prefers-color-scheme: light)"
-    scheme: default
-    toggle:
-      icon: material/weather-night
-      name: Switch to dark mode
-
-  - media: "(prefers-color-scheme: dark)"
-    scheme: slate
-    primary: custom
-    accent: custom
-    toggle:
-      icon: material/weather-sunny
-      name: Switch to light mode
-
-markdown_extensions:
-  - pymdownx.tabbed:
-      alternate_style: true 
-  - pymdownx.superfences
+hooks:
+  - hooks/exclude_modules_from_search.py
 
 copyright: |
-   Copyright 2026 Qualisys AB
+  Copyright 2026 Qualisys AB
 
 extra:
- generator: false
- version:
-  provider: mike
+  version:
+    provider: mike

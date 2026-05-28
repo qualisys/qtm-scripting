@@ -20,6 +20,10 @@ Various methods related to measurement files.
     qtm.file.get_capture_license()
     # 'Qualisys Internal'
     
+    qtm.file.export_tsv(r"C:\temp\exported_file.tsv")
+    qtm.file.export_c3d(r"C:\temp\exported_file.c3d")
+    qtm.file.export_fbx(r"C:\temp\exported_file.fbx")
+    
     qtm.data.object.trajectory.add_trajectory()
     qtm.file.is_dirty()
     # True
@@ -51,6 +55,10 @@ Various methods related to measurement files.
     -- 2019.1 (build 4400)
     qtm.file.get_capture_license()
     -- Qualisys Internal
+    
+    qtm.file.export_tsv([[C:\temp\exported_file.tsv]])
+    qtm.file.export_c3d([[C:\temp\exported_file.c3d]])
+    qtm.file.export_fbx([[C:\temp\exported_file.fbx]])
     
     qtm.data.object.trajectory.add_trajectory()
     qtm.file.is_dirty()
@@ -84,6 +92,13 @@ Various methods related to measurement files.
     :: "2019.1 (build 4400)"
     curl --json "" http://localhost:7979/api/scripting/qtm/file/get_capture_license/
     :: "Qualisys Internal"
+    
+    set out_tsv=\"C:\\temp\\exported_file.tsv\"
+    curl --json "[%out_tsv%]" http://localhost:7979/api/scripting/qtm/file/export_tsv/
+    set out_c3d=\"C:\\temp\\exported_file.c3d\"
+    curl --json "[%out_c3d%]" http://localhost:7979/api/scripting/qtm/file/export_c3d/
+    set out_fbx=\"C:\\temp\\exported_file.fbx\"
+    curl --json "[%out_fbx%]" http://localhost:7979/api/scripting/qtm/file/export_fbx/
     
     curl --json "" http://localhost:7979/api/scripting/qtm/data/object/trajectory/add_trajectory/
     curl --json "" http://localhost:7979/api/scripting/qtm/file/is_dirty/
@@ -247,6 +262,118 @@ qtm.file.get_capture_license()
 **Returns**
 
 `string?` The license (or null, if the file does not contain this info).
+
+---
+
+## export_tsv
+
+Export the current measurement as a tsv file.
+```
+qtm.file.export_tsv(path)
+```
+
+**Parameters**
+
+`path` `string`<br/>
+The output file path (.tsv).
+
+
+
+---
+
+## export_c3d
+
+Export the current measurement as a c3d file.
+```
+qtm.file.export_c3d(path)
+```
+
+**Parameters**
+
+`path` `string`<br/>
+The output file path (.c3d).
+
+
+
+---
+
+## export_mat
+
+Export the current measurement as a mat file.
+```
+qtm.file.export_mat(path)
+```
+
+**Parameters**
+
+`path` `string`<br/>
+The output file path (.mat).
+
+
+
+---
+
+## export_json
+
+Export the current measurement as a json file.
+```
+qtm.file.export_json(path)
+```
+
+**Parameters**
+
+`path` `string`<br/>
+The output file path (.json).
+
+
+
+---
+
+## export_fbx
+
+Export the current measurement as an fbx file.
+```
+qtm.file.export_fbx(path)
+```
+
+**Parameters**
+
+`path` `string`<br/>
+The output file path (.fbx).
+
+
+
+---
+
+## export_trc
+
+Export the current measurement as a trc file.
+```
+qtm.file.export_trc(path)
+```
+
+**Parameters**
+
+`path` `string`<br/>
+The output file path (.trc).
+
+
+
+---
+
+## export_sto
+
+Export the current measurement as an sto file.
+```
+qtm.file.export_sto(path)
+```
+
+**Parameters**
+
+`path` `string`<br/>
+The output file path (.sto).
+
+
 
 ---
 

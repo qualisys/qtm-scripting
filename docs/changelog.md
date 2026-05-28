@@ -2,6 +2,18 @@
 
 | **Version** | **Changes** |
 | ------ | ------ |
+| 2026.2 | Fixed qtm.settings.processing.skeleton.set_settings setting the wrong 'post' settings. | 
+|  | Changed qtm.gui.get_menu_item to return null for non-existing text/command/submenu. | 
+|  | Added qtm.gui.set_menu_item method. | 
+|  | Changed qtm.gui.insert_menu_separator to only accept submenus. | 
+|  | Changed qtm.file.save to allow 'analysis' execution context. | 
+|  | Added qtm.file.export_c3d method. | 
+|  | Added qtm.file.export_mat method. | 
+|  | Added qtm.file.export_json method. | 
+|  | Added qtm.file.export_fbx method. | 
+|  | Added qtm.file.export_trc method. | 
+|  | Added qtm.file.export_sto method. | 
+|  | Added qtm.file.export_tsv method. | 
 | 2026.1 | Added qtm.settings.camera.get_lens_aperture method. | 
 |  | Added qtm.settings.camera.set_lens_aperture method. | 
 |  | Added qtm.settings.camera.get_lens_focus method. | 
@@ -91,12 +103,12 @@
 |  | Added qtm.settings.export.tsv.set_skeleton_reference_frame method. | 
 | 2024.2 | Added qtm.data.object.trajectory.get_is_discarded method. | 
 |  | Added qtm.data.object.trajectory.set_is_discarded method. | 
-| 2024.1 | qtm.data.series.*.get_sample_range method now returns null if there are no samples. | 
+| 2024.1 | Changed qtm.data.series.*.get_sample_range to return null if there are no samples. | 
 |  | Added qtm.data.series._6d.set_sample method. | 
 |  | Added qtm.data.series._6d.set_samples method. | 
 |  | Added qtm.data.series._6d.delete_sample method. | 
 |  | Added qtm.data.series._6d.delete_samples method. | 
-|  | qtm.data.series._6d module now correctly handles missing samples. | 
+|  | Fixed qtm.data.series._6d incorrectly handling missing samples. | 
 |  | Added qtm.settings.processing.aim module. | 
 |  | Added qtm.settings.processing._6d.get_body_is_enabled method. | 
 |  | Added qtm.settings.processing._6d.set_body_is_enabled method. | 
@@ -104,7 +116,7 @@
 |  | Removed qtm.settings.processing._3d.set_discard_out_of_bounds_intersections method. | 
 |  | Added qtm.settings.processing module. | 
 |  | Added qtm.settings.camera.get_ip_address method. | 
-|  | qtm.gui._3d.draw_mesh now correctly scales meshes that have a size not equal to 1 unit. | 
+|  | Fixed qtm.gui._3d.draw_mesh incorrectly scaling meshes that had a size not equal to 1 unit. | 
 |  | Added qtm.data.object.trajectory.get_color method. | 
 |  | Added qtm.data.object.trajectory.set_color method. | 
 |  | Added qtm.data.object.bone module. | 

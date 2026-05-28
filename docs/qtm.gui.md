@@ -59,6 +59,9 @@ Control and customize the graphical user interface.
     # - Add a separator between the button "My first button" and submenu "My submenu"
     menu_index = 1
     qtm.gui.insert_menu_separator(my_menu_handle, menu_index)
+    
+    # - Update a menu item
+    qtm.gui.set_menu_item(my_menu_handle, 0, {"text": "Updated Button Text"})
     ```
 === "Lua"
     ``` lua
@@ -117,6 +120,51 @@ Control and customize the graphical user interface.
     -- - Add a separator between the button "My first button" and submenu "My submenu"
     menu_index = 1
     qtm.gui.insert_menu_separator(my_menu_handle, menu_index)
+    
+    -- - Update a menu item
+    qtm.gui.set_menu_item(my_menu_handle, 0, {text = "Updated Button Text"})
+    ```
+=== "REST"
+    ``` bat
+    :: - List all available built-in commands
+    curl --json "[\"builtin\"]" http://localhost:7979/api/scripting/qtm/gui/get_commands/
+    :: ["save_file_as", "generate_aim_model_from_multiple_files", "swap_trajectory_current_part", ... ...
+    
+    :: - List all available user commands
+    curl --json "[\"user\"]" http://localhost:7979/api/scripting/qtm/gui/get_commands/
+    :: []
+    
+    :: - Add a user command
+    set my_command_name=\"my_command\"
+    curl --json "[%my_command_name%]" http://localhost:7979/api/scripting/qtm/gui/add_command/
+    
+    :: - List all available user commands
+    curl --json "[\"user\"]" http://localhost:7979/api/scripting/qtm/gui/get_commands/
+    :: ["my_command"]
+    
+    :: - Add a menu in the main menu
+    set menu_name=\"My menu\"
+    curl --json "[null, %menu_name%]" http://localhost:7979/api/scripting/qtm/gui/insert_menu_submenu/
+    :: 12345
+    
+    set my_menu_handle=12345
+    
+    :: - Add a menu button in "My menu" and connect it to "my_command"
+    curl --json "[%my_menu_handle%, \"User command: my_command\", %my_command_name%]" http://localhost:7979/api/scripting/qtm/gui/insert_menu_button/
+    
+    :: - Add a submenu in "My menu"
+    curl --json "[%my_menu_handle%, \"My submenu\"]" http://localhost:7979/api/scripting/qtm/gui/insert_menu_submenu/
+    :: 67890
+    
+    :: - Add a menu button in the submenu "My submenu" and connect it to the built-in command "add_event".
+    set my_submenu_handle=67890
+    curl --json "[%my_submenu_handle%, \"Built-in command: add_event\", \"add_event\"]" http://localhost:7979/api/scripting/qtm/gui/insert_menu_button/
+    
+    :: - Add a separator between the button "My first button" and submenu "My submenu"
+    curl --json "[%my_menu_handle%, 1]" http://localhost:7979/api/scripting/qtm/gui/insert_menu_separator/
+    
+    :: - Update a menu item
+    curl --json "[%my_menu_handle%, 0, {\"text\": \"Updated Button Text\"}]" http://localhost:7979/api/scripting/qtm/gui/set_menu_item/
     ```
 ## add_command
 
@@ -212,7 +260,31 @@ The index of the item in the menu.
 
 **Returns**
 
-`{"text": string, "command": string, "submenu": integer}` 
+`{"text": string?, "command": string?, "submenu": integer?}` 
+
+---
+
+## set_menu_item
+
+Set one or more properties of an item in a menu or submenu.
+```
+qtm.gui.set_menu_item(menu?, index, item)
+```
+
+This method cannot be used to change an item's type or submenu.
+
+**Parameters**
+
+`menu` `integer?`<br/>
+The handle to the menu (if null, the main menu will be used).
+
+`index` `integer`<br/>
+The index of the item to modify.
+
+`item` `{"text": string?, "command": string?, "submenu": integer?}`<br/>
+The menu item properties (if a field is omitted or null, it will not be set).
+
+
 
 ---
 
@@ -231,7 +303,7 @@ The handle to the menu (if null, the main menu will be used).
 
 **Returns**
 
-`[{"text": string, "command": string, "submenu": integer}]` 
+`[{"text": string?, "command": string?, "submenu": integer?}]` 
 
 ---
 
@@ -281,15 +353,15 @@ The index where the button will be inserted (if null, the button will be inserte
 
 ## insert_menu_separator
 
-Insert a separator into a menu or submenu.
+Insert a separator into a submenu.
 ```
-qtm.gui.insert_menu_separator(menu?, index?)
+qtm.gui.insert_menu_separator(menu, index?)
 ```
 
 **Parameters**
 
-`menu` `integer?`<br/>
-The handle to the menu (if null, the main menu will be used).
+`menu` `integer`<br/>
+The handle to the submenu.
 
 `index` `integer?`<br/>
 The index where the separator will be inserted (if null, the separator will be inserted at the end).
@@ -314,7 +386,7 @@ The handle to the menu (if null, the main menu will be used).
 The submenu text.
 
 `index` `integer?`<br/>
-The index where the submenu will be inserted (if null, the submenu will inserted at the end).
+The index where the submenu will be inserted (if null, the submenu will be inserted at the end).
 
 
 **Returns**
