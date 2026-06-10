@@ -1,0 +1,1000 @@
+/* =========================================================================
+   Qualisys MkDocs Theme
+   Based on: Qualisys Brand Guidelines v2024.01
+   For use with: Material for MkDocs
+   ========================================================================= */
+
+/* ---------- FONT FACES ---------- */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url('../fonts/Montserrat-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal; font-weight: 500; font-display: swap;
+  src: url('../fonts/Montserrat-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal; font-weight: 600; font-display: swap;
+  src: url('../fonts/Montserrat-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url('../fonts/Montserrat-700.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal; font-weight: 800; font-display: swap;
+  src: url('../fonts/Montserrat-800.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal; font-weight: 400; font-display: swap;
+  src: url('../fonts/OpenSans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal; font-weight: 500; font-display: swap;
+  src: url('../fonts/OpenSans-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal; font-weight: 600; font-display: swap;
+  src: url('../fonts/OpenSans-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal; font-weight: 700; font-display: swap;
+  src: url('../fonts/OpenSans-700.woff2') format('woff2');
+}
+
+/* =========================================================================
+   DESIGN TOKENS (from Qualisys Design System)
+   ========================================================================= */
+:root {
+  /* ---------- PRIMARY: RED ---------- */
+  --qualisys-red: #da291c;
+  --red-1: #801811;
+  --red-2: #be1e15;
+  --red-3: #e15449;
+  --red-4: #e97f77;
+
+  /* ---------- PRIMARY: NEUTRAL ---------- */
+  --qualisys-black: #000000;
+  --gray-1: #242424;
+  --gray-2: #767676;
+  --gray-3: #a0a0a0;
+  --qualisys-gray: #e0e0e0;
+  --gray-5: #f2f2f2;
+  --gray-6: #fafafa;
+  --white: #ffffff;
+
+  /* ---------- SECONDARY (data-viz / illustrations) ---------- */
+  --pink-1: #7f0c2e;
+  --pink-3: #d90f4d;
+  --pink-5: #f187a7;
+  --blue-1: #20336b;
+  --blue-3: #456ce2;
+  --blue-5: #8ba3ed;
+  --purple-1: #492076;
+  --purple-3: #7e2cd2;
+  --purple-5: #c095ed;
+  --turquoise-1: #06557b;
+  --turquoise-3: #0baccd;
+  --turquoise-5: #82dae8;
+  --yellow-1: #f6be00;
+  --yellow-3: #f0c844;
+  --yellow-5: #f6d86a;
+
+  /* ---------- SEMANTIC ---------- */
+  --success: #2c8a4a;
+  --info: var(--blue-3);
+  --warning: var(--yellow-1);
+  --danger: var(--qualisys-red);
+
+  /* ---------- TYPOGRAPHY ---------- */
+  --font-display: 'Montserrat', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Open Sans', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* ---------- SPACING (8-pt grid) ---------- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* ---------- RADII ---------- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+
+  /* ---------- SHADOWS ---------- */
+  --shadow-xs: 0 1px 2px rgba(36, 36, 36, 0.06);
+  --shadow-sm: 0 2px 6px rgba(36, 36, 36, 0.08);
+  --shadow-md: 0 6px 16px rgba(36, 36, 36, 0.10);
+  --shadow-lg: 0 16px 36px rgba(36, 36, 36, 0.14);
+  --shadow-xl: 0 28px 64px rgba(36, 36, 36, 0.18);
+
+  /* ---------- MOTION ---------- */
+  --ease-standard: cubic-bezier(0.2, 0.0, 0.2, 1);
+  --dur-fast: 120ms;
+  --dur-normal: 200ms;
+  --dur-slow: 320ms;
+}
+
+/* =========================================================================
+   MATERIAL FOR MKDOCS — LIGHT SCHEME
+   ========================================================================= */
+[data-md-color-scheme="default"] {
+  /* Header / navigation */
+  --md-primary-fg-color: var(--qualisys-black);
+  --md-primary-fg-color--light: var(--gray-1);
+  --md-primary-fg-color--dark: var(--qualisys-black);
+  --md-primary-bg-color: var(--white);
+  --md-primary-bg-color--light: rgba(255, 255, 255, 0.7);
+
+  /* Accent — links, buttons, focus */
+  --md-accent-fg-color: var(--qualisys-red);
+  --md-accent-fg-color--transparent: rgba(218, 41, 28, 0.1);
+  --md-accent-bg-color: var(--white);
+  --md-accent-bg-color--light: rgba(255, 255, 255, 0.7);
+
+  /* Typography */
+  --md-typeset-a-color: var(--qualisys-red);
+
+  /* Code blocks */
+  --md-code-fg-color: var(--gray-1);
+  --md-code-bg-color: var(--gray-5);
+
+  /* Admonitions */
+  --md-admonition-fg-color: var(--gray-1);
+  --md-admonition-bg-color: var(--gray-6);
+}
+
+/* =========================================================================
+   MATERIAL FOR MKDOCS — DARK SCHEME
+   ========================================================================= */
+[data-md-color-scheme="slate"] {
+  /* Header / navigation */
+  --md-primary-fg-color: var(--qualisys-black);
+  --md-primary-fg-color--light: var(--gray-1);
+  --md-primary-fg-color--dark: var(--qualisys-black);
+
+  /* Accent */
+  --md-accent-fg-color: var(--qualisys-red);
+  --md-accent-fg-color--transparent: rgba(218, 41, 28, 0.18);
+
+  /* Typography — lighter red for better contrast on dark */
+  --md-typeset-a-color: var(--red-3);
+
+  /* Background — warm dark per brand guidelines */
+  --md-default-bg-color: #181818;
+
+  /* Code blocks */
+  --md-code-fg-color: var(--qualisys-gray);
+  --md-code-bg-color: var(--gray-1);
+}
+
+/* =========================================================================
+   TYPOGRAPHY — Montserrat headings, Open Sans body
+   ========================================================================= */
+.md-typeset {
+  font-family: var(--font-body);
+}
+
+.md-typeset h1,
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4,
+.md-typeset h5,
+.md-typeset h6,
+.md-header__title,
+.md-nav__title {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.md-typeset h1 {
+  font-weight: 800;
+  color: var(--qualisys-black);
+}
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: var(--qualisys-gray);
+}
+
+.md-typeset h2 {
+  font-weight: 700;
+}
+
+.md-typeset h3,
+.md-typeset h4 {
+  font-weight: 600;
+}
+
+.md-typeset h5,
+.md-typeset h6 {
+  font-weight: 600;
+}
+
+/* =========================================================================
+   LINKS
+   ========================================================================= */
+.md-typeset a {
+  transition: color var(--dur-fast) var(--ease-standard),
+              border-color var(--dur-fast) var(--ease-standard);
+}
+
+.md-typeset a:hover {
+  color: var(--red-2);
+}
+
+.md-typeset a:active {
+  color: var(--red-1);
+}
+
+/* =========================================================================
+   CODE BLOCKS
+   ========================================================================= */
+.md-typeset code,
+.md-typeset pre {
+  font-family: var(--font-mono);
+}
+
+.md-typeset code {
+  border-radius: var(--radius-xs);
+}
+
+.md-typeset pre {
+  border-radius: var(--radius-sm);
+}
+
+/* Limit code block height */
+.md-typeset pre > code {
+  max-height: 25rem;
+}
+
+/* =========================================================================
+   ADMONITIONS — Qualisys accent stripe
+   ========================================================================= */
+.md-typeset .admonition,
+.md-typeset details {
+  border-left-width: 4px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
+}
+
+/* Custom admonition colors using secondary palette */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: var(--blue-3);
+}
+
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: var(--turquoise-3);
+}
+
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: var(--yellow-1);
+}
+
+.md-typeset .admonition.danger,
+.md-typeset details.danger {
+  border-color: var(--qualisys-red);
+}
+
+.md-typeset .admonition.success,
+.md-typeset details.success {
+  border-color: var(--success);
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: var(--blue-3);
+}
+
+.md-typeset .admonition.question,
+.md-typeset details.question {
+  border-color: var(--purple-3);
+}
+
+/* =========================================================================
+   TABLES
+   ========================================================================= */
+.md-typeset table:not([class]) th {
+  background-color: var(--gray-5);
+  color: var(--qualisys-black);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) th {
+  background-color: var(--gray-1);
+  color: var(--qualisys-gray);
+}
+
+/* =========================================================================
+   HEADER
+   ========================================================================= */
+.md-header {
+  box-shadow: 0 1px 0 var(--gray-1);
+}
+
+/* Logo sizing */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  height: 1.75rem;
+  width: auto;
+}
+
+/* =========================================================================
+   NAVIGATION
+   ========================================================================= */
+.md-nav__link {
+  font-family: var(--font-body);
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.md-nav__link:hover {
+  color: var(--qualisys-red);
+}
+
+.md-nav__link--active {
+  color: var(--qualisys-red);
+  font-weight: 600;
+}
+
+/* =========================================================================
+   BUTTONS / TABS
+   ========================================================================= */
+.md-typeset .md-button {
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur-fast) var(--ease-standard),
+              color var(--dur-fast) var(--ease-standard),
+              transform var(--dur-fast) var(--ease-standard);
+}
+
+.md-typeset .md-button:hover {
+  background-color: var(--red-2);
+}
+
+.md-typeset .md-button:active {
+  background-color: var(--red-1);
+  transform: scale(0.98);
+}
+
+/* Tabs */
+.md-typeset .tabbed-labels > label {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+/* =========================================================================
+   SEARCH
+   ========================================================================= */
+.md-search__input {
+  font-family: var(--font-body);
+  border-radius: var(--radius-sm);
+}
+
+/* =========================================================================
+   FOOTER
+   ========================================================================= */
+.md-footer {
+  background-color: var(--gray-1);
+}
+
+/* =========================================================================
+   SELECTION
+   ========================================================================= */
+::selection {
+  background: var(--qualisys-red);
+  color: var(--white);
+}
+
+/* =========================================================================
+   FOCUS — Accessibility
+   ========================================================================= */
+:focus-visible {
+  outline: 2px solid var(--qualisys-red);
+  outline-offset: 2px;
+}
+
+/* =========================================================================
+   UTILITY: Hidden content (for drafts/comments)
+   ========================================================================= */
+.do_not_show {
+  display: none;
+}
+
+/* =========================================================================
+   PRINT STYLES
+   ========================================================================= */
+@media print {
+  /* Page size only — Playwright owns margins so headers/footers render
+     outside the content box without colliding with @page margins. */
+  @page {
+    size: A4;
+  }
+
+  /* Hide non-content elements */
+  .md-header,
+  .md-footer,
+  .md-sidebar,
+  .md-tabs,
+  .md-search,
+  .md-top,
+  .md-source,
+  .headerlink,
+  .md-clipboard,
+  .print-site-banner,
+  nav,
+  .md-nav {
+    display: none !important;
+  }
+
+  /* Constrain body to the @page content area width.
+     Chromium lays out HTML at the full @page size (210mm for A4) without
+     clipping to the @page margin box, so content overflows into the side
+     margins. Setting an explicit body width + centering aligns HTML layout
+     with the @page content area (210mm - 2*18mm = 174mm). */
+  body {
+    width: 174mm !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Full width content */
+  .md-content {
+    margin: 0 !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .md-main__inner {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .md-container {
+    display: block !important;
+  }
+
+  /* Typography — match Qualisys brochure style (minimal, clean sans-serif,
+     black text on white, no colored accents in body copy). */
+  body {
+    font-family: 'Open Sans', system-ui, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #242424 !important;
+    background: #fff !important;
+  }
+
+  .md-typeset {
+    font-size: 10pt;
+    color: #242424;
+  }
+
+  .md-typeset h1,
+  .md-typeset h2,
+  .md-typeset h3,
+  .md-typeset h4,
+  .md-typeset h5,
+  .md-typeset h6 {
+    font-family: 'Montserrat', system-ui, Arial, sans-serif;
+    letter-spacing: 0;
+    color: #242424 !important;
+  }
+
+  /* H1 = doc title only (cover). Subsequent per-page H1s get italic
+     brochure-style treatment, no underline, no red. */
+  .md-typeset h1 {
+    font-size: 22pt;
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0 18pt 0;
+    padding: 0;
+    border: none;
+    page-break-after: avoid;
+    page-break-before: always;
+  }
+
+  .md-typeset h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    font-style: normal;
+    margin: 18pt 0 4pt 0;
+    padding: 0;
+    border: none;
+    page-break-after: avoid;
+  }
+
+  .md-typeset h3 {
+    font-size: 10pt;
+    font-weight: 700;
+    margin: 14pt 0 3pt 0;
+    page-break-after: avoid;
+  }
+
+  .md-typeset h4,
+  .md-typeset h5,
+  .md-typeset h6 {
+    font-size: 10pt;
+    font-weight: 600;
+    margin: 12pt 0 2pt 0;
+    page-break-after: avoid;
+  }
+
+  /* Links — subtle red; underline removed to match brochure style. */
+  .md-typeset a {
+    color: #da291c !important;
+    text-decoration: none;
+  }
+
+  .md-typeset a[href^="http"]:after,
+  .md-typeset a[href^="#"]:after,
+  .md-typeset a[href^="/"]:after {
+    content: none;
+  }
+
+  /* Code blocks */
+  .md-typeset code {
+    background: #f5f5f5 !important;
+    color: #000 !important;
+    border: 1px solid #ddd;
+    padding: 1pt 3pt;
+    font-size: 9pt;
+  }
+
+  .md-typeset pre {
+    background: #f5f5f5 !important;
+    border: 1px solid #ddd;
+    padding: 10pt;
+    page-break-inside: avoid;
+    overflow-x: visible;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: none !important;
+  }
+
+  .md-typeset pre code {
+    border: none;
+    padding: 0;
+    background: transparent !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow-wrap: break-word !important;
+    overflow: visible !important;
+  }
+
+  /* Tables — Qualisys brochure style: thin horizontal rules only,
+     no vertical borders, no row fills. */
+  .md-typeset table {
+    page-break-inside: avoid;
+    border-collapse: collapse;
+    width: 100%;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  .md-typeset table th,
+  .md-typeset table td {
+    border: none !important;
+    border-bottom: 1px solid #d6d6d6 !important;
+    padding: 5pt 8pt 5pt 0 !important;
+    background: transparent !important;
+    text-align: left;
+  }
+
+  .md-typeset table th {
+    background: transparent !important;
+    color: #242424 !important;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 700;
+    border-bottom: 1px solid #242424 !important;
+  }
+
+  .md-typeset table tr:last-child td {
+    border-bottom: 1px solid #d6d6d6 !important;
+  }
+
+  /* Admonitions — subtle: thin left stripe, no fill, no top rule. */
+  .md-typeset .admonition,
+  .md-typeset details {
+    page-break-inside: avoid;
+    border: none !important;
+    border-left: 2px solid #d6d6d6 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    margin: 10pt 0;
+    padding: 2pt 0 2pt 10pt;
+  }
+
+  .md-typeset .admonition-title,
+  .md-typeset summary {
+    background: transparent !important;
+    color: #242424 !important;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 700;
+    border: none !important;
+    padding: 0 0 3pt 0;
+    margin: 0 0 3pt 0;
+    font-size: 10pt;
+  }
+
+  /* Images */
+  .md-typeset img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+
+  /* Page breaks */
+  .md-typeset h1 {
+    page-break-before: always;
+  }
+
+  .md-typeset h1:first-of-type {
+    page-break-before: avoid;
+  }
+
+  /* Lists */
+  .md-typeset ul,
+  .md-typeset ol {
+    page-break-inside: avoid;
+  }
+
+  /* Tabs - show all content */
+  .md-typeset .tabbed-set > input {
+    display: none;
+  }
+
+  .md-typeset .tabbed-content {
+    display: block !important;
+  }
+
+  .md-typeset .tabbed-block {
+    display: block !important;
+  }
+
+  .md-typeset .tabbed-labels {
+    display: none;
+  }
+
+  /* Definition lists */
+  .md-typeset dd {
+    page-break-inside: avoid;
+  }
+
+  /* Print page section breaks */
+  .print-page-break {
+    page-break-before: always;
+  }
+
+  /* =========================================================================
+     COVER PAGE  — matches Qualisys brochure layout:
+     logo top-left, large italic title roughly 1/3 down, subtle meta row,
+     light divider, small footer with brand + contact.
+     ========================================================================= */
+  #print-site-cover-page {
+    page-break-after: always;
+    padding: 20mm 18mm 18mm 18mm;
+    margin: 0;
+    position: relative;
+    color: #242424;
+    background: #fff;
+    min-height: 257mm;  /* A4 less ~4cm breathing room for brand footer */
+  }
+
+  /* Logo as a top-left block — uses the dark-on-light variant. */
+  #print-site-cover-page::before {
+    content: "";
+    display: block;
+    width: 55mm;
+    height: 18mm;
+    background-image: url('../images/qualisys-logo.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: contain;
+    margin-bottom: 80mm;
+  }
+
+  /* Print-site default cover emits <div><h1>...</h1></div> then a <table>. */
+  #print-site-cover-page > div:first-of-type {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  #print-site-cover-page h1 {
+    margin: 0 0 12pt 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    font-family: 'Montserrat', system-ui, Arial, sans-serif;
+    font-size: 34pt;
+    font-weight: 500;
+    font-style: italic;
+    color: #242424 !important;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+    page-break-after: avoid;
+    page-break-before: avoid;
+  }
+
+  #print-site-cover-page table {
+    margin: 20mm 0 0 0;
+    border: none !important;
+    width: auto;
+    page-break-inside: avoid;
+  }
+
+  #print-site-cover-page table td {
+    border: none !important;
+    padding: 2pt 12pt 2pt 0 !important;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 9pt;
+    color: #767676 !important;
+    background: transparent !important;
+  }
+
+  #print-site-cover-page table td:first-child {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-weight: 600;
+    color: #242424 !important;
+    text-transform: none;
+    font-size: 9pt;
+    letter-spacing: 0;
+  }
+
+  /* =========================================================================
+     TABLE OF CONTENTS  (injected by cli.py as #qmk-toc when doc is long)
+     ========================================================================= */
+  #qmk-toc {
+    page-break-after: always;
+    page-break-before: always;
+  }
+
+  #qmk-toc .qmk-toc-title {
+    font-family: 'Montserrat', system-ui, Arial, sans-serif;
+    font-size: 22pt;
+    font-weight: 400;
+    font-style: italic;
+    color: #242424 !important;
+    border: none !important;
+    padding: 0 0 10pt 0 !important;
+    margin: 0 0 14pt 0 !important;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  #qmk-toc > ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  #qmk-toc > ul > li {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    color: #242424;
+    margin: 10pt 0 0 0;
+    padding: 5pt 0 0 0;
+    border-top: 1px solid #d6d6d6;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0 8pt;
+  }
+
+  #qmk-toc > ul > li > ul {
+    flex-basis: 100%;
+    margin-top: 3pt;
+  }
+
+  #qmk-toc ul ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8pt;
+  }
+
+  #qmk-toc a {
+    color: #242424 !important;
+    text-decoration: none !important;
+    flex: 1;
+  }
+
+  #qmk-toc ul ul a {
+    color: #767676 !important;
+  }
+
+  #qmk-toc .qmk-toc-page {
+    font-weight: 400;
+    color: #767676;
+    flex-shrink: 0;
+    font-size: 10pt;
+  }
+
+  #qmk-toc > ul > li > .qmk-toc-page {
+    font-weight: 700;
+    color: #242424;
+  }
+
+  #qmk-toc > ul > li:first-child {
+    border-top: 1px solid #242424;
+  }
+
+  #qmk-toc ul ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 4pt 0 0 0;
+  }
+
+  #qmk-toc ul ul li {
+    font-weight: 400;
+    color: #767676;
+    font-size: 10pt;
+    margin: 2pt 0;
+  }
+
+  /* =========================================================================
+     OFFICE COLUMNS (last-page footer block, injected by cli.py as #qmk-offices)
+     ========================================================================= */
+  /* Use a <table> because Chromium's paged-media layout respects
+     table-layout:fixed for equal-column widths more reliably than
+     grid/flex inside a dynamically-injected block. */
+  #qmk-offices {
+    margin-top: 8mm;
+    padding-top: 4mm;
+    border-top: 1px solid #d6d6d6;
+  }
+
+  #qmk-offices .qmk-offices-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10mm;
+    margin-bottom: 6mm;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 8pt;
+    line-height: 1.4;
+  }
+
+  #qmk-offices .qmk-offices-brand strong {
+    font-weight: 700;
+    color: #242424;
+    letter-spacing: 0.08em;
+    font-size: 9pt;
+  }
+
+  #qmk-offices .qmk-offices-brand span {
+    color: #767676;
+  }
+
+  #qmk-offices table.qmk-offices-tbl {
+    table-layout: fixed !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: none !important;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 8pt;
+    line-height: 1.4;
+  }
+
+  #qmk-offices table.qmk-offices-tbl td {
+    vertical-align: top;
+    padding: 0 3mm 0 0 !important;
+    border: none !important;
+    border-bottom: none !important;
+    background: transparent !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal !important;
+  }
+
+  #qmk-offices table.qmk-offices-tbl td:last-child {
+    padding-right: 0 !important;
+  }
+
+  /* Constrain print-site sections to content box so injected blocks don't
+     overflow. Material theme leaves section widths unset, so on paginate
+     Chromium defaults them to the pre-print viewport width. */
+  #print-site-page,
+  #print-site-page section.print-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  #qmk-offices strong {
+    font-weight: 700;
+    color: #242424;
+    display: block;
+    margin-bottom: 2pt;
+  }
+
+  #qmk-offices span {
+    color: #767676;
+  }
+}
+
+/* =========================================================================
+   PAGED MEDIA — page setup + running header/footer via @page margin boxes.
+
+   We render the running header/footer entirely through CSS paged-media
+   margin boxes (@top-left, @bottom-right, etc.) instead of Playwright's
+   `display_header_footer` templates. This gives us per-page control — in
+   particular `@page :first` can blank them out on the cover page.
+
+   The doc title is injected as a CSS string by cli.py via `string-set`
+   on a hidden ::before, then consumed here with `string(doc-title)`.
+   ========================================================================= */
+@page {
+  size: A4 portrait;
+  margin: 22mm 18mm 22mm 18mm;
+
+  /* Brochure footer: "QUALISYS <doc name>" bottom-left, contact bottom-right.
+     Doc title is injected by cli.py as a literal string to avoid Chromium's
+     flaky `string()` support; we set empty placeholders here so the higher
+     "Page N" from print-site-material.css can't leak through. */
+  @top-left     { content: ""; }
+  @top-right    { content: ""; }
+  @top-center   { content: none; }
+
+  @bottom-left {
+    content: "";
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 7pt;
+    color: #242424;
+    padding-bottom: 10mm;
+  }
+  @bottom-right {
+    content: "";
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 7pt;
+    color: #767676;
+    padding-bottom: 10mm;
+  }
+  @bottom-center { content: none; }
+}
+
+/* Page-number mode: when cli.py decides numbers should be shown (doc has
+   more than the configured threshold), it injects a style tag setting
+   --qmk-show-page-numbers. Until then, no numbers print. This is done via
+   a follow-up @page rule rather than conditional content so the declaration
+   can be cleanly overridden without fighting the cascade. */
+@page {
+  @bottom-center {
+    content: "";
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 7pt;
+    color: #767676;
+    padding-bottom: 10mm;
+  }
+}
+
+/* Cover page: no margins (so the red band bleeds to the paper edge) and no
+   running header/footer (conventionally cover pages have neither). */
+@page :first {
+  margin: 0;
+  @top-left      { content: none; }
+  @top-right     { content: none; }
+  @top-center    { content: none; }
+  @bottom-left   { content: none; }
+  @bottom-right  { content: none; }
+  @bottom-center { content: none; }
+}
