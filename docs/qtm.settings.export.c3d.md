@@ -19,6 +19,21 @@ Access and modify c3d export settings.
     qtm.settings.export.c3d.set_zero_force_baseline_range(zero_baseline_range)
     print(qtm.settings.export.c3d.get_zero_force_baseline_range())
     # {'start': 0, 'end': 9}
+    
+    # Set a Y-up axis mapping (output X from input X, Y from Z, Z from -Y).
+    qtm.settings.export.c3d.set_output_x_axis("+x")
+    qtm.settings.export.c3d.set_output_y_axis("+z")
+    qtm.settings.export.c3d.set_output_z_axis("-y")
+    print(qtm.settings.export.c3d.get_output_x_axis())
+    # +x
+    print(qtm.settings.export.c3d.get_output_y_axis())
+    # +z
+    print(qtm.settings.export.c3d.get_output_z_axis())
+    # -y
+    
+    qtm.settings.export.c3d.set_export_subjects(True)
+    print(qtm.settings.export.c3d.get_export_subjects())
+    # True
     ```
 === "Lua"
     ``` lua
@@ -35,6 +50,21 @@ Access and modify c3d export settings.
     qtm.settings.export.c3d.set_zero_force_baseline_range(zero_baseline_range)
     print(qtm.settings.export.c3d.get_zero_force_baseline_range())
     -- {start = 0, end = 9}
+    
+    -- Set a Y-up axis mapping (output X from input X, Y from Z, Z from -Y).
+    qtm.settings.export.c3d.set_output_x_axis("+x")
+    qtm.settings.export.c3d.set_output_y_axis("+z")
+    qtm.settings.export.c3d.set_output_z_axis("-y")
+    print(qtm.settings.export.c3d.get_output_x_axis())
+    -- +x
+    print(qtm.settings.export.c3d.get_output_y_axis())
+    -- +z
+    print(qtm.settings.export.c3d.get_output_z_axis())
+    -- -y
+    
+    qtm.settings.export.c3d.set_export_subjects(true)
+    print(qtm.settings.export.c3d.get_export_subjects())
+    -- true
     ```
 === "REST"
     ``` bat
@@ -51,6 +81,21 @@ Access and modify c3d export settings.
     curl --json "[%zero_baseline_range%]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_zero_force_baseline_range/
     curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_zero_force_baseline_range/
     :: {"end":9,"start":0}
+    
+    :: Set a Y-up axis mapping (output X from input X, Y from Z, Z from -Y).
+    curl --json "[\"+x\"]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_output_x_axis/
+    curl --json "[\"+z\"]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_output_y_axis/
+    curl --json "[\"-y\"]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_output_z_axis/
+    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_output_x_axis/
+    :: "+x"
+    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_output_y_axis/
+    :: "+z"
+    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_output_z_axis/
+    :: "-y"
+    
+    curl --json "[true]" http://localhost:7979/api/scripting/qtm/settings/export/c3d/set_export_subjects/
+    curl --json "" http://localhost:7979/api/scripting/qtm/settings/export/c3d/get_export_subjects/
+    :: true
     ```
 ## get_exclude_unidentified
 
@@ -285,6 +330,122 @@ qtm.settings.export.c3d.set_length_units(units)
 
 `units` `"mm"|"cm"|"m"`<br/>
 The length units.
+
+
+
+---
+
+## get_output_x_axis
+
+Get the axis to use as the output x axis.
+```
+qtm.settings.export.c3d.get_output_x_axis()
+```
+
+**Returns**
+
+`"+x"|"-x"|"+y"|"-y"|"+z"|"-z"` 
+
+---
+
+## set_output_x_axis
+
+Set the axis to use as the output x axis.
+```
+qtm.settings.export.c3d.set_output_x_axis(input_axis)
+```
+
+**Parameters**
+
+`input_axis` `"+x"|"-x"|"+y"|"-y"|"+z"|"-z"`<br/>
+The axis to use as the output x axis.
+
+
+
+---
+
+## get_output_y_axis
+
+Get the axis to use as the output y axis.
+```
+qtm.settings.export.c3d.get_output_y_axis()
+```
+
+**Returns**
+
+`"+x"|"-x"|"+y"|"-y"|"+z"|"-z"` 
+
+---
+
+## set_output_y_axis
+
+Set the axis to use as the output y axis.
+```
+qtm.settings.export.c3d.set_output_y_axis(input_axis)
+```
+
+**Parameters**
+
+`input_axis` `"+x"|"-x"|"+y"|"-y"|"+z"|"-z"`<br/>
+The axis to use as the output y axis.
+
+
+
+---
+
+## get_output_z_axis
+
+Get the axis to use as the output z axis.
+```
+qtm.settings.export.c3d.get_output_z_axis()
+```
+
+**Returns**
+
+`"+x"|"-x"|"+y"|"-y"|"+z"|"-z"` 
+
+---
+
+## set_output_z_axis
+
+Set the axis to use as the output z axis.
+```
+qtm.settings.export.c3d.set_output_z_axis(input_axis)
+```
+
+**Parameters**
+
+`input_axis` `"+x"|"-x"|"+y"|"-y"|"+z"|"-z"`<br/>
+The axis to use as the output z axis.
+
+
+
+---
+
+## get_export_subjects
+
+Get whether to export the subjects parameter group.
+```
+qtm.settings.export.c3d.get_export_subjects()
+```
+
+**Returns**
+
+`bool` 
+
+---
+
+## set_export_subjects
+
+Set whether to export the subjects parameter group.
+```
+qtm.settings.export.c3d.set_export_subjects(enable)
+```
+
+**Parameters**
+
+`enable` `bool`<br/>
+True if the subjects parameter group should be exported, otherwise false.
 
 
 

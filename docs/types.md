@@ -6,6 +6,7 @@
 | integer | 64-bit signed integer. | 
 | float | 64-bit floating-point number. | 
 | string | 8-bit ansi string (codepage depends on the user settings in windows). | 
+| bytes | Binary data. | 
 | function | Any callable object such as a function or a lambda. | 
 | enumeration | String from a predefined set (e.g. "enumerator1"\|"enumerator2" can be either "enumerator1" or "enumerator2"). | 
 | matrix | NxM matrix or 1xM vector with integer or float values (e.g. mat4x4f means a 4x4 matrix of floats, and vec3i means a 1x3 vector of integers). | 

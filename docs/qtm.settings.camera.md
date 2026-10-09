@@ -33,6 +33,16 @@ Access and modify camera settings.
     
     print(qtm.settings.camera.get_max_marker_size("project", camera_index))
     # 60000
+    
+    mask = qtm.settings.camera.get_marker_pixel_mask("project", camera_index)
+    print(mask["size"])
+    # [1831, 1092]
+    print(len(mask["data"]))
+    # 1999452
+    
+    qtm.settings.camera.set_marker_pixel_mask("project", camera_index, mask)
+    
+    qtm.settings.camera.clear_marker_pixel_mask("project", camera_index)
     ```
 === "Lua"
     ``` lua
@@ -63,6 +73,16 @@ Access and modify camera settings.
     
     print(qtm.settings.camera.get_max_marker_size("project", camera_index))
     -- 60000
+    
+    mask = qtm.settings.camera.get_marker_pixel_mask("project", camera_index)
+    print(mask.size)
+    -- {1831, 1092}
+    print(#mask.data)
+    -- 1999452
+    
+    qtm.settings.camera.set_marker_pixel_mask("project", camera_index, mask)
+    
+    qtm.settings.camera.clear_marker_pixel_mask("project", camera_index)
     ```
 === "REST"
     ``` bat
@@ -93,6 +113,13 @@ Access and modify camera settings.
     
     curl --json "[\"project\", %camera_index%]" http://localhost:7979/api/scripting/qtm/settings/camera/get_max_marker_size/
     :: 60000
+    
+    curl --json "[\"project\", %camera_index%]" http://localhost:7979/api/scripting/qtm/settings/camera/get_marker_pixel_mask/
+    :: {"size":[1664,1232],"data":"AAAA..."}
+    
+    curl --json "[\"project\", %camera_index%, {\"size\":[1664,1232],\"data\":\"AAAA...\"}]" http://localhost:7979/api/scripting/qtm/settings/camera/set_marker_pixel_mask/
+    
+    curl --json "[\"project\", %camera_index%]" http://localhost:7979/api/scripting/qtm/settings/camera/clear_marker_pixel_mask/
     ```
 ## get_system_type
 
@@ -784,6 +811,71 @@ The index of the camera.
 
 `masks` `[{"left": integer, "top": integer, "right": integer, "bottom": integer}]`<br/>
 The marker masks.
+
+
+
+---
+
+## get_marker_pixel_mask
+
+Get the marker pixel mask of a camera.
+```
+qtm.settings.camera.get_marker_pixel_mask(source, index)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`index` `integer`<br/>
+The index of the camera.
+
+
+**Returns**
+
+`{"size": vec2i, "data": bytes}` The pixel mask (with size in pixels, data in row-major format and one byte per pixel where non-zero bytes indicate masked pixels).
+
+---
+
+## set_marker_pixel_mask
+
+Set the marker pixel mask of a camera.
+```
+qtm.settings.camera.set_marker_pixel_mask(source, index, mask)
+```
+
+The mask size must match the one returned from 'get_marker_pixel_mask'.
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`index` `integer`<br/>
+The index of the camera.
+
+`mask` `{"size": vec2i, "data": bytes}`<br/>
+The pixel mask (with size in pixels, data in row-major format and one byte per pixel where non-zero bytes indicate masked pixels).
+
+
+
+---
+
+## clear_marker_pixel_mask
+
+Clear the marker pixel mask of a camera.
+```
+qtm.settings.camera.clear_marker_pixel_mask(source, index)
+```
+
+**Parameters**
+
+`source` `"project"|"measurement"`<br/>
+The settings source.
+
+`index` `integer`<br/>
+The index of the camera.
 
 
 

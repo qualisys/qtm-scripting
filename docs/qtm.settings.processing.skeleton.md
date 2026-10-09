@@ -454,7 +454,7 @@ The settings source.
 The skeleton identifier.
 
 `index` `integer`<br/>
-The segment index.
+The index of the segment.
 
 
 **Returns**
@@ -931,7 +931,7 @@ The settings source.
 The segment identifier.
 
 `index` `integer`<br/>
-The child index.
+The index of the child.
 
 
 **Returns**

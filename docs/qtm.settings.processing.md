@@ -404,7 +404,7 @@ Set whether to calculate 6dof.
 qtm.settings.processing.set_calculate_6d(type, enable)
 ```
 
-This method requires tracking to be enabled during realtime and capture (see 'set_track_2d' and 'set_track_3d').
+This method requires tracking to be enabled during realtime and capture (see 'set_track_2d' and 'set_track_3d'). It fails when rigid body tracking is enabled and attempting to enable 6dof solving, since they're incompatible.
 
 **Parameters**
 

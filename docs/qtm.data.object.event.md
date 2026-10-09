@@ -81,7 +81,7 @@ The event to add.
 
 ## get_event_count
 
-Get the total number of events.
+Get the number of events.
 ```
 qtm.data.object.event.get_event_count()
 ```

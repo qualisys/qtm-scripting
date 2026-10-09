@@ -2,6 +2,26 @@
 
 | **Version** | **Changes** |
 | ------ | ------ |
+| 2026.3 | Changed qtm.processing.* settings to be optional. | 
+|  | Added qtm.processing.track_3d calibration settings parameter. | 
+|  | Changed qtm.settings.processing.set_calculate_6d to fail when enabling 6dof while rigid body tracking is enabled. | 
+|  | Deprecated qtm.settings.processing._2d.get_use_software_marker_masks method. | 
+|  | Deprecated qtm.settings.processing._2d.set_use_software_marker_masks method. | 
+|  | Added qtm.settings.calibration module. | 
+|  | Added qtm.settings.processing.calibration module. | 
+|  | Added qtm.settings.export.c3d.get_output_x_axis method. | 
+|  | Added qtm.settings.export.c3d.set_output_x_axis method. | 
+|  | Added qtm.settings.export.c3d.get_output_y_axis method. | 
+|  | Added qtm.settings.export.c3d.set_output_y_axis method. | 
+|  | Added qtm.settings.export.c3d.get_output_z_axis method. | 
+|  | Added qtm.settings.export.c3d.set_output_z_axis method. | 
+|  | Added qtm.settings.export.c3d.get_export_subjects method. | 
+|  | Added qtm.settings.export.c3d.set_export_subjects method. | 
+|  | Added qtm.settings.camera.get_marker_pixel_mask method. | 
+|  | Added qtm.settings.camera.set_marker_pixel_mask method. | 
+|  | Added qtm.settings.camera.clear_marker_pixel_mask method. | 
+|  | Added qtm.settings.processing._2d.get_use_pixel_masks method. | 
+|  | Added qtm.settings.processing._2d.set_use_pixel_masks method. | 
 | 2026.2 | Fixed qtm.settings.processing.skeleton.set_settings setting the wrong 'post' settings. | 
 |  | Changed qtm.gui.get_menu_item to return null for non-existing text/command/submenu. | 
 |  | Added qtm.gui.set_menu_item method. | 

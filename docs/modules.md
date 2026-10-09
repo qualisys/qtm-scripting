@@ -25,6 +25,7 @@
  * [qtm.gui.terminal](qtm.gui.terminal.md) - Interface to the terminal window.
  * [qtm.gui.timeline](qtm.gui.timeline.md) - Interface to the measurement timeline.
  * [qtm.processing](qtm.processing.md) - Methods for processing measurement files.
+ * [qtm.settings.calibration](qtm.settings.calibration.md) - Access and modify calibration settings.
  * [qtm.settings.camera](qtm.settings.camera.md) - Access and modify camera settings.
  * [qtm.settings.directory](qtm.settings.directory.md) - Access and modify directory settings.
  * [qtm.settings.euler](qtm.settings.euler.md) - Access and modify euler angle settings.
@@ -39,6 +40,7 @@
  * [qtm.settings.processing._3d](qtm.settings.processing._3d.md) - Access and modify 3d processing settings.
  * [qtm.settings.processing._6d](qtm.settings.processing._6d.md) - Access and modify 6dof processing settings.
  * [qtm.settings.processing.aim](qtm.settings.processing.aim.md) - Access and modify aim processing settings.
+ * [qtm.settings.processing.calibration](qtm.settings.processing.calibration.md) - Access and modify calibration processing settings.
  * [qtm.settings.processing.gap_fill](qtm.settings.processing.gap_fill.md) - Access and modify gap fill processing settings.
  * [qtm.settings.processing.glove](qtm.settings.processing.glove.md) - Access and modify glove processing settings.
  * [qtm.settings.processing.sal](qtm.settings.processing.sal.md) - Access and modify sal processing settings.

@@ -662,7 +662,7 @@ The settings source.
 The index of the rigid body.
 
 `mesh_settings` `{"filename": string?, "position": vec3f?, "rotation": vec3f?, "scale": float?, "opacity": float?}`<br/>
-The mesh settings. Scale must be within the [0.01, 1000.0] range and opacity within the [0.01, 1.0] range.
+The mesh settings (if a setting is omitted or null, then it will not be set). Scale must be within the [0.01, 1000.0] range and opacity within the [0.01, 1.0] range.
 
 
 
